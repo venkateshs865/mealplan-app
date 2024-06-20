@@ -217,8 +217,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
         // Construct the API URL with query parameter
-        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
-
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?meal_type=${mealType}&user_preferences=${encodedMealPlanText}`;
         // Show the loader
         document.getElementById("loader").style.display = "block";
 
@@ -269,7 +268,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             'diet-preferences': 'Vegetarian',
             'food-allergies': 'Nuts, Dairy',
             'specific-foods': 'Banana, Spinach',
-            goals: 'Weight Loss',
+            'goals': 'Weight Loss',
             'caloric-intake': 1800,
             'macronutrient-ratios': '40% Carbs, 30% Proteins, 30% Fats',
             'meal-preparation-time': 'Moderate',
