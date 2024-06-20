@@ -137,10 +137,10 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
                                 <select id="meal-type" name="meal-type" class="form-control" required>
                                     <option value="">Select your Meal Type</option>
                                     <option value="breakfast">Breakfast</option>
-                                    <option value="snack-1">Snack - 1</option>
+                                    <!-- <option value="snack-1">Snack - 1</option>
                                     <option value="lunch">Lunch</option>
                                     <option value="snack-2">Snack - 2</option>
-                                    <option value="dinner">Dinner</option>
+                                    <option value="dinner">Dinner</option> -->
                                 </select>
                             </div>
                         </div>
@@ -310,22 +310,32 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             // Handle API response here
             console.log('API Response:', data);
 
-            // Extract data for meal plan
-            var meal = data.breakfast;
-            var shoppingList = meal.shopping_list.join('<li>');
-            var preparationSteps = meal.preperation_step.join('<li>');
-            var nutrition = `Calories: ${meal.nutrition.calories} kcal<br>Protein: ${meal.nutrition.protein}<br>Carbs: ${meal.nutrition.carbs}<br>Fat: ${meal.nutrition.fat}`;
+            // Extract the breakfast details
+            var breakfast = data.breakfast;
+            var shoppingList = breakfast.shopping_list.join(", ");
+            var preparationSteps = breakfast.preparation_steps.join(". ");
+            var nutrition = breakfast.nutrition;
 
             // Populate the modal with the response data
             var modalContent = document.getElementById("mealPlanContent");
-            modalContent.innerHTML = `
-                <h5>${meal.recipe_name}</h5>
-                <p><strong>Cooking Time:</strong> ${meal.cooking_time}</p>
-                <p><strong>Serving:</strong> ${meal.serving}</p>
-                <p><strong>Nutrition:</strong><br>${nutrition}</p>
-                <p><strong>Shopping List:</strong><br><ul><li>${shoppingList}</ul></p>
-                <p><strong>Preparation Steps:</strong><br><ol><li>${preparationSteps}</ol></p>
+            var mealPlanHtml = `
+                <h5>${breakfast.recipe_name}</h5>
+                <p><strong>Shopping List:</strong> ${shoppingList}</p>
+                <p><strong>Preparation Steps:</strong> ${preparationSteps}</p>
+                <p><strong>Cooking Time:</strong> ${breakfast.cooking_time}</p>
+                <p><strong>Notes:</strong> ${breakfast.notes}</p>
+                <p><strong>Serving:</strong> ${breakfast.serving}</p>
+                <p><strong>Nutrition:</strong></p>
+                <ul>
+                    <li>Calories: ${nutrition.calories}</li>
+                    <li>Fat: ${nutrition.fat} grams</li>
+                    <li>Protein: ${nutrition.protein} grams</li>
+                    <li>Carbohydrates: ${nutrition.carbohydrates} grams</li>
+                    <li>Fiber: ${nutrition.fiber} grams</li>
+                    <li>Sugar: ${nutrition.sugar} grams</li>
+                </ul>
             `;
+            modalContent.innerHTML = mealPlanHtml;
 
             // Show the modal
             $('#mealPlanModal').modal('show');
