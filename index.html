@@ -200,136 +200,6 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    function validate(val) {
-        v1 = document.getElementById("fname");
-        v2 = document.getElementById("lname");
-        v3 = document.getElementById("email");
-        v4 = document.getElementById("mob");
-        v5 = document.getElementById("job");
-        v6 = document.getElementById("ans");
-
-        flag1 = true;
-        flag2 = true;
-        flag3 = true;
-        flag4 = true;
-        flag5 = true;
-        flag6 = true;
-
-        if(val>=1 || val==0) {
-            if(v1.value == "") {
-                v1.style.borderColor = "red";
-                flag1 = false;
-            }
-            else {
-                v1.style.borderColor = "green";
-                flag1 = true;
-            }
-        }
-
-        if(val>=2 || val==0) {
-            if(v2.value == "") {
-                v2.style.borderColor = "red";
-                flag2 = false;
-            }
-            else {
-                v2.style.borderColor = "green";
-                flag2 = true;
-            }
-        }
-        if(val>=3 || val==0) {
-            if(v3.value == "") {
-                v3.style.borderColor = "red";
-                flag3 = false;
-            }
-            else {
-                v3.style.borderColor = "green";
-                flag3 = true;
-            }
-        }
-        if(val>=4 || val==0) {
-            if(v4.value == "") {
-                v4.style.borderColor = "red";
-                flag4 = false;
-            }
-            else {
-                v4.style.borderColor = "green";
-                flag4 = true;
-            }
-        }
-        if(val>=5 || val==0) {
-            if(v5.value == "") {
-                v5.style.borderColor = "red";
-                flag5 = false;
-            }
-            else {
-                v5.style.borderColor = "green";
-                flag5 = true;
-            }
-        }
-        if(val>=6 || val==0) {
-            if(v6.value == "") {
-                v6.style.borderColor = "red";
-                flag6 = false;
-            }
-            else {
-                v6.style.borderColor = "green";
-                flag6 = true;
-            }
-        }
-
-        flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
-
-        return flag;
-    }
-
-    // function prepareMeal() {
-    //     // Retrieve form values
-    //     var age = document.getElementById("age").value;
-    //     var gender = document.getElementById("gender").value;
-    //     var height = document.getElementById("height").value;
-    //     var weight = document.getElementById("weight").value;
-    //     var activityLevel = document.getElementById("activity-level").value;
-    //     var dietPreferences = document.getElementById("diet-preferences").value;
-    //     var foodAllergies = document.getElementById("food-allergies").value;
-    //     var specificFoods = document.getElementById("specific-foods").value;
-    //     var goals = document.getElementById("goals").value;
-    //     var caloricIntake = document.getElementById("caloric-intake").value;
-    //     var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
-    //     var mealPreparationTime = document.getElementById("meal-preparation-time").value;
-    //     var budgetConstraints = document.getElementById("budget-constraints").value;
-    //     var shoppingFrequency = document.getElementById("shopping-frequency").value;
-    //     var cuisinePreferences = document.getElementById("cuisine-preferences").value;
-    //     var medicalConditions = document.getElementById("medical-conditions").value;
-    //     var medicationsSupplements = document.getElementById("medications-supplements").value;
-    //     var mealType = document.getElementById("meal-type").value;
-        
-    //     // Generate meal plan text
-    //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
-
-    //     // Encode mealPlanText for URL
-    //     var encodedMealPlanText = encodeURIComponent(mealPlanText);
-
-    //     // Construct the API URL with query parameter
-    //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
-
-    //     // Send POST request to API endpoint using fetch
-    //     fetch(apiUrl, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         // Handle API response here
-    //         console.log('API Response:', data);
-    //         // Optionally display response in a modal or handle as needed
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //         // Handle error gracefully
-    //     });
-    // }
     function prepareMeal() {
         // Retrieve form values
         var age = document.getElementById("age").value;
@@ -380,7 +250,12 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 
             // Populate the modal with the response data
             var modalContent = document.getElementById("mealPlanContent");
-            modalContent.textContent = JSON.stringify(data, null, 2); // Pretty print JSON response
+
+            // Format the JSON for display
+            var formattedJson = JSON.stringify(data, null, 2);
+
+            // Set the HTML content to display the formatted JSON
+            modalContent.innerHTML = `<pre>${formattedJson}</pre>`;
 
             // Show the modal
             $('#mealPlanModal').modal('show');
