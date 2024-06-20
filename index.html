@@ -115,6 +115,16 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Current Season</label>
+                                <input type="text" id="season" name="season" placeholder="Enter your current season">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Taste Prefered</label>
+                                <input type="text" id="taste" name="taste" placeholder="Enter your Taste">
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Current Medications or Supplements</label>
                                 <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
                             </div>
@@ -130,6 +140,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
                                 </select>
                             </div>
                         </div>
+                        
                         
                         <div class="row justify-content-end">
                             <div class="form-group col-sm-6"> 
@@ -198,9 +209,11 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
         var medicalConditions = document.getElementById("medical-conditions").value;
         var medicationsSupplements = document.getElementById("medications-supplements").value;
         var mealType = document.getElementById("meal-type").value;
+        var season = document.getElementById("season").value;
+        var taste = document.getElementById("taste").value;
 
         // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and prefered taste is ${taste}. Plan for meals including ${mealType}.`;
 
         // Encode mealPlanText for URL
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
@@ -284,6 +297,8 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             'shopping-frequency': 'Weekly',
             'cuisine-preferences': 'Italian, Mexican',
             'medical-conditions': 'None',
+            'season': 'Winter',
+            'taste': 'Low Spicy',
             'medications-supplements': 'Multivitamin',
             'meal-type': 'breakfast'
         };
