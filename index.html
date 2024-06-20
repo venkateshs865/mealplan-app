@@ -99,7 +99,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Macronutrient Ratios</label>
+                                <label class="form-control-label px-3">Macronutrient Ratio</label>
                                 <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
@@ -369,7 +369,8 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 
             // Populate the modal with the response data
             var modalContent = document.getElementById("mealPlanContent");
-            modalContent.textContent = JSON.stringify(data, null, 2); // Pretty print JSON response
+            var formattedResponse = JSON.stringify(data, null, 4);
+            modalContent.innerHTML = `<pre>${formattedResponse}</pre>`; // Pretty print JSON response
 
             // Show the modal
             $('#mealPlanModal').modal('show');
