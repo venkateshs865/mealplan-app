@@ -2,6 +2,13 @@
 <title>Meal Generating App</title>
 <style>
 body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jpg");}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2)}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
+.loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
 </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -143,7 +150,6 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
                                 <button type="button" class="btn-block btn-primary" onclick="prepareMeal()">Prepare a Meal</button> 
                             </div>
                         </div>
-                        <p id="meal-plan-text">Generate a meal plan for a $age-year-old $gender who is $height tall and weighs $weight pounds...</p>
                     </form>
                     
 
@@ -151,6 +157,31 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             </div>
         </div>
     </div>
+    <div id="loader" class="loader" style="display:none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="mealPlanModal" tabindex="-1" role="dialog" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mealPlanModalLabel">Meal Plan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mealPlanContent">
+                <!-- Meal plan content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+  
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
@@ -264,10 +295,30 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
     //     // Generate meal plan text
     //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
 
-    //     // Update the placeholder text
-    //     document.getElementById("meal-plan-text").textContent = mealPlanText;
-    // }
+    //     // Encode mealPlanText for URL
+    //     var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
+    //     // Construct the API URL with query parameter
+    //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+    //     // Send POST request to API endpoint using fetch
+    //     fetch(apiUrl, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json'
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Handle API response here
+    //         console.log('API Response:', data);
+    //         // Optionally display response in a modal or handle as needed
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //         // Handle error gracefully
+    //     });
+    // }
     function prepareMeal() {
         // Retrieve form values
         var age = document.getElementById("age").value;
@@ -288,7 +339,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
         var medicalConditions = document.getElementById("medical-conditions").value;
         var medicationsSupplements = document.getElementById("medications-supplements").value;
         var mealType = document.getElementById("meal-type").value;
-        
+
         // Generate meal plan text
         var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
 
@@ -297,6 +348,9 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 
         // Construct the API URL with query parameter
         var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+        // Show the loader
+        document.getElementById("loader").style.display = "block";
 
         // Send POST request to API endpoint using fetch
         fetch(apiUrl, {
@@ -307,15 +361,33 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
         })
         .then(response => response.json())
         .then(data => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
             // Handle API response here
             console.log('API Response:', data);
-            // Optionally display response in a modal or handle as needed
+
+            // Populate the modal with the response data
+            var modalContent = document.getElementById("mealPlanContent");
+            modalContent.textContent = JSON.stringify(data, null, 2); // Pretty print JSON response
+
+            // Show the modal
+            $('#mealPlanModal').modal('show');
         })
         .catch(error => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
             console.error('Error:', error);
             // Handle error gracefully
+            var modalContent = document.getElementById("mealPlanContent");
+            modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
+            
+            // Show the modal
+            $('#mealPlanModal').modal('show');
         });
     }
+
 </script>
 
 </html>
