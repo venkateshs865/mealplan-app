@@ -188,89 +188,137 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 <!-- Bootstrap Bundle JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    function validate(val) {
-        v1 = document.getElementById("fname");
-        v2 = document.getElementById("lname");
-        v3 = document.getElementById("email");
-        v4 = document.getElementById("mob");
-        v5 = document.getElementById("job");
-        v6 = document.getElementById("ans");
+<!-- <script>
+    // function validate(val) {
+    //     v1 = document.getElementById("fname");
+    //     v2 = document.getElementById("lname");
+    //     v3 = document.getElementById("email");
+    //     v4 = document.getElementById("mob");
+    //     v5 = document.getElementById("job");
+    //     v6 = document.getElementById("ans");
 
-        flag1 = true;
-        flag2 = true;
-        flag3 = true;
-        flag4 = true;
-        flag5 = true;
-        flag6 = true;
+    //     flag1 = true;
+    //     flag2 = true;
+    //     flag3 = true;
+    //     flag4 = true;
+    //     flag5 = true;
+    //     flag6 = true;
 
-        if(val>=1 || val==0) {
-            if(v1.value == "") {
-                v1.style.borderColor = "red";
-                flag1 = false;
-            }
-            else {
-                v1.style.borderColor = "green";
-                flag1 = true;
-            }
-        }
+    //     if(val>=1 || val==0) {
+    //         if(v1.value == "") {
+    //             v1.style.borderColor = "red";
+    //             flag1 = false;
+    //         }
+    //         else {
+    //             v1.style.borderColor = "green";
+    //             flag1 = true;
+    //         }
+    //     }
 
-        if(val>=2 || val==0) {
-            if(v2.value == "") {
-                v2.style.borderColor = "red";
-                flag2 = false;
-            }
-            else {
-                v2.style.borderColor = "green";
-                flag2 = true;
-            }
-        }
-        if(val>=3 || val==0) {
-            if(v3.value == "") {
-                v3.style.borderColor = "red";
-                flag3 = false;
-            }
-            else {
-                v3.style.borderColor = "green";
-                flag3 = true;
-            }
-        }
-        if(val>=4 || val==0) {
-            if(v4.value == "") {
-                v4.style.borderColor = "red";
-                flag4 = false;
-            }
-            else {
-                v4.style.borderColor = "green";
-                flag4 = true;
-            }
-        }
-        if(val>=5 || val==0) {
-            if(v5.value == "") {
-                v5.style.borderColor = "red";
-                flag5 = false;
-            }
-            else {
-                v5.style.borderColor = "green";
-                flag5 = true;
-            }
-        }
-        if(val>=6 || val==0) {
-            if(v6.value == "") {
-                v6.style.borderColor = "red";
-                flag6 = false;
-            }
-            else {
-                v6.style.borderColor = "green";
-                flag6 = true;
-            }
-        }
+    //     if(val>=2 || val==0) {
+    //         if(v2.value == "") {
+    //             v2.style.borderColor = "red";
+    //             flag2 = false;
+    //         }
+    //         else {
+    //             v2.style.borderColor = "green";
+    //             flag2 = true;
+    //         }
+    //     }
+    //     if(val>=3 || val==0) {
+    //         if(v3.value == "") {
+    //             v3.style.borderColor = "red";
+    //             flag3 = false;
+    //         }
+    //         else {
+    //             v3.style.borderColor = "green";
+    //             flag3 = true;
+    //         }
+    //     }
+    //     if(val>=4 || val==0) {
+    //         if(v4.value == "") {
+    //             v4.style.borderColor = "red";
+    //             flag4 = false;
+    //         }
+    //         else {
+    //             v4.style.borderColor = "green";
+    //             flag4 = true;
+    //         }
+    //     }
+    //     if(val>=5 || val==0) {
+    //         if(v5.value == "") {
+    //             v5.style.borderColor = "red";
+    //             flag5 = false;
+    //         }
+    //         else {
+    //             v5.style.borderColor = "green";
+    //             flag5 = true;
+    //         }
+    //     }
+    //     if(val>=6 || val==0) {
+    //         if(v6.value == "") {
+    //             v6.style.borderColor = "red";
+    //             flag6 = false;
+    //         }
+    //         else {
+    //             v6.style.borderColor = "green";
+    //             flag6 = true;
+    //         }
+    //     }
 
-        flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+    //     flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
 
-        return flag;
-    }
+    //     return flag;
+    // }
 
+    // // function prepareMeal() {
+    // //     // Retrieve form values
+    // //     var age = document.getElementById("age").value;
+    // //     var gender = document.getElementById("gender").value;
+    // //     var height = document.getElementById("height").value;
+    // //     var weight = document.getElementById("weight").value;
+    // //     var activityLevel = document.getElementById("activity-level").value;
+    // //     var dietPreferences = document.getElementById("diet-preferences").value;
+    // //     var foodAllergies = document.getElementById("food-allergies").value;
+    // //     var specificFoods = document.getElementById("specific-foods").value;
+    // //     var goals = document.getElementById("goals").value;
+    // //     var caloricIntake = document.getElementById("caloric-intake").value;
+    // //     var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+    // //     var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+    // //     var budgetConstraints = document.getElementById("budget-constraints").value;
+    // //     var shoppingFrequency = document.getElementById("shopping-frequency").value;
+    // //     var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+    // //     var medicalConditions = document.getElementById("medical-conditions").value;
+    // //     var medicationsSupplements = document.getElementById("medications-supplements").value;
+    // //     var mealType = document.getElementById("meal-type").value;
+        
+    // //     // Generate meal plan text
+    // //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
+
+    // //     // Encode mealPlanText for URL
+    // //     var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+    // //     // Construct the API URL with query parameter
+    // //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+    // //     // Send POST request to API endpoint using fetch
+    // //     fetch(apiUrl, {
+    // //         method: 'POST',
+    // //         headers: {
+    // //             'Accept': 'application/json'
+    // //         }
+    // //     })
+    // //     .then(response => response.json())
+    // //     .then(data => {
+    // //         // Handle API response here
+    // //         console.log('API Response:', data);
+    // //         // Optionally display response in a modal or handle as needed
+    // //     })
+    // //     .catch(error => {
+    // //         console.error('Error:', error);
+    // //         // Handle error gracefully
+    // //     });
+    // // }
     // function prepareMeal() {
     //     // Retrieve form values
     //     var age = document.getElementById("age").value;
@@ -291,7 +339,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
     //     var medicalConditions = document.getElementById("medical-conditions").value;
     //     var medicationsSupplements = document.getElementById("medications-supplements").value;
     //     var mealType = document.getElementById("meal-type").value;
-        
+
     //     // Generate meal plan text
     //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
 
@@ -300,6 +348,9 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 
     //     // Construct the API URL with query parameter
     //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+    //     // Show the loader
+    //     document.getElementById("loader").style.display = "block";
 
     //     // Send POST request to API endpoint using fetch
     //     fetch(apiUrl, {
@@ -310,85 +361,142 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
     //     })
     //     .then(response => response.json())
     //     .then(data => {
+    //         // Hide the loader
+    //         document.getElementById("loader").style.display = "none";
+
     //         // Handle API response here
     //         console.log('API Response:', data);
-    //         // Optionally display response in a modal or handle as needed
+
+    //         // Populate the modal with the response data
+    //         var modalContent = document.getElementById("mealPlanContent");
+    //         var formattedResponse = JSON.stringify(data, null, 4);
+    //         modalContent.innerHTML = `<pre>${formattedResponse}</pre>`; // Pretty print JSON response
+
+    //         // Show the modal
+    //         $('#mealPlanModal').modal('show');
     //     })
     //     .catch(error => {
+    //         // Hide the loader
+    //         document.getElementById("loader").style.display = "none";
+
     //         console.error('Error:', error);
     //         // Handle error gracefully
+    //         var modalContent = document.getElementById("mealPlanContent");
+    //         modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
+            
+    //         // Show the modal
+    //         $('#mealPlanModal').modal('show');
     //     });
     // }
-    function prepareMeal() {
-        // Retrieve form values
-        var age = document.getElementById("age").value;
-        var gender = document.getElementById("gender").value;
-        var height = document.getElementById("height").value;
-        var weight = document.getElementById("weight").value;
-        var activityLevel = document.getElementById("activity-level").value;
-        var dietPreferences = document.getElementById("diet-preferences").value;
-        var foodAllergies = document.getElementById("food-allergies").value;
-        var specificFoods = document.getElementById("specific-foods").value;
-        var goals = document.getElementById("goals").value;
-        var caloricIntake = document.getElementById("caloric-intake").value;
-        var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
-        var mealPreparationTime = document.getElementById("meal-preparation-time").value;
-        var budgetConstraints = document.getElementById("budget-constraints").value;
-        var shoppingFrequency = document.getElementById("shopping-frequency").value;
-        var cuisinePreferences = document.getElementById("cuisine-preferences").value;
-        var medicalConditions = document.getElementById("medical-conditions").value;
-        var medicationsSupplements = document.getElementById("medications-supplements").value;
-        var mealType = document.getElementById("meal-type").value;
 
-        // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
+</script> -->
 
-        // Encode mealPlanText for URL
-        var encodedMealPlanText = encodeURIComponent(mealPlanText);
+<script>
+function prepareMeal() {
+    // Retrieve form values
+    var age = document.getElementById("age").value;
+    var gender = document.getElementById("gender").value;
+    var height = document.getElementById("height").value;
+    var weight = document.getElementById("weight").value;
+    var activityLevel = document.getElementById("activity-level").value;
+    var dietPreferences = document.getElementById("diet-preferences").value;
+    var foodAllergies = document.getElementById("food-allergies").value;
+    var specificFoods = document.getElementById("specific-foods").value;
+    var goals = document.getElementById("goals").value;
+    var caloricIntake = document.getElementById("caloric-intake").value;
+    var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+    var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+    var budgetConstraints = document.getElementById("budget-constraints").value;
+    var shoppingFrequency = document.getElementById("shopping-frequency").value;
+    var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+    var medicalConditions = document.getElementById("medical-conditions").value;
+    var medicationsSupplements = document.getElementById("medications-supplements").value;
+    var mealType = document.getElementById("meal-type").value;
 
-        // Construct the API URL with query parameter
-        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+    // Generate meal plan text
+    var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
 
-        // Show the loader
-        document.getElementById("loader").style.display = "block";
+    // Encode mealPlanText for URL
+    var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
-        // Send POST request to API endpoint using fetch
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json'
+    // Construct the API URL with query parameter
+    var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+    // Show the loader
+    document.getElementById("loader").style.display = "block";
+
+    // Send POST request to API endpoint using fetch
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide the loader
+        document.getElementById("loader").style.display = "none";
+
+        // Handle API response here
+        console.log('API Response:', data);
+
+        // Format the JSON data into readable HTML
+        var formattedResponse = formatMealPlanResponse(data);
+
+        // Populate the modal with the formatted response data
+        var modalContent = document.getElementById("mealPlanContent");
+        modalContent.innerHTML = formattedResponse;
+
+        // Show the modal
+        $('#mealPlanModal').modal('show');
+    })
+    .catch(error => {
+        // Hide the loader
+        document.getElementById("loader").style.display = "none";
+
+        console.error('Error:', error);
+        // Handle error gracefully
+        var modalContent = document.getElementById("mealPlanContent");
+        modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
+        
+        // Show the modal
+        $('#mealPlanModal').modal('show');
+    });
+}
+
+// Function to format the JSON response into HTML
+function formatMealPlanResponse(data) {
+    var htmlContent = "";
+
+    for (var meal in data.mealType) {
+        if (data.mealType.hasOwnProperty(meal)) {
+            var mealData = data.mealType[meal];
+            htmlContent += `<h3>${meal} - ${mealData.recipe_name}</h3>`;
+            htmlContent += `<h4>Shopping List:</h4><ul>`;
+            mealData.shopping_list.forEach(item => {
+                htmlContent += `<li>${item}</li>`;
+            });
+            htmlContent += `</ul>`;
+            htmlContent += `<h4>Preparation Steps:</h4><ol>`;
+            mealData.preparation_step.forEach(step => {
+                htmlContent += `<li>${step}</li>`;
+            });
+            htmlContent += `</ol>`;
+            htmlContent += `<p><strong>Cooking Time:</strong> ${mealData.cooking_time}</p>`;
+            htmlContent += `<p><strong>Notes:</strong> ${mealData.notes}</p>`;
+            htmlContent += `<p><strong>Serving:</strong> ${mealData.serving}</p>`;
+            htmlContent += `<h4>Nutrition Information:</h4><ul>`;
+            for (var nutrient in mealData.nutrition) {
+                if (mealData.nutrition.hasOwnProperty(nutrient)) {
+                    htmlContent += `<li><strong>${nutrient.charAt(0).toUpperCase() + nutrient.slice(1)}:</strong> ${mealData.nutrition[nutrient]}</li>`;
+                }
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Hide the loader
-            document.getElementById("loader").style.display = "none";
-
-            // Handle API response here
-            console.log('API Response:', data);
-
-            // Populate the modal with the response data
-            var modalContent = document.getElementById("mealPlanContent");
-            var formattedResponse = JSON.stringify(data, null, 4);
-            modalContent.innerHTML = `<pre>${formattedResponse}</pre>`; // Pretty print JSON response
-
-            // Show the modal
-            $('#mealPlanModal').modal('show');
-        })
-        .catch(error => {
-            // Hide the loader
-            document.getElementById("loader").style.display = "none";
-
-            console.error('Error:', error);
-            // Handle error gracefully
-            var modalContent = document.getElementById("mealPlanContent");
-            modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
-            
-            // Show the modal
-            $('#mealPlanModal').modal('show');
-        });
+            htmlContent += `</ul>`;
+        }
     }
 
-</script>
+    return htmlContent;
+}
 
+</script>
 </html>
