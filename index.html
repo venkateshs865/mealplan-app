@@ -248,14 +248,12 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             // Handle API response here
             console.log('API Response:', data);
 
-            // Populate the modal with the response data
+            // Format the JSON response as markdown
+            var markdownContent = `## JSON\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\``;
+
+            // Populate the modal with the markdown content
             var modalContent = document.getElementById("mealPlanContent");
-
-            // Format the JSON for display
-            var formattedJson = JSON.stringify(data, null, 2);
-
-            // Set the HTML content to display the formatted JSON
-            modalContent.innerHTML = `<pre>${formattedJson}</pre>`;
+            modalContent.innerHTML = `<pre>${markdownContent}</pre>`;
 
             // Show the modal
             $('#mealPlanModal').modal('show');
