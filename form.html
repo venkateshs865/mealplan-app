@@ -1,0 +1,319 @@
+<style>
+body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jpg");}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2)}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
+</style>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+            <div class="card">
+                <h5 class="text-center mb-4">Generate a Meal Plan</h5>
+                <form class="form-card" onsubmit="event.preventDefault()">
+                    <!-- <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">First name<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Business email<span class="text-danger"> *</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="mob" name="mob" placeholder="" onblur="validate(4)"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Job title<span class="text-danger"> *</span></label> <input type="text" id="job" name="job" placeholder="" onblur="validate(5)"> </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">What would you be using Flinks for?<span class="text-danger"> *</span></label> <input type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
+                    </div> -->
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
+                            <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required>
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label>
+                            <select id="gender" name="gender" class="form-control" required>
+                                <option value="">Select your gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Height (cm)<span class="text-danger"> *</span></label>
+                            <input type="number" id="height" name="height" placeholder="Enter your height in cm" min="100" max="250" required>
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Weight (kg)<span class="text-danger"> *</span></label>
+                            <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
+                            <select id="activity-level" name="activity-level" class="form-control" required>
+                                <option value="">Select your activity level</option>
+                                <option value="sedentary">Sedentary (little or no exercise)</option>
+                                <option value="lightly-active">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                                <option value="moderately-active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+                                <option value="very-active">Very Active (hard exercise/sports 6-7 days a week)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Dietary Preferences</label>
+                            <input type="text" id="diet-preferences" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Food Allergies</label>
+                            <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Specific Foods to Include or Exclude</label>
+                            <input type="text" id="specific-foods" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Goals</label>
+                            <input type="text" id="goals" name="goals" placeholder="Weight Loss, Weight Gain, Maintenance, Muscle Building">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Target Caloric Intake (calories)</label>
+                            <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Macronutrient Ratios</label>
+                            <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
+                            <input type="text" id="meal-preparation-time" name="meal-preparation-time" placeholder="Quick, Moderate, Extensive">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Budget Constraints</label>
+                            <input type="text" id="budget-constraints" name="budget-constraints" placeholder="Low, Medium, High">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Preferred Shopping Frequency</label>
+                            <input type="text" id="shopping-frequency" name="shopping-frequency" placeholder="Daily, Weekly, Bi-weekly">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
+                            <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Medical Conditions</label>
+                            <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Current Medications or Supplements</label>
+                            <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Choose Meal Type</label>
+                            <select id="meal-type" name="meal-type" class="form-control" required>
+                                <option value="">Select your Meal Type</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="snack-1">Snack - 1</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="snack-2">Snack - 2</option>
+                                <option value="dinner">Dinner</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-end">
+                        <div class="form-group col-sm-6"> 
+                            <button type="button" class="btn-block btn-primary" onclick="prepareMeal()">Prepare a Meal</button> 
+                        </div>
+                    </div>
+                    <p id="meal-plan-text">Generate a meal plan for a $age-year-old $gender who is $height tall and weighs $weight pounds...</p>
+                </form>
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+<!-- Bootstrap Bundle JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function validate(val) {
+        v1 = document.getElementById("fname");
+        v2 = document.getElementById("lname");
+        v3 = document.getElementById("email");
+        v4 = document.getElementById("mob");
+        v5 = document.getElementById("job");
+        v6 = document.getElementById("ans");
+
+        flag1 = true;
+        flag2 = true;
+        flag3 = true;
+        flag4 = true;
+        flag5 = true;
+        flag6 = true;
+
+        if(val>=1 || val==0) {
+            if(v1.value == "") {
+                v1.style.borderColor = "red";
+                flag1 = false;
+            }
+            else {
+                v1.style.borderColor = "green";
+                flag1 = true;
+            }
+        }
+
+        if(val>=2 || val==0) {
+            if(v2.value == "") {
+                v2.style.borderColor = "red";
+                flag2 = false;
+            }
+            else {
+                v2.style.borderColor = "green";
+                flag2 = true;
+            }
+        }
+        if(val>=3 || val==0) {
+            if(v3.value == "") {
+                v3.style.borderColor = "red";
+                flag3 = false;
+            }
+            else {
+                v3.style.borderColor = "green";
+                flag3 = true;
+            }
+        }
+        if(val>=4 || val==0) {
+            if(v4.value == "") {
+                v4.style.borderColor = "red";
+                flag4 = false;
+            }
+            else {
+                v4.style.borderColor = "green";
+                flag4 = true;
+            }
+        }
+        if(val>=5 || val==0) {
+            if(v5.value == "") {
+                v5.style.borderColor = "red";
+                flag5 = false;
+            }
+            else {
+                v5.style.borderColor = "green";
+                flag5 = true;
+            }
+        }
+        if(val>=6 || val==0) {
+            if(v6.value == "") {
+                v6.style.borderColor = "red";
+                flag6 = false;
+            }
+            else {
+                v6.style.borderColor = "green";
+                flag6 = true;
+            }
+        }
+
+        flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+
+        return flag;
+    }
+
+    // function prepareMeal() {
+    //     // Retrieve form values
+    //     var age = document.getElementById("age").value;
+    //     var gender = document.getElementById("gender").value;
+    //     var height = document.getElementById("height").value;
+    //     var weight = document.getElementById("weight").value;
+    //     var activityLevel = document.getElementById("activity-level").value;
+    //     var dietPreferences = document.getElementById("diet-preferences").value;
+    //     var foodAllergies = document.getElementById("food-allergies").value;
+    //     var specificFoods = document.getElementById("specific-foods").value;
+    //     var goals = document.getElementById("goals").value;
+    //     var caloricIntake = document.getElementById("caloric-intake").value;
+    //     var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+    //     var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+    //     var budgetConstraints = document.getElementById("budget-constraints").value;
+    //     var shoppingFrequency = document.getElementById("shopping-frequency").value;
+    //     var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+    //     var medicalConditions = document.getElementById("medical-conditions").value;
+    //     var medicationsSupplements = document.getElementById("medications-supplements").value;
+    //     var mealType = document.getElementById("meal-type").value;
+        
+    //     // Generate meal plan text
+    //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
+
+    //     // Update the placeholder text
+    //     document.getElementById("meal-plan-text").textContent = mealPlanText;
+    // }
+
+    function prepareMeal() {
+        // Retrieve form values
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+        var activityLevel = document.getElementById("activity-level").value;
+        var dietPreferences = document.getElementById("diet-preferences").value;
+        var foodAllergies = document.getElementById("food-allergies").value;
+        var specificFoods = document.getElementById("specific-foods").value;
+        var goals = document.getElementById("goals").value;
+        var caloricIntake = document.getElementById("caloric-intake").value;
+        var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+        var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+        var budgetConstraints = document.getElementById("budget-constraints").value;
+        var shoppingFrequency = document.getElementById("shopping-frequency").value;
+        var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+        var medicalConditions = document.getElementById("medical-conditions").value;
+        var medicationsSupplements = document.getElementById("medications-supplements").value;
+        var mealType = document.getElementById("meal-type").value;
+        
+        // Generate meal plan text
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. Plan for meals including ${mealType}.`;
+
+        // Encode mealPlanText for URL
+        var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+        // Construct the API URL with query parameter
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?user_preferences=${encodedMealPlanText}`;
+
+        // Send POST request to API endpoint using fetch
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle API response here
+            console.log('API Response:', data);
+            // Optionally display response in a modal or handle as needed
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error gracefully
+        });
+    }
+</script>
+
+
