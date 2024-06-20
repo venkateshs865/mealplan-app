@@ -227,21 +227,25 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
 
             var modalContent = document.getElementById("mealPlanContent");
 
-            // Create a formatted string representation of the data object
+            // Create a formatted HTML string representation of the data object
             var formattedData = `
-            Recipe Name: ${data.recipe_name}
-            Cooking Time: ${data.cooking_time}
-            Serving: ${data.serving}
+                <h2>Recipe Name: ${data.recipe_name}</h2>
+                <p><strong>Cooking Time:</strong> ${data.cooking_time}</p>
+                <p><strong>Serving:</strong> ${data.serving}</p>
 
-            Ingredients:
-            ${data.shopping_list.map(item => `- ${item}`).join('\n')}
+                <h3>Ingredients:</h3>
+                <ul>
+                    ${data.shopping_list.map(item => `<li>${item}</li>`).join('')}
+                </ul>
 
-            Preparation Steps:
-            ${data.preperation_step.map((step, index) => `${index + 1}. ${step}`).join('\n')}
+                <h3>Preparation Steps:</h3>
+                <ol>
+                    ${data.preperation_step.map((step, index) => `<li>${step}</li>`).join('')}
+                </ol>
             `;
 
-            // Set the formatted data as the content of modalContent
-            modalContent.textContent = formattedData;
+            // Set the formatted HTML data as the content of modalContent
+            modalContent.innerHTML = formattedData;
 
             // Show the modal
             $('#mealPlanModal').modal('show');
