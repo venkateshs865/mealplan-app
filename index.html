@@ -9,17 +9,6 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
-.modal-header {
-    background-color: #f8f9fa;
-}
-.modal-body {
-    font-size: 16px;
-    white-space: pre-wrap;
-    font-family: monospace;
-}
-.modal-footer {
-    background-color: #f8f9fa;
-}
 </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -237,7 +226,22 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             console.log('API Response:', data);
 
             var modalContent = document.getElementById("mealPlanContent");
-            modalContent.textContent = data;
+
+            // Create a formatted string representation of the data object
+            var formattedData = `
+            Recipe Name: ${data.recipe_name}
+            Cooking Time: ${data.cooking_time}
+            Serving: ${data.serving}
+
+            Ingredients:
+            ${data.shopping_list.map(item => `- ${item}`).join('\n')}
+
+            Preparation Steps:
+            ${data.preperation_step.map((step, index) => `${index + 1}. ${step}`).join('\n')}
+            `;
+
+            // Set the formatted data as the content of modalContent
+            modalContent.textContent = formattedData;
 
             // Show the modal
             $('#mealPlanModal').modal('show');
@@ -263,7 +267,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-image: url("image.jp
             age: 50,
             gender: 'male',
             height: 180,
-            weight: 75,
+            weight: 60,
             'activity-level': 'moderately-active',
             'diet-preferences': 'Vegetarian',
             'food-allergies': 'Nuts, Dairy',
