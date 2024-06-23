@@ -122,8 +122,8 @@ input, select{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .recipe-title {
-    background-color: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
-    color: #000;
+    background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+    color: #fff;
     padding: 10px;
     border-radius: 8px 8px 0 0;
     text-align: center;
@@ -138,10 +138,10 @@ input, select{
 .nutrition table {
     width: 100%;
 }
-.custom-modal-size {
+/* .custom-modal-size {
     max-width: 70% !important;
     width: auto !important;
-}
+} */
 .full-width-image {
     width: 100%;
     height: auto;
@@ -408,7 +408,7 @@ input, select{
     </div>
     <!-- Modal -->
     <div class="modal fade" id="mealPlanModal" tabindex="-1" role="dialog" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
-        <div class="modal-dialog custom-modal-size" role="document">
+        <div class="modal-dialog custom-modal-size" role="document" style="max-width: 70%;width: auto;">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="mealPlanModalLabel">Meal Plan</h5>
