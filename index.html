@@ -1,6 +1,7 @@
 <html>
-<title>Meal Generating App</title>
+<title>Fabulous50s - Meal Generating App</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" type="image/x-icon">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidden;height: 100%;}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);background-image: linear-gradient(180deg, #a5bdfe 9%, #7a57db 100%);}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
@@ -91,6 +92,10 @@ input, select{
     p{
         font-size: 15px;
     }
+    legend{
+        width: 50% !important;
+        font-size: 10px !important;
+    }
 }
 
 .subheading{
@@ -99,6 +104,10 @@ input, select{
     font-weight: 700;
     line-height: 1.2em;
 }
+/* legend{
+    width: 20%;
+    font-size: 15px;
+} */
 </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -118,24 +127,6 @@ input, select{
             </div>
         </div>
     </nav>
-    
-    <!-- <div class="container my-1 main-content">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <img src="img-1.jpg" class="img-fluid" alt="Placeholder Image">
-          </div>
-          <div class="col-md-6 center-content">
-            <h1 id="heading-card">Welcome to Fabulous50s Meal Generation</h1>
-            <p class="subheading">Healthy Meal Plan for Women Over 50</p>
-            <p>
-              Our meal plan is specifically designed to meet the nutritional needs of women over 50. It includes a balanced mix of lean proteins, whole grains, healthy fats, and plenty of fruits and vegetables.
-            </p>
-            <div class="form-group col-sm-6">
-              <button type="button" class="btn btn-primary btn-block" id="f50s_button">Get Started</button>
-            </div>
-          </div>
-        </div>
-    </div> -->
     <div class="container my-1 main-content">
         <div class="row align-items-center">
             <div class="col-md-6 col-sm-12 col-12">
@@ -153,7 +144,6 @@ input, select{
             </div>
         </div>
     </div>
-    <br>
     <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 text-center">
@@ -171,6 +161,25 @@ input, select{
                 <div class="card">
                     <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5>
                     <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <select id="meal-type" name="meal-type" class="form-control" required>
+                                    <option value="">Select your Meal Type</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="snack-1">Snack - 1</option>
+                                    <option value="lunch">Lunch</option>
+                                    <option value="snack-2">Snack - 2</option>
+                                    <option value="dinner">Dinner</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <!-- <div class="form-group col-sm-6">  -->
+                                    <button type="button" class="btn-block btn-warning" id="f50s_button" onclick="autofillForm()">Autofill Form</button> 
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Personal Information</legend>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
@@ -196,6 +205,11 @@ input, select{
                                 <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
                             </div>
                         </div>
+                        </fieldset>
+
+
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Lifestyle and Activity</legend>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
@@ -208,10 +222,70 @@ input, select{
                                 </select>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences</label>
-                                <input type="text" id="diet-preferences" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                <label class="form-control-label px-3">Goals</label>
+                                <select id="goals" name="goals" class="form-control">
+                                    <option value="">Select a goal</option>
+                                    <option value="weight_loss">Weight Loss</option>
+                                    <option value="weight_gain">Weight Gain</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="muscle_building">Muscle Building</option>
+                                </select>
                             </div>
                         </div>
+                        </fieldset>
+                        
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Nutritional Preferences</legend>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Macronutrient Ratios</label>
+                                <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Target Caloric Intake (calories per meal)</label>
+                                <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                            </div>
+                        </div>
+                        </fieldset>
+                        
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Meal Planning</legend>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Budget Constraints</label>
+                                <select id="budget-constraints" name="budget-constraints" class="form-control">
+                                    <option value="">Select a budget constraint</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Preferred Shopping Frequency</label>
+                                <select id="shopping-frequency" name="shopping-frequency" class="form-control">
+                                    <option value="">Select a shopping frequency</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="bi-weekly">Bi-weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
+                                <select id="meal-preparation-time" name="meal-preparation-time" class="form-control">
+                                    <option value="">Select a time constraint</option>
+                                    <option value="quick">Quick</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="extensive">Extensive</option>
+                                </select>
+                            </div>
+                        </div>
+                        </fieldset>
+                        
+
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Food Preferences and Restrictions</legend>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Food Allergies</label>
@@ -224,80 +298,62 @@ input, select{
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Goals</label>
-                                <input type="text" id="goals" name="goals" placeholder="Weight Loss, Weight Gain, Maintenance, Muscle Building">
+                                <label class="form-control-label px-3">Dietary Preferences</label>
+                                <input type="text" id="diet-preferences" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Target Caloric Intake (calories)</label>
-                                <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                                <label class="form-control-label px-3">Taste Prefered</label>
+                                <select id="taste" name="taste" class="form-control">
+                                    <option value="">Select your taste</option>
+                                    <option value="sweet">Sweet</option>
+                                    <option value="sour">Sour</option>
+                                    <option value="spicy">Spicy</option>
+                                    <option value="salty">Salty</option>
+                                    <option value="bitter">Bitter</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Macronutrient Ratios</label>
-                                <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
-                                <input type="text" id="meal-preparation-time" name="meal-preparation-time" placeholder="Quick, Moderate, Extensive">
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Budget Constraints</label>
-                                <input type="text" id="budget-constraints" name="budget-constraints" placeholder="Low, Medium, High">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Preferred Shopping Frequency</label>
-                                <input type="text" id="shopping-frequency" name="shopping-frequency" placeholder="Daily, Weekly, Bi-weekly">
-                            </div>
-                        </div>
+                        </fieldset>
+                        
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Culinary Preferences & Season</legend>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
                                 <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Medical Conditions</label>
-                                <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Current Season</label>
-                                <input type="text" id="season" name="season" placeholder="Enter your current season">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Taste Prefered</label>
-                                <input type="text" id="taste" name="taste" placeholder="Enter your Taste">
+                                <select id="season" name="season" class="form-control">
+                                    <option value="">Select your current season</option>
+                                    <option value="spring">Spring</option>
+                                    <option value="summer">Summer</option>
+                                    <option value="autumn">Autumn</option>
+                                    <option value="winter">Winter</option>
+                                </select>
                             </div>
                         </div>
+                        </fieldset>
+
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Health Considerations</legend>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Current Medications or Supplements</label>
                                 <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Choose Meal Type</label>
-                                <select id="meal-type" name="meal-type" class="form-control" required>
-                                    <option value="">Select your Meal Type</option>
-                                    <option value="breakfast">Breakfast</option>
-                                    <option value="snack-1">Snack - 1</option>
-                                    <option value="lunch">Lunch</option>
-                                    <option value="snack-2">Snack - 2</option>
-                                    <option value="dinner">Dinner</option>
-                                </select>
+                                    <label class="form-control-label px-3">Medical Conditions</label>
+                                    <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
                             </div>
                         </div>
-                        
+                        </fieldset>
                         
                         <div class="row justify-content-end">
                             <div class="form-group col-sm-6"> 
                                 <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL</button> 
                             </div>
-                            <div class="form-group col-sm-6"> 
-                                <button type="button" class="btn-block btn-warning" onclick="autofillForm()">Autofill Form</button> 
-                            </div>
+                            
                         </div>
                     </form>
                     
@@ -432,40 +488,176 @@ input, select{
 
 
     function autofillForm() {
-        // Sample values for autofill
-        var sampleValues = {
-            age: 50,
-            gender: 'male',
-            height: 180,
-            weight: 60,
-            'activity-level': 'moderately-active',
-            'diet-preferences': 'Vegetarian',
-            'food-allergies': 'Nuts, Dairy',
-            'specific-foods': 'Banana, Spinach',
-            'goals': 'Weight Loss',
-            'caloric-intake': 1800,
-            'macronutrient-ratios': '40% Carbs, 30% Proteins, 30% Fats',
-            'meal-preparation-time': 'Moderate',
-            'budget-constraints': 'Medium',
-            'shopping-frequency': 'Weekly',
-            'cuisine-preferences': 'Italian, Mexican',
-            'medical-conditions': 'None',
-            'season': 'Winter',
-            'taste': 'Low Spicy',
-            'medications-supplements': 'Multivitamin',
-            'meal-type': 'breakfast'
-        };
-
-        // Loop through sampleValues object and set values in form fields
-        for (var key in sampleValues) {
-            if (sampleValues.hasOwnProperty(key)) {
-                var element = document.getElementById(key);
-                if (element) {
-                    element.value = sampleValues[key];
-                }
-            }
+        var mealType = document.getElementById('meal-type').value;
+        var sampleData = getSampleDataForMealType(mealType);
+        
+        document.getElementById('age').value = sampleData.age;
+        document.getElementById('gender').value = sampleData.gender;
+        document.getElementById('height').value = sampleData.height;
+        document.getElementById('weight').value = sampleData.weight;
+        document.getElementById('activity-level').value = sampleData.activityLevel;
+        document.getElementById('goals').value = sampleData.goals;
+        document.getElementById('caloric-intake').value = sampleData.caloricIntake;
+        document.getElementById('macronutrient-ratios').value = sampleData.macronutrientRatios;
+        document.getElementById('meal-preparation-time').value = sampleData.mealPreparationTime;
+        document.getElementById('budget-constraints').value = sampleData.budgetConstraints;
+        document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
+        document.getElementById('season').value = sampleData.season;
+        document.getElementById('taste').value = sampleData.taste;
+        document.getElementById('diet-preferences').value = sampleData.dietPreferences;
+        document.getElementById('food-allergies').value = sampleData.foodAllergies;
+        document.getElementById('specific-foods').value = sampleData.specificFoods;
+        document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
+        document.getElementById('medical-conditions').value = sampleData.medicalConditions;
+        document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
+        document.getElementById('meal-type').value = sampleData.MealType;
+    }
+    
+    function getSampleDataForMealType(mealType) {
+        switch (mealType) {
+            case 'breakfast':
+                return {
+                    age: 30,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein'
+                };
+            case 'snack-1':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein'
+                };
+                break;
+            case 'lunch':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein'
+                };
+                // Add sample data for Lunch
+                break;
+            case 'snack-2':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein'
+                };
+                // Add sample data for Snack - 2
+                break;
+            case 'dinner':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein'
+                };
+                // Add sample data for Dinner
+                break;
+            default:
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Oats',
+                    cuisinePreferences: 'American',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein',
+                    MealType: 'breakfast'
+                };
         }
     }
+
 </script>
 
 </html>
