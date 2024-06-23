@@ -118,7 +118,7 @@ input, select{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .recipe-title {
-    background-color: #a3d3ff;
+    background-color: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
     color: #000;
     padding: 10px;
     border-radius: 8px 8px 0 0;
@@ -135,8 +135,12 @@ input, select{
     width: 100%;
 }
 .custom-modal-size {
-    max-width: 90% !important;
+    max-width: 70% !important;
     width: auto !important;
+}
+.full-width-image {
+    width: 100%;
+    height: auto;
 }
 
 </style>
@@ -523,23 +527,23 @@ input, select{
                         <h2 id="recipe-name">${recipeName}</h2>
                         <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
                     </div>
-                    <img src="${imageUrl}" class="mealimage">
+                    <img src="${imageUrl}" class="mealimage full-width-image">
                     <div class="row">
                         <div class="col-md-6 ingredient-list">
-                            <h4>Ingredients:</h4>
+                            <h4 style="color:#6e4bd0;">Ingredients:</h4>
                             <ul>
                                 ${shoppingList.map(item => `<li>${item}</li>`).join('')}
                             </ul>
                         </div>
                         <div class="col-md-6 preparation">
-                            <h4>Preparation Steps:</h4>
+                            <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
                             <ol>
                                 ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
                             </ol>
                         </div>
                     </div>
                     <div class="nutrition">
-                        <h4>Nutrition Information:</h4>
+                        <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
                         <ul>
                             ${nutrition.map(item => `<li>${item}</li>`).join('')}
                         </ul>
