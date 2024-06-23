@@ -146,6 +146,28 @@ input, select{
     width: 100%;
     height: auto;
 }
+.item {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+.radio {
+  display: none;
+}
+.radio ~ span {
+  font-size: 3rem;
+  filter: grayscale(100);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.radio:checked ~ span {
+  filter: grayscale(0);
+  font-size: 4rem;
+}
 
 </style>
 
@@ -597,8 +619,7 @@ input, select{
                 </div>
                 <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
                 <div class="app" style="width: 90%; max-width: 500px; margin: 0 auto;">
-                    <h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this page helpful?</h1>
-                    <p style="margin: 0; padding: 0; line-height: 1.5;">Let us know how we did</p>
+                    <center><h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this meal helpful?</h3></center>
 
                     <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                     <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
