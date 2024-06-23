@@ -147,33 +147,6 @@ input, select{
     height: auto;
 }
 
-.app {
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.item {
-  width: 90px;
-  height: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-}
-.radio {
-  display: none;
-}
-.radio ~ span {
-  font-size: 3rem;
-  filter: grayscale(100);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.radio:checked ~ span {
-  filter: grayscale(0);
-  font-size: 4rem;
-}
 </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -622,48 +595,49 @@ input, select{
                         </ul>
                     </div>
                 </div>
-                <div class="app">
-                    <h1>Was this page helpful?</h1>
-                    <p>Let us know how we did</p>
+                <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
+                <div class="app" style="width: 90%; max-width: 500px; margin: 0 auto;">
+                    <h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this page helpful?</h1>
+                    <p style="margin: 0; padding: 0; line-height: 1.5;">Let us know how we did</p>
 
-                    <div class="container">
-                        <div class="item">
+                    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
                         <label for="0">
-                        <input class="radio" type="radio" name="feedback" id="0" value="0">
-                        <span>🤬</span>
+                        <input class="radio" type="radio" name="feedback" id="0" value="0" style="display: none;">
+                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🤬</span>
                         </label>
-                        </div>
+                    </div>
 
-                        <div class="item">
+                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
                         <label for="1">
-                        <input class="radio" type="radio" name="feedback" id="1" value="1">
-                        <span>🙁</span>
+                        <input class="radio" type="radio" name="feedback" id="1" value="1" style="display: none;">
+                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🙁</span>
                         </label>
-                        </div>
+                    </div>
 
-                        <div class="item">
+                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
                         <label for="2">
-                        <input class="radio" type="radio" name="feedback" id="2" value="2">
-                        <span>😶</span>
+                        <input class="radio" type="radio" name="feedback" id="2" value="2" style="display: none;">
+                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😶</span>
                         </label>
-                        </div>
+                    </div>
 
-                        <div class="item">
+                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
                         <label for="3">
-                        <input class="radio" type="radio" name="feedback" id="3" value="3">
-                        <span>😁</span>
+                        <input class="radio" type="radio" name="feedback" id="3" value="3" style="display: none;">
+                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😁</span>
                         </label>
-                        </div>
+                    </div>
 
-                        <div class="item">
+                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
                         <label for="4">
-                        <input class="radio" type="radio" name="feedback" id="4" value="4">
-                        <span>😍</span>
+                        <input class="radio" type="radio" name="feedback" id="4" value="4" style="display: none;">
+                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😍</span>
                         </label>
-                        </div>
+                    </div>
 
                     </div>
-                    </div>
+                </div>
             `;
 
             // Update the meal container with formattedData
