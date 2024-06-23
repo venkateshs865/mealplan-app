@@ -135,8 +135,8 @@ input, select{
     width: 100%;
 }
 .custom-modal-size {
-    max-width: 90%;
-    width: auto;
+    max-width: 90% !important;
+    width: auto !important;
 }
 
 </style>
@@ -415,6 +415,7 @@ input, select{
                             <h2 id="recipe-name">Recipe Name</h2>
                             <p id="recipe-info">Serving Info</p>
                         </div>
+                        <img src="" class="mealimage">
                         <div class="row">
                             <div class="col-md-6 ingredient-list">
                                 <h4>Ingredient List</h4>
@@ -513,6 +514,7 @@ input, select{
             var shoppingList = data.shopping_list || [];
             var preparationSteps = data.preparation_step || [];
             var nutrition = data.nutrition || [];
+            var imageUrl = data.image_url || 'N/A';
 
             // Construct the HTML for displaying the response data
             var formattedData = `
@@ -521,6 +523,7 @@ input, select{
                         <h2 id="recipe-name">${recipeName}</h2>
                         <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
                     </div>
+                    <img src="${imageUrl}" class="mealimage">
                     <div class="row">
                         <div class="col-md-6 ingredient-list">
                             <h4>Ingredients:</h4>
