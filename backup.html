@@ -790,3 +790,173 @@ input, select{
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<!-- ---------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .recipe-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .recipe-title {
+            background-color: #a3d3ff;
+            color: #000;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+        .ingredient-list, .preparation {
+            margin: 20px 0;
+        }
+        .notes, .nutrition {
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        .nutrition table {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div id="meal-container" class="recipe-card">
+        <!-- Dynamic meal plan content will be inserted here -->
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Fetch meal plan data from URL parameters and display it
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
+
+        var recipeName = mealPlanData.recipe_name || 'N/A';
+        var cookingTime = mealPlanData.cooking_time || 'N/A';
+        var serving = mealPlanData.serving || 'N/A';
+        var shoppingList = mealPlanData.shopping_list || [];
+        var preparationSteps = mealPlanData.preparation_step || [];
+        var nutrition = mealPlanData.nutrition || [];
+        var imageUrl = mealPlanData.image_url || 'N/A';
+
+        var formattedData = `
+            <div class="recipe-title">
+                <h2>${recipeName}</h2>
+                <p>${serving} Servings, ${cookingTime} Minutes</p>
+            </div>
+            <img src="${imageUrl}" class="mealimage full-width-image">
+            <div class="row">
+                <div class="col-md-6 ingredient-list">
+                    <h4>Ingredient List</h4>
+                    <ul>
+                        ${shoppingList.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="col-md-6 preparation">
+                    <h4>Preparation</h4>
+                    <ol>
+                        ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                </div>
+            </div>
+            <div class="nutrition">
+                <h4>Nutrition Information (Amount Per Serve)</h4>
+                <table class="table table-bordered">
+                    ${nutrition.map(item => `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.value}</td>
+                    </tr>`).join('')}
+                </table>
+            </div>
+        `;
+
+        var mealContainer = document.getElementById("meal-container");
+        mealContainer.innerHTML = formattedData;
+    });
+</script>
+</body>
+</html>
+
+<script>
+var mealPlanData = {
+    recipe_name: "Bacon, Cheese & Kale Egg Wrap",
+    cooking_time: "20",
+    serving: "2",
+    shopping_list: ["2 slices Bacon", "4 Eggs (large)", "4 tbsp Water", "Sea Salt & Black Pepper (to taste)", "2 tsp Avocado Oil", "2 slices Havarti Cheese (sliced)", "2 cups Baby Kale"],
+    preparation_step: ["Cook the bacon in a pan over medium heat for five minutes or until crisp. Drain on a paper towel and set aside.", "Meanwhile, whisk the eggs, water, salt, and pepper.", "Heat a medium non-stick pan over medium heat. Evenly coat it with oil.", "Pour in the egg mixture to form a layer along the bottom of the skillet.", "Tilt and rotate the pan to allow the uncooked egg to flow into empty spaces.", "Cook for about two minutes or until the egg is cooked. Set aside.", "To serve, layer the cheese, kale, and bacon down the center of the egg.", "Roll or fold it all together and enjoy!"],
+    nutrition: [{name: "Calories", value: "370"}, {name: "Fat", value: "29g"}, {name: "Fiber", value: "1g"}, {name: "Protein", value: "24g"}, {name: "Cholesterol", value: "370mg"}, {name: "Sodium", value: "760mg"}, {name: "Vitamin A", value: "552IU"}, {name: "Calcium", value: "104mg"}, {name: "Iron", value: "2mg"}, {name: "Vitamin C", value: "14mg"}, {name: "Vitamin D", value: "41IU"}, {name: "Vitamin E", value: "3mg"}, {name: "Vitamin K", value: "90mcg"}, {name: "Folate", value: "60mcg"}, {name: "Zinc", value: "2mg"}],
+    image_url: "https://example.com/image.jpg"
+};
+
+var encodedMealPlanData = encodeURIComponent(JSON.stringify(mealPlanData));
+// window.location.href = `meal-plan.html?mealPlanData=${encodedMealPlanData}`;
+</script>
+----------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan</title>
+    <style>
+        .recipe-card { margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .recipe-title { text-align: center; }
+        .mealimage { width: 100%; max-width: 400px; display: block; margin: 20px auto; }
+        .ingredient-list, .preparation { margin-top: 20px; }
+        .nutrition { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div id="meal-container" class="meal-container"></div>
+
+    <script>
+        // Retrieve meal plan data from localStorage
+        var mealPlanData = JSON.parse(localStorage.getItem('mealPlanData'));
+
+        // Construct the HTML for displaying the meal plan data
+        var formattedData = `
+            <div class="recipe-card">
+                <div class="recipe-title">
+                    <h2 id="recipe-name">${mealPlanData.recipeName}</h2>
+                    <p id="recipe-info">Cooking Time: ${mealPlanData.cookingTime}, Serving: ${mealPlanData.serving}</p>
+                </div>
+                <img src="${mealPlanData.imageUrl}" class="mealimage full-width-image">
+                <div class="row">
+                    <div class="col-md-6 ingredient-list">
+                        <h4 style="color:#6e4bd0;">Ingredients:</h4>
+                        <ul>
+                            ${mealPlanData.shoppingList.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="col-md-6 preparation">
+                        <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
+                        <ol>
+                            ${mealPlanData.preparationSteps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+                <div class="nutrition">
+                    <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
+                    <ul>
+                        ${mealPlanData.nutrition.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+
+        // Update the meal container with formattedData
+        var mealContainer = document.getElementById("meal-container");
+        mealContainer.innerHTML = formattedData;
+    </script>
+</body>
+</html>
