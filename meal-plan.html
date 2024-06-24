@@ -38,6 +38,58 @@
         h4{
             color: #8074df;
         }
+        /* body {
+        margin: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: sans-serif;
+        } */
+
+        h1,
+        p {
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+        }
+
+        .app {
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto;
+        }
+        .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .item {
+        width: 90px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        }
+        .radio {
+        display: none;
+        }
+        .radio ~ span {
+        font-size: 3rem;
+        filter: grayscale(100);
+        cursor: pointer;
+        transition: 0.3s;
+        }
+
+        .radio:checked ~ span {
+        filter: grayscale(0);
+        font-size: 4rem;
+        }
+
     </style>
 </head>
 <body>
@@ -92,6 +144,49 @@
                     </tr>`).join('')}
                 </table>
             </div>
+            <div class="app">
+                <center><h4>Was this meal was useful?</h4></center>
+
+                <div class="container">
+                    <div class="item">
+                    <label for="0">
+                    <input class="radio" type="radio" name="feedback" id="0" value="0">
+                    <span>🤬</span>
+                    </label>
+                    </div>
+
+                    <div class="item">
+                    <label for="1">
+                    <input class="radio" type="radio" name="feedback" id="1" value="1">
+                    <span>🙁</span>
+                    </label>
+                    </div>
+
+                    <div class="item">
+                    <label for="2">
+                    <input class="radio" type="radio" name="feedback" id="2" value="2">
+                    <span>😶</span>
+                    </label>
+                    </div>
+
+                    <div class="item">
+                    <label for="3">
+                    <input class="radio" type="radio" name="feedback" id="3" value="3">
+                    <span>😁</span>
+                    </label>
+                    </div>
+
+                    <div class="item">
+                    <label for="4">
+                    <input class="radio" type="radio" name="feedback" id="4" value="4">
+                    <span>😍</span>
+                    </label>
+                    </div>
+
+                </div>
+            </div>
+                
+            
         `;
 
         var mealContainer = document.getElementById("meal-container");
@@ -100,18 +195,3 @@
 </script>
 </body>
 </html>
-
-<!-- <script>
-var mealPlanData = {
-    recipe_name: "Bacon, Cheese & Kale Egg Wrap",
-    cooking_time: "20",
-    serving: "2",
-    shopping_list: ["2 slices Bacon", "4 Eggs (large)", "4 tbsp Water", "Sea Salt & Black Pepper (to taste)", "2 tsp Avocado Oil", "2 slices Havarti Cheese (sliced)", "2 cups Baby Kale"],
-    preparation_step: ["Cook the bacon in a pan over medium heat for five minutes or until crisp. Drain on a paper towel and set aside.", "Meanwhile, whisk the eggs, water, salt, and pepper.", "Heat a medium non-stick pan over medium heat. Evenly coat it with oil.", "Pour in the egg mixture to form a layer along the bottom of the skillet.", "Tilt and rotate the pan to allow the uncooked egg to flow into empty spaces.", "Cook for about two minutes or until the egg is cooked. Set aside.", "To serve, layer the cheese, kale, and bacon down the center of the egg.", "Roll or fold it all together and enjoy!"],
-    nutrition: [{name: "Calories", value: "370"}, {name: "Fat", value: "29g"}, {name: "Fiber", value: "1g"}, {name: "Protein", value: "24g"}, {name: "Cholesterol", value: "370mg"}, {name: "Sodium", value: "760mg"}, {name: "Vitamin A", value: "552IU"}, {name: "Calcium", value: "104mg"}, {name: "Iron", value: "2mg"}, {name: "Vitamin C", value: "14mg"}, {name: "Vitamin D", value: "41IU"}, {name: "Vitamin E", value: "3mg"}, {name: "Vitamin K", value: "90mcg"}, {name: "Folate", value: "60mcg"}, {name: "Zinc", value: "2mg"}],
-    image_url: "https://example.com/image.jpg"
-};
-
-var encodedMealPlanData = encodeURIComponent(JSON.stringify(mealPlanData));
-// window.location.href = `meal-plan.html?mealPlanData=${encodedMealPlanData}`;
-</script> -->
