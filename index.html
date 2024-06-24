@@ -753,10 +753,12 @@ input, select{
             };
 
             // Save mealPlanData to localStorage
-            localStorage.setItem('mealPlanData', JSON.stringify(mealPlanData));
+            // localStorage.setItem('mealPlanData', JSON.stringify(mealPlanData));
 
-            // Redirect to the new page
-            window.location.href = 'meal-plan.html';
+            // // Redirect to the new page
+            // window.location.href = 'meal-plan.html';
+            var encodedMealPlanData = encodeURIComponent(JSON.stringify(mealPlanData));
+            window.location.href = `meal-plan.html?mealPlanData=${encodedMealPlanData}`;
         })
         .catch(error => {
             // Hide the loader
