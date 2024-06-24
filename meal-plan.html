@@ -89,111 +89,55 @@
         filter: grayscale(0);
         font-size: 4rem;
         }
-
+        .back-link {
+            /* font-family: "Gilroy", Sans-serif; */
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: none;
+            line-height: 1em;
+            letter-spacing: 0px;
+            width: 50%;
+            /* background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+            */
+            background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+            color: white;
+            border-style: solid;
+            border-width: .9px;
+            border-color: white;
+            border-radius: 30px !important;
+            box-shadow: 0px 0px 6px 1px #7a57db;
+        }
+        .navbar-light{
+            background-color: #8984e4 !important;
+            height: 90px;
+        }
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img width="60" height="60" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" class="attachment-full size-full wp-image-36441" alt></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container mt-5">
     <div id="meal-container" class="recipe-card">
         <!-- Dynamic meal plan content will be inserted here -->
+        
     </div>
+    
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- <script>
-    // Fetch meal plan data from URL parameters and display it
-    document.addEventListener("DOMContentLoaded", function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
-
-        var recipeName = mealPlanData.recipe_name || 'N/A';
-        var cookingTime = mealPlanData.cooking_time || 'N/A';
-        var serving = mealPlanData.serving || 'N/A';
-        var shoppingList = mealPlanData.shopping_list || [];
-        var preparationSteps = mealPlanData.preparation_step || [];
-        var nutrition = mealPlanData.nutrition || [];
-        var imageUrl = mealPlanData.image_url || 'N/A';
-
-        var formattedData = `
-            <div class="recipe-title">
-                <h2>${recipeName}</h2>
-                <p>${serving} Servings, ${cookingTime} Minutes</p>
-            </div>
-            <img src="${imageUrl}" class="mealimage full-width-image">
-            <div class="row">
-                <div class="col-md-6 ingredient-list">
-                    <h4>Ingredient List</h4>
-                    <ul>
-                        ${shoppingList.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-                <div class="col-md-6 preparation">
-                    <h4>Preparation</h4>
-                    <ol>
-                        ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
-                    </ol>
-                </div>
-            </div>
-            <div class="nutrition">
-                <h4>Nutrition Information (Amount Per Serve)</h4>
-                <table class="table table-bordered">
-                    ${nutrition.map(item => `
-                    <tr>
-                        <td>${item}</td>
-                    </tr>`).join('')}
-                </table>
-            </div>
-            <div class="app">
-                <center><h4>Was this meal was useful?</h4></center>
-
-                <div class="container">
-                    <div class="item">
-                    <label for="0">
-                    <input class="radio" type="radio" name="feedback" id="0" value="0">
-                    <span>🤬</span>
-                    </label>
-                    </div>
-
-                    <div class="item">
-                    <label for="1">
-                    <input class="radio" type="radio" name="feedback" id="1" value="1">
-                    <span>🙁</span>
-                    </label>
-                    </div>
-
-                    <div class="item">
-                    <label for="2">
-                    <input class="radio" type="radio" name="feedback" id="2" value="2">
-                    <span>😶</span>
-                    </label>
-                    </div>
-
-                    <div class="item">
-                    <label for="3">
-                    <input class="radio" type="radio" name="feedback" id="3" value="3">
-                    <span>😁</span>
-                    </label>
-                    </div>
-
-                    <div class="item">
-                    <label for="4">
-                    <input class="radio" type="radio" name="feedback" id="4" value="4">
-                    <span>😍</span>
-                    </label>
-                    </div>
-
-                </div>
-            </div>
-                
-            
-        `;
-
-        var mealContainer = document.getElementById("meal-container");
-        mealContainer.innerHTML = formattedData;
-    });
-</script> -->
 <script>
+    
     // Fetch meal plan data from URL parameters and display it
     document.addEventListener("DOMContentLoaded", function() {
         var urlParams = new URLSearchParams(window.location.search);
@@ -271,6 +215,7 @@
                     </div>
                 </div>
             </div>
+            <center><a href="index.html" class="btn btn-primary back-link">Go Back to Main Page</a></center>
         `;
 
         var mealContainer = document.getElementById("meal-container");
