@@ -195,7 +195,7 @@ input, select{
             </div>
             <div class="col-md-6 col-sm-12 col-12 center-content">
                 <h1 id="heading-card">Welcome to Fabulous50s Meal Generation</h1>
-                <p class="subheading">Healthy Meal Plan for Women Over 50</p>
+                <p class="subheading">Healthy Meal Plan for Women Over 50s</p>
                 <p>
                     Our meal plan is specifically designed to meet the nutritional needs of women over 50. It includes a balanced mix of lean proteins, whole grains, healthy fats, and plenty of fruits and vegetables.
                 </p>
@@ -530,6 +530,159 @@ input, select{
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    // function prepareMeal() {
+    //     // Retrieve form values
+    //     var age = document.getElementById("age").value;
+    //     var gender = document.getElementById("gender").value;
+    //     var height = document.getElementById("height").value;
+    //     var weight = document.getElementById("weight").value;
+    //     var activityLevel = document.getElementById("activity-level").value;
+    //     var dietPreferences = document.getElementById("diet-preferences").value;
+    //     var foodAllergies = document.getElementById("food-allergies").value;
+    //     var specificFoods = document.getElementById("specific-foods").value;
+    //     var goals = document.getElementById("goals").value;
+    //     var caloricIntake = document.getElementById("caloric-intake").value;
+    //     var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+    //     var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+    //     var budgetConstraints = document.getElementById("budget-constraints").value;
+    //     var shoppingFrequency = document.getElementById("shopping-frequency").value;
+    //     var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+    //     var medicalConditions = document.getElementById("medical-conditions").value;
+    //     var medicationsSupplements = document.getElementById("medications-supplements").value;
+    //     var mealType = document.getElementById("meal-type").value;
+    //     var season = document.getElementById("season").value;
+    //     var taste = document.getElementById("taste").value;
+
+    //     // Generate meal plan text
+    //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and prefered taste is ${taste}. Plan for meals including ${mealType}.`;
+
+    //     // Encode mealPlanText for URL
+    //     var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+    //     // Construct the API URL with query parameter
+    //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?meal_type=${mealType}&user_preferences=${encodedMealPlanText}`;
+    //     // Show the loader
+    //     document.getElementById("loader").style.display = "block";
+
+    //     // Send POST request to API endpoint using fetch
+    //     fetch(apiUrl, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json'
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Hide the loader
+    //         document.getElementById("loader").style.display = "none";
+
+    //         // Handle API response here
+    //         console.log('API Response:', data);
+
+    //         // Ensure the API response contains necessary data
+    //         var recipeName = data.recipe_name || 'N/A';
+    //         var cookingTime = data.cooking_time || 'N/A';
+    //         var serving = data.serving || 'N/A';
+    //         var shoppingList = data.shopping_list || [];
+    //         var preparationSteps = data.preparation_step || [];
+    //         var nutrition = data.nutrition || [];
+    //         var imageUrl = data.image_url || 'N/A';
+
+    //         // Construct the HTML for displaying the response data
+    //         var formattedData = `
+    //             <div class="recipe-card">
+    //                 <div class="recipe-title">
+    //                     <h2 id="recipe-name">${recipeName}</h2>
+    //                     <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
+    //                 </div>
+    //                 <img src="${imageUrl}" class="mealimage full-width-image">
+    //                 <div class="row">
+    //                     <div class="col-md-6 ingredient-list">
+    //                         <h4 style="color:#6e4bd0;">Ingredients:</h4>
+    //                         <ul>
+    //                             ${shoppingList.map(item => `<li>${item}</li>`).join('')}
+    //                         </ul>
+    //                     </div>
+    //                     <div class="col-md-6 preparation">
+    //                         <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
+    //                         <ol>
+    //                             ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
+    //                         </ol>
+    //                     </div>
+    //                 </div>
+    //                 <div class="nutrition">
+    //                     <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
+    //                     <ul>
+    //                         ${nutrition.map(item => `<li>${item}</li>`).join('')}
+    //                     </ul>
+    //                 </div>
+    //             </div>
+    //             <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
+    //             <div class="app" style="width: 90%; max-width: 500px; margin: 0 auto;">
+    //                 <center><h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this meal helpful?</h3></center>
+
+    //                 <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+    //                     <label for="0">
+    //                     <input class="radio" type="radio" name="feedback" id="0" value="0" style="display: none;">
+    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🤬</span>
+    //                     </label>
+    //                 </div>
+
+    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+    //                     <label for="1">
+    //                     <input class="radio" type="radio" name="feedback" id="1" value="1" style="display: none;">
+    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🙁</span>
+    //                     </label>
+    //                 </div>
+
+    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+    //                     <label for="2">
+    //                     <input class="radio" type="radio" name="feedback" id="2" value="2" style="display: none;">
+    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😶</span>
+    //                     </label>
+    //                 </div>
+
+    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+    //                     <label for="3">
+    //                     <input class="radio" type="radio" name="feedback" id="3" value="3" style="display: none;">
+    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😁</span>
+    //                     </label>
+    //                 </div>
+
+    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+    //                     <label for="4">
+    //                     <input class="radio" type="radio" name="feedback" id="4" value="4" style="display: none;">
+    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😍</span>
+    //                     </label>
+    //                 </div>
+
+    //                 </div>
+    //             </div>
+    //         `;
+
+    //         // Update the meal container with formattedData
+    //         var mealContainer = document.getElementById("meal-container");
+    //         mealContainer.innerHTML = formattedData;
+
+    //         // Show the modal
+    //         $('#mealPlanModal').modal('show');
+    //     })
+    //     .catch(error => {
+    //         // Hide the loader
+    //         document.getElementById("loader").style.display = "none";
+
+    //         console.error('Error:', error);
+
+    //         // Handle error gracefully
+    //         var modalContent = document.getElementById("mealPlanContent");
+    //         modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
+
+    //         // Show the modal
+    //         $('#mealPlanModal').modal('show');
+    //     });
+    // }
+    
     function prepareMeal() {
         // Retrieve form values
         var age = document.getElementById("age").value;
@@ -554,7 +707,7 @@ input, select{
         var taste = document.getElementById("taste").value;
 
         // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and prefered taste is ${taste}. Plan for meals including ${mealType}.`;
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and preferred taste is ${taste}. Plan for meals including ${mealType}.`;
 
         // Encode mealPlanText for URL
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
@@ -563,6 +716,14 @@ input, select{
         var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?meal_type=${mealType}&user_preferences=${encodedMealPlanText}`;
         // Show the loader
         document.getElementById("loader").style.display = "block";
+
+        // Hide all other divs
+        var allDivs = document.querySelectorAll("div");
+        allDivs.forEach(div => {
+            if (div.id !== "loader" && div.id !== "meal-container") {
+                div.style.display = "none";
+            }
+        });
 
         // Send POST request to API endpoint using fetch
         fetch(apiUrl, {
@@ -579,109 +740,144 @@ input, select{
             // Handle API response here
             console.log('API Response:', data);
 
-            // Ensure the API response contains necessary data
-            var recipeName = data.recipe_name || 'N/A';
-            var cookingTime = data.cooking_time || 'N/A';
-            var serving = data.serving || 'N/A';
-            var shoppingList = data.shopping_list || [];
-            var preparationSteps = data.preparation_step || [];
-            var nutrition = data.nutrition || [];
-            var imageUrl = data.image_url || 'N/A';
+            var recipeName = data.recipe_name;
+            var cookingTime = data.cooking_time;
+            var serving = data.serving;
+            var imageUrl = data.image_url;  // Assume the API provides an image URL
+            var shoppingList = data.shopping_list;
+            var preparationSteps = data.preperation_step;
+            var nutrition = data.nutrition;
 
-            // Construct the HTML for displaying the response data
             var formattedData = `
-                <div class="recipe-card">
-                    <div class="recipe-title">
-                        <h2 id="recipe-name">${recipeName}</h2>
-                        <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
-                    </div>
-                    <img src="${imageUrl}" class="mealimage full-width-image">
-                    <div class="row">
-                        <div class="col-md-6 ingredient-list">
-                            <h4 style="color:#6e4bd0;">Ingredients:</h4>
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Meal Plan</title>
+                    <style>
+                        .recipe-card {
+                            max-width: 800px;
+                            margin: auto;
+                            padding: 20px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                        }
+                        .recipe-title h2 {
+                            color: #6e4bd0;
+                        }
+                        .mealimage {
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 8px;
+                            margin: 20px 0;
+                        }
+                        .ingredient-list, .preparation, .nutrition {
+                            margin-top: 20px;
+                        }
+                        .nutrition table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        .nutrition table, .nutrition th, .nutrition td {
+                            border: 1px solid #ddd;
+                        }
+                        .nutrition th, .nutrition td {
+                            padding: 8px;
+                            text-align: left;
+                        }
+                    </style>
+                </head>
+                <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
+                    <div class="recipe-card">
+                        <div class="recipe-title">
+                            <h2 id="recipe-name">${recipeName}</h2>
+                            <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
+                        </div>
+                        <img src="${imageUrl}" class="mealimage full-width-image">
+                        <div class="row">
+                            <div class="col-md-6 ingredient-list">
+                                <h4 style="color:#6e4bd0;">Ingredients:</h4>
+                                <ul>
+                                    ${shoppingList.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="col-md-6 preparation">
+                                <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
+                                <ol>
+                                    ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="nutrition">
+                            <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
                             <ul>
-                                ${shoppingList.map(item => `<li>${item}</li>`).join('')}
+                                ${nutrition.map(item => `<li>${item}</li>`).join('')}
                             </ul>
                         </div>
-                        <div class="col-md-6 preparation">
-                            <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
-                            <ol>
-                                ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
-                            </ol>
+                    </div>
+                    <div class="app" style="width: 90%; max-width: 500px; margin: 20px auto;">
+                        <center><h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this meal helpful?</h3></center>
+                        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                            <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+                                <label for="0">
+                                    <input class="radio" type="radio" name="feedback" id="0" value="0" style="display: none;">
+                                    <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🤬</span>
+                                </label>
+                            </div>
+                            <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+                                <label for="1">
+                                    <input class="radio" type="radio" name="feedback" id="1" value="1" style="display: none;">
+                                    <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🙁</span>
+                                </label>
+                            </div>
+                            <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+                                <label for="2">
+                                    <input class="radio" type="radio" name="feedback" id="2" value="2" style="display: none;">
+                                    <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😶</span>
+                                </label>
+                            </div>
+                            <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+                                <label for="3">
+                                    <input class="radio" type="radio" name="feedback" id="3" value="3" style="display: none;">
+                                    <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😁</span>
+                                </label>
+                            </div>
+                            <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
+                                <label for="4">
+                                    <input class="radio" type="radio" name="feedback" id="4" value="4" style="display: none;">
+                                    <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😍</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="nutrition">
-                        <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
-                        <ul>
-                            ${nutrition.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-                <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
-                <div class="app" style="width: 90%; max-width: 500px; margin: 0 auto;">
-                    <center><h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this meal helpful?</h3></center>
-
-                    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
-                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-                        <label for="0">
-                        <input class="radio" type="radio" name="feedback" id="0" value="0" style="display: none;">
-                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🤬</span>
-                        </label>
-                    </div>
-
-                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-                        <label for="1">
-                        <input class="radio" type="radio" name="feedback" id="1" value="1" style="display: none;">
-                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🙁</span>
-                        </label>
-                    </div>
-
-                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-                        <label for="2">
-                        <input class="radio" type="radio" name="feedback" id="2" value="2" style="display: none;">
-                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😶</span>
-                        </label>
-                    </div>
-
-                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-                        <label for="3">
-                        <input class="radio" type="radio" name="feedback" id="3" value="3" style="display: none;">
-                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😁</span>
-                        </label>
-                    </div>
-
-                    <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-                        <label for="4">
-                        <input class="radio" type="radio" name="feedback" id="4" value="4" style="display: none;">
-                        <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😍</span>
-                        </label>
-                    </div>
-
-                    </div>
-                </div>
+                </body>
+                </html>
             `;
 
-            // Update the meal container with formattedData
-            var mealContainer = document.getElementById("meal-container");
-            mealContainer.innerHTML = formattedData;
+            // Create a new Blob object
+            var blob = new Blob([formattedData], { type: 'text/html' });
 
-            // Show the modal
-            $('#mealPlanModal').modal('show');
+            // Create a link element
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.target = '_blank';
+
+            // Simulate a click on the link to open the new page
+            link.click();
         })
         .catch(error => {
             // Hide the loader
             document.getElementById("loader").style.display = "none";
 
             console.error('Error:', error);
-
             // Handle error gracefully
-            var modalContent = document.getElementById("mealPlanContent");
-            modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
-
-            // Show the modal
-            $('#mealPlanModal').modal('show');
+            alert('An error occurred. Please try again.');
         });
     }
+
+    
     function autofillForm() {
         var mealType = document.getElementById('meal-type').value;
         var sampleData = getSampleDataForMealType(mealType);
