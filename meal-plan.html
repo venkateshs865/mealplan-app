@@ -270,31 +270,31 @@
                 <div class="container">
                     <div class="item">
                         <label for="0">
-                            <input class="radio" type="radio" name="feedback" id="0" value="0">
+                            <input class="radio" type="radio" name="feedback" id="0" value="🤬">
                             <span>🤬</span>
                         </label>
                     </div>
                     <div class="item">
                         <label for="1">
-                            <input class="radio" type="radio" name="feedback" id="1" value="1">
+                            <input class="radio" type="radio" name="feedback" id="1" value="🙁">
                             <span>🙁</span>
                         </label>
                     </div>
                     <div class="item">
                         <label for="2">
-                            <input class="radio" type="radio" name="feedback" id="2" value="2">
+                            <input class="radio" type="radio" name="feedback" id="2" value="😶">
                             <span>😶</span>
                         </label>
                     </div>
                     <div class="item">
                         <label for="3">
-                            <input class="radio" type="radio" name="feedback" id="3" value="3">
+                            <input class="radio" type="radio" name="feedback" id="3" value="😁">
                             <span>😁</span>
                         </label>
                     </div>
                     <div class="item">
                         <label for="4">
-                            <input class="radio" type="radio" name="feedback" id="4" value="4">
+                            <input class="radio" type="radio" name="feedback" id="4" value="😍">
                             <span>😍</span>
                         </label>
                     </div>
@@ -319,13 +319,13 @@
         var data = {
             'fields': {
                 'user_name': 'meal_app',
-                'meal_type': 'breakfast',  // You can set this dynamically if needed
+                'meal_type': 'N/A',  // You can set this dynamically if needed
                 'recipe': recipeName,
                 'ingredients': shoppingList.join(', '),
                 'cooking_instruction': preparationSteps.join(', '),
                 'status': 'completed',
                 'nutrition': nutrition.join(', '),
-                'image': imageUrl,
+                'image': [{'url': imageUrl}],
                 'cooking_time': cookingTime,
                 'serving': serving,
                 'review': review
@@ -342,7 +342,11 @@
         })
         .then(response => response.json())
         .then(data => {
-            alert('Your review has been saved. Thank you!');
+            if(data.error){
+                alert(`Error: ${data.error.message}`);
+            } else {
+                alert('Your review has been saved. Thank you!');
+            }
         })
         .catch(error => {
             console.error('Error:', error);
