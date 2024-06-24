@@ -136,7 +136,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
+<!-- <script>
     
     // Fetch meal plan data from URL parameters and display it
     document.addEventListener("DOMContentLoaded", function() {
@@ -221,6 +221,134 @@
         var mealContainer = document.getElementById("meal-container");
         mealContainer.innerHTML = formattedData;
     });
+</script> -->
+<script>
+    // Fetch meal plan data from URL parameters and display it
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
+
+        var recipeName = mealPlanData.recipeName || 'N/A';
+        var cookingTime = mealPlanData.cookingTime || 'N/A';
+        var serving = mealPlanData.serving || 'N/A';
+        var shoppingList = mealPlanData.shoppingList || [];
+        var preparationSteps = mealPlanData.preparationSteps || [];
+        var nutrition = mealPlanData.nutrition || [];
+        var imageUrl = mealPlanData.imageUrl && mealPlanData.imageUrl !== 'N/A' ? mealPlanData.imageUrl : 'https://via.placeholder.com/500';
+
+        var formattedData = `
+            <div class="recipe-title">
+                <h2>${recipeName}</h2>
+                <p>${serving} Servings, ${cookingTime} Minutes</p>
+            </div>
+            <img src="${imageUrl}" class="mealimage full-width-image" alt="Meal Image">
+            <div class="row">
+                <div class="col-md-6 ingredient-list">
+                    <h4>Ingredient List</h4>
+                    <ul>
+                        ${shoppingList.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="col-md-6 preparation">
+                    <h4>Preparation</h4>
+                    <ol>
+                        ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                </div>
+            </div>
+            <div class="nutrition">
+                <h4>Nutrition Information (Amount Per Serve)</h4>
+                <table class="table table-bordered">
+                    ${nutrition.map(item => `
+                    <tr>
+                        <td>${item}</td>
+                    </tr>`).join('')}
+                </table>
+            </div>
+            <div class="app">
+                <center><h4>Was this meal useful?</h4></center>
+                <div class="container">
+                    <div class="item">
+                        <label for="0">
+                            <input class="radio" type="radio" name="feedback" id="0" value="0">
+                            <span>🤬</span>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <label for="1">
+                            <input class="radio" type="radio" name="feedback" id="1" value="1">
+                            <span>🙁</span>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <label for="2">
+                            <input class="radio" type="radio" name="feedback" id="2" value="2">
+                            <span>😶</span>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <label for="3">
+                            <input class="radio" type="radio" name="feedback" id="3" value="3">
+                            <span>😁</span>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <label for="4">
+                            <input class="radio" type="radio" name="feedback" id="4" value="4">
+                            <span>😍</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        var mealContainer = document.getElementById("meal-container");
+        mealContainer.innerHTML = formattedData;
+
+        // Add event listeners to emoji buttons
+        var feedbackRadios = document.querySelectorAll('.radio');
+        feedbackRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                var review = this.value;
+                saveMealDataToAirtable(recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review);
+            });
+        });
+    });
+
+    function saveMealDataToAirtable(recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
+        var data = {
+            'fields': {
+                'user_name': 'meal_app',
+                'meal_type': 'breakfast',  // You can set this dynamically if needed
+                'recipe': recipeName,
+                'ingredients': shoppingList.join(', '),
+                'cooking_instruction': preparationSteps.join(', '),
+                'status': 'completed',
+                'nutrition': nutrition.join(', '),
+                'image': imageUrl,
+                'cooking_time': cookingTime,
+                'serving': serving,
+                'review': review
+            }
+        };
+
+        fetch('https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer patXM2BHfAqiHM2kx.b67f0ea418ea122677bd765ccb629e291f0976bf2375c0d45a252f18c7ff2d86',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Your review has been saved. Thank you!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error saving your review. Please try again.');
+        });
+    }
 </script>
 </body>
 </html>
