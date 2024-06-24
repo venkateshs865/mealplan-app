@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan</title>
+    <style>
+        .recipe-card { margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .recipe-title { text-align: center; }
+        .mealimage { width: 100%; max-width: 400px; display: block; margin: 20px auto; }
+        .ingredient-list, .preparation { margin-top: 20px; }
+        .nutrition { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div id="meal-container" class="meal-container"></div>
+
+    <script>
+        // Retrieve meal plan data from localStorage
+        var mealPlanData = JSON.parse(localStorage.getItem('mealPlanData'));
+
+        // Construct the HTML for displaying the meal plan data
+        var formattedData = `
+            <div class="recipe-card">
+                <div class="recipe-title">
+                    <h2 id="recipe-name">${mealPlanData.recipeName}</h2>
+                    <p id="recipe-info">Cooking Time: ${mealPlanData.cookingTime}, Serving: ${mealPlanData.serving}</p>
+                </div>
+                <img src="${mealPlanData.imageUrl}" class="mealimage full-width-image">
+                <div class="row">
+                    <div class="col-md-6 ingredient-list">
+                        <h4 style="color:#6e4bd0;">Ingredients:</h4>
+                        <ul>
+                            ${mealPlanData.shoppingList.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="col-md-6 preparation">
+                        <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
+                        <ol>
+                            ${mealPlanData.preparationSteps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+                <div class="nutrition">
+                    <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
+                    <ul>
+                        ${mealPlanData.nutrition.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+
+        // Update the meal container with formattedData
+        var mealContainer = document.getElementById("meal-container");
+        mealContainer.innerHTML = formattedData;
+    </script>
+</body>
+</html>
