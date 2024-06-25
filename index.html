@@ -223,7 +223,7 @@ input, select{
                     <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5>
                     <form class="form-card" onsubmit="event.preventDefault()">
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex">
                                 <select id="meal-type" name="meal-type" class="form-control" required>
                                     <option value="">Select your Meal Type</option>
                                     <option value="breakfast">Breakfast</option>
@@ -231,6 +231,18 @@ input, select{
                                     <option value="lunch">Lunch</option>
                                     <option value="snack-2">Snack - 2</option>
                                     <option value="dinner">Dinner</option>
+                                </select>
+                            </div> -->
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <select id="day" name="day" class="form-control" required>
+                                    <option value="">Select your Day</option>
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                    <option value="friday">Friday</option>
+                                    <option value="saturday">Saturday</option>
+                                    <option value="sunday">Sunday</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
@@ -341,26 +353,9 @@ input, select{
                                     <option value="extensive">Extensive</option>
                                 </select>
                             </div>
-                        </div>
-                        </fieldset>
-                        
-
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Food Preferences and Restrictions</legend>
-                        <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Food Allergies</label>
                                 <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include</label>
-                                <input type="text" id="specific-foods" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences</label>
-                                <input type="text" id="diet-preferences" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Taste Prefered</label>
@@ -372,6 +367,55 @@ input, select{
                                     <option value="salty">Salty</option>
                                     <option value="bitter">Bitter</option>
                                 </select>
+                            </div>
+                        </div>
+                        </fieldset>
+                        
+
+                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                        <legend style="width: 20%;font-size: 15px;">Food Preferences and Restrictions</legend>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                <input type="text" id="specific-foods-1" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                <input type="text" id="specific-foods-2" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                <input type="text" id="specific-foods-3" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                <input type="text" id="specific-foods-4" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                <input type="text" id="specific-foods-5" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                <input type="text" id="diet-preferences-1" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                <input type="text" id="diet-preferences-2" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                <input type="text" id="diet-preferences-3" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                <input type="text" id="diet-preferences-4" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                <input type="text" id="diet-preferences-5" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
                             </div>
                         </div>
                         </fieldset>
@@ -690,9 +734,7 @@ input, select{
         var height = document.getElementById("height").value;
         var weight = document.getElementById("weight").value;
         var activityLevel = document.getElementById("activity-level").value;
-        var dietPreferences = document.getElementById("diet-preferences").value;
         var foodAllergies = document.getElementById("food-allergies").value;
-        var specificFoods = document.getElementById("specific-foods").value;
         var goals = document.getElementById("goals").value;
         var caloricIntake = document.getElementById("caloric-intake").value;
         var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
@@ -702,18 +744,31 @@ input, select{
         var cuisinePreferences = document.getElementById("cuisine-preferences").value;
         var medicalConditions = document.getElementById("medical-conditions").value;
         var medicationsSupplements = document.getElementById("medications-supplements").value;
-        var mealType = document.getElementById("meal-type").value;
+        var day = document.getElementById("day").value;
         var season = document.getElementById("season").value;
         var taste = document.getElementById("taste").value;
 
-        // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and prefered taste is ${taste}. Plan for meals including ${mealType}.`;
+        var specificFoods1 = document.getElementById("specific-foods-1").value;
+        var specificFoods2 = document.getElementById("specific-foods-2").value;
+        var specificFoods3 = document.getElementById("specific-foods-3").value;
+        var specificFoods4 = document.getElementById("specific-foods-4").value;
+        var specificFoods5 = document.getElementById("specific-foods-5").value;
 
+        var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+        var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+        var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+        var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+        var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+
+
+        // Generate meal plan text
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack-1, lunch, snack-2, dinner. Prepare only for ${day}.`;
+        console.log(mealPlanText)
         // Encode mealPlanText for URL
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
         // Construct the API URL with query parameter
-        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?meal_type=${mealType}&user_preferences=${encodedMealPlanText}`;
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?weekday=${day}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
         // Show the loader
         document.getElementById("loader").style.display = "block";
 
@@ -942,7 +997,7 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'breakfast'
+                    day: 'Monday'
                 };
         }
     }
