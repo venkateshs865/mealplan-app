@@ -827,8 +827,8 @@ input, select{
     }
 
     function autofillForm() {
-        var mealType = document.getElementById('meal-type').value;
-        var sampleData = getSampleDataForMealType(mealType);
+        var day = document.getElementById('day').value;
+        var sampleData = getSampleDataForMealType(day);
         
         document.getElementById('age').value = sampleData.age;
         document.getElementById('gender').value = sampleData.gender;
@@ -849,11 +849,11 @@ input, select{
         document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
         document.getElementById('medical-conditions').value = sampleData.medicalConditions;
         document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
-        document.getElementById('meal-type').value = sampleData.MealType;
+        document.getElementById('day').value = sampleData.day;
     }
     
-    function getSampleDataForMealType(mealType) {
-        switch (mealType) {
+    function getSampleDataForMealType(day) {
+        switch (day) {
             case 'breakfast':
                 return {
                     age: 50,
