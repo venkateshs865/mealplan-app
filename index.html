@@ -702,7 +702,7 @@ input, select{
         var dietPreferences5 = document.getElementById("diet-preferences-5").value;
 
         // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack-1, lunch, snack-2, dinner. Prepare only for ${day}.`;
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner. Prepare only for ${day}.`;
         console.log(mealPlanText);
         // Encode mealPlanText for URL
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
@@ -741,9 +741,9 @@ input, select{
             // Construct the data object to pass to the new page
             var mealPlanData = {
                 breakfast: dayMeals.breakfast,
-                snack1: dayMeals.snack1,
+                snack1: dayMeals.snack_1,
                 lunch: dayMeals.lunch,
-                snack2: dayMeals.snack2,
+                snack2: dayMeals.snack_2,
                 dinner: dayMeals.dinner
             };
 
