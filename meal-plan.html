@@ -149,6 +149,9 @@
             var meal = mealPlanData[mealType];
             if (meal) {
                 var formattedData = `
+                    <div class="meal-type">
+                        <h2>${mealTypes[mealType]}</h2>
+                    </div>
                     <div class="recipe-title">
                         <h2>${meal.recipe_name}</h2>
                         <p>${meal.serving} Servings, ${meal.cooking_time}</p>
