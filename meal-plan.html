@@ -256,14 +256,15 @@
             'fields': {
                 'user_name': 'meal_app',
                 'meal_type': mealType,
-                'recipe_name': recipeName,
+                'recipe': recipeName,
                 'cooking_time': cookingTime,
                 'serving': serving,
-                'shopping_list': shoppingList.join(', '),
-                'preparation_step': preparationSteps.join(', '),
+                'ingredients': shoppingList.join(', '),
+                'cooking_instruction': preparationSteps.join(', '),
                 'nutrition': nutrition.join(', '),
                 'image': imageUrl,
-                'reviews': review
+                'reviews': review,
+                'status': 'completed'
             }
         };
 
