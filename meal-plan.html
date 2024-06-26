@@ -144,6 +144,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var urlParams = new URLSearchParams(window.location.search);
         var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
+        var userName = urlParams.get('userName');
 
         console.log('Loaded Meal Plan Data:', mealPlanData); // Debugging statement
 
@@ -237,6 +238,7 @@
                 var meal = mealPlanData[mealType];
                 var review = this.value;
                 saveMealDataToAirtable(
+                    userName,
                     mealTypes[mealType],
                     meal.recipe_name,
                     meal.cooking_time,
@@ -251,10 +253,10 @@
         });
     });
 
-    function saveMealDataToAirtable(mealType, recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
+    function saveMealDataToAirtable(userName, mealType, recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
         var data = {
             'fields': {
-                'user_name': 'meal_app',
+                'user_name': userName,
                 'meal_type': mealType,
                 'recipe': recipeName,
                 'cooking_time': cookingTime,
