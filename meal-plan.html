@@ -111,6 +111,11 @@
             background-color: #8984e4 !important;
             height: 90px;
         }
+        .meal-type{
+            color: #8984e4;
+            background: aliceblue;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -256,7 +261,7 @@
             if (meal) {
                 var formattedData = `
                     <div class="meal-type">
-                        <h2>${mealTypes[mealType]}</h2>
+                        <center><h2>${mealTypes[mealType]}</h2></center>
                     </div>
                     <div class="recipe-title">
                         <h2>${meal.recipe_name}</h2>
@@ -284,6 +289,42 @@
                         </table>
                     </div>
                     <hr>
+                    <div class="app">
+                        <center><h4>Was this meal useful?</h4></center>
+                        <div class="container">
+                            <div class="item">
+                                <label for="0">
+                                    <input class="radio" type="radio" name="feedback" id="0" value="🤬">
+                                    <span>🤬</span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <label for="1">
+                                    <input class="radio" type="radio" name="feedback" id="1" value="🙁">
+                                    <span>🙁</span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <label for="2">
+                                    <input class="radio" type="radio" name="feedback" id="2" value="😶">
+                                    <span>😶</span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <label for="3">
+                                    <input class="radio" type="radio" name="feedback" id="3" value="😁">
+                                    <span>😁</span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <label for="4">
+                                    <input class="radio" type="radio" name="feedback" id="4" value="😍">
+                                    <span>😍</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <center><a href="index.html" class="btn btn-primary back-link">Go Back to Main Page</a></center>
                 `;
                 mealContainer.innerHTML += formattedData;
             }
