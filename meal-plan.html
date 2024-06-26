@@ -132,7 +132,7 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
@@ -230,4 +230,112 @@
             alert('There was an error saving your review. Please try again.');
         });
     }
+</script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
+
+        console.log('Loaded Meal Plan Data:', mealPlanData); // Debugging statement
+
+        var mealTypes = {
+            breakfast: "Breakfast",
+            snack1: "Snack 1",
+            lunch: "Lunch",
+            snack2: "Snack 2",
+            dinner: "Dinner"
+        };
+
+        var mealContainer = document.getElementById("meal-container");
+
+        Object.keys(mealTypes).forEach(mealType => {
+            var meal = mealPlanData[mealType];
+            if (meal) {
+                var formattedData = `
+                    <div class="meal-type">
+                        <h2>${mealTypes[mealType]}</h2>
+                    </div>
+                    <div class="recipe-title">
+                        <h2>${meal.recipe_name}</h2>
+                        <p>${meal.serving} Servings, ${meal.cooking_time}</p>
+                    </div>
+                    <img src="${meal.image_url}" class="mealimage full-width-image" alt="Meal Image">
+                    <div class="row">
+                        <div class="col-md-6 ingredient-list">
+                            <h4>Ingredient List</h4>
+                            <ul>
+                                ${meal.shopping_list.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="col-md-6 preparation">
+                            <h4>Preparation</h4>
+                            <ol>
+                                ${meal.preparation_step.map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="nutrition">
+                        <h4>Nutrition Information (Amount Per Serve)</h4>
+                        <table class="table table-bordered">
+                            ${meal.nutrition.map(item => `<tr><td>${item}</td></tr>`).join('')}
+                        </table>
+                    </div>
+                    <hr>
+                `;
+                mealContainer.innerHTML += formattedData;
+            }
+        });
+
+        // Add event listeners to emoji buttons
+        var feedbackRadios = document.querySelectorAll('.radio');
+        feedbackRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                var review = this.value;
+                saveMealDataToAirtable(recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review);
+            });
+        });
+    });
+
+    function saveMealDataToAirtable(recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
+        var data = {
+            'fields': {
+                'user_name': 'meal_app',
+                'meal_type': mealType,
+                'recipe_name': recipeName,
+                'cooking_time': cookingTime,
+                'serving': serving,
+                'shopping_list': shoppingList.join(', '),
+                'preparation_step': preparationSteps.join(', '),
+                'nutrition': nutrition.join(', '),
+                'image': imageUrl,
+                'reviews': review
+            }
+        };
+
+        fetch('https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer YOUR_API_KEY',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(`Error: ${data.error.message}`);
+            } else {
+                alert('Your review has been saved. Thank you!');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error saving your review. Please try again.');
+        });
+    }
 </script>
+</body>
+</html>
