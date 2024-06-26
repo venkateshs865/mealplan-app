@@ -202,8 +202,6 @@
                 'preparation_step': preparationSteps.join(', '),
                 'nutrition': nutrition.join(', '),
                 'image': imageUrl,
-                'cooking_time': cookingTime,
-                'serving': serving,
                 'reviews': review
             }
         };
@@ -218,7 +216,7 @@
         })
         .then(response => response.json())
         .then(data => {
-            if(data.error){
+            if (data.error) {
                 alert(`Error: ${data.error.message}`);
             } else {
                 alert('Your review has been saved. Thank you!');

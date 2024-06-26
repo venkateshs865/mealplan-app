@@ -734,13 +734,17 @@ input, select{
             // Handle API response here
             console.log('API Response:', data);
 
+            // Extract meal data for the specified day
+            var dayMeals = data[day.toLowerCase()];
+            console.log('Day Meals:', dayMeals); // Debugging statement
+
             // Construct the data object to pass to the new page
             var mealPlanData = {
-                breakfast: data.breakfast,
-                snack1: data["snack-1"],
-                lunch: data.lunch,
-                snack2: data["snack-2"],
-                dinner: data.dinner
+                breakfast: dayMeals.breakfast,
+                snack1: dayMeals.snack1,
+                lunch: dayMeals.lunch,
+                snack2: dayMeals.snack2,
+                dinner: dayMeals.dinner
             };
 
             console.log('Meal Plan Data:', mealPlanData); // Debugging statement
