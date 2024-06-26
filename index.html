@@ -4,7 +4,7 @@
 <link rel="icon" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" type="image/x-icon">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidden;height: 100%;}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);background-image: linear-gradient(180deg, #a5bdfe 9%, #7a57db 100%);}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
+body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidden;height: 100%;}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);background-color: #ebf3fd !important;}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
 .loader {
     position: fixed;
     left: 50%;
@@ -12,7 +12,7 @@ body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidde
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
-#f50s_button{
+#f50s_button, #custom-meal,#predefined-meal{
     /* font-family: "Gilroy", Sans-serif; */
     font-size: 16px;
     font-weight: 600;
@@ -30,7 +30,7 @@ body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidde
     box-shadow: 0px 0px 6px 1px #7a57db;
 }
 label{
-    color: white;
+    color: #8074df;
     font-weight: 600;
 }
 input, select{
@@ -71,6 +71,9 @@ input, select{
     display: flex;
     align-items: center;
 }
+#meal-form {
+            display: none;
+        }
 @media (max-width: 600px) {
     .main-content {
     flex-direction: column; /* Stack elements vertically */
@@ -169,6 +172,35 @@ input, select{
   font-size: 4rem;
 }
 
+ /* Custom styles for the target card */
+ #targetCard {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#targetCard h5 {
+    color: #6e4bd0;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#targetCard select {
+    border-radius: 5px;
+}
+
+#targetCard .form-group {
+    margin-bottom: 15px;
+}
+
+#targetCard .icon {
+    color: #6e4bd0;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
 </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -218,251 +250,263 @@ input, select{
     <div class="container-fluid px-1 py-5 mx-auto">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <!-- <div class="row justify-content-between text-left" id="targetCard">
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        Choose a day to Start your meal journey
+                    </div>
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <select id="day" name="day" class="form-control" required>
+                            <option value="">Select your Day</option>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                            <option value="sunday">Sunday</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="card" id="targetCard">
+                    <h5 class="text-center mb-4">Start Your Meal Journey</h5>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 d-flex align-items-center">
+                            <span class="icon">&#128197;</span> <!-- Calendar icon -->
+                            <label for="day" class="mb-0">Choose a day to start:</label>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <select id="day" name="day" class="form-control" required>
+                                <option value="">Select your Day</option>
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday">Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="card">
-                    <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5>
-                    <form class="form-card" onsubmit="event.preventDefault()">
-                        <div class="row justify-content-between text-left">
-                            <!-- <div class="form-group col-sm-6 flex-column d-flex">
-                                <select id="meal-type" name="meal-type" class="form-control" required>
-                                    <option value="">Select your Meal Type</option>
-                                    <option value="breakfast">Breakfast</option>
-                                    <option value="snack-1">Snack - 1</option>
-                                    <option value="lunch">Lunch</option>
-                                    <option value="snack-2">Snack - 2</option>
-                                    <option value="dinner">Dinner</option>
-                                </select>
-                            </div> -->
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <select id="day" name="day" class="form-control" required>
-                                    <option value="">Select your Day</option>
-                                    <option value="monday">Monday</option>
-                                    <option value="tuesday">Tuesday</option>
-                                    <option value="wednesday">Wednesday</option>
-                                    <option value="thursday">Thursday</option>
-                                    <option value="friday">Friday</option>
-                                    <option value="saturday">Saturday</option>
-                                    <option value="sunday">Sunday</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <!-- <div class="form-group col-sm-6">  -->
-                                    <button type="button" class="btn-block btn-warning" id="f50s_button" onclick="autofillForm()">Autofill Form</button> 
-                                <!-- </div> -->
-                            </div>
-                        </div>
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Personal Information</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
-                                <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label>
-                                <select id="gender" name="gender" class="form-control" required>
-                                    <option value="">Select your gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Height (cm)<span class="text-danger"> *</span></label>
-                                <input type="number" id="height" name="height" placeholder="Enter your height in cm" min="100" max="250" required>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Weight (kg)<span class="text-danger"> *</span></label>
-                                <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
-                            </div>
-                        </div>
-                        </fieldset>
-
-
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Lifestyle and Activity</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
-                                <select id="activity-level" name="activity-level" class="form-control" required>
-                                    <option value="">Select your activity level</option>
-                                    <option value="sedentary">Sedentary (little or no exercise)</option>
-                                    <option value="lightly-active">Lightly Active (light exercise/sports 1-3 days/week)</option>
-                                    <option value="moderately-active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
-                                    <option value="very-active">Very Active (hard exercise/sports 6-7 days a week)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Goals</label>
-                                <select id="goals" name="goals" class="form-control">
-                                    <option value="">Select a goal</option>
-                                    <option value="weight_loss">Weight Loss</option>
-                                    <option value="weight_gain">Weight Gain</option>
-                                    <option value="maintenance">Maintenance</option>
-                                    <option value="muscle_building">Muscle Building</option>
-                                </select>
-                            </div>
-                        </div>
-                        </fieldset>
-                        
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Nutritional Preferences</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Macronutrient Ratios</label>
-                                <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Target Caloric Intake (calories per meal)</label>
-                                <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
-                            </div>
-                        </div>
-                        </fieldset>
-                        
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Meal Planning</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Budget Constraints</label>
-                                <select id="budget-constraints" name="budget-constraints" class="form-control">
-                                    <option value="">Select a budget constraint</option>
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Preferred Shopping Frequency</label>
-                                <select id="shopping-frequency" name="shopping-frequency" class="form-control">
-                                    <option value="">Select a shopping frequency</option>
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="bi-weekly">Bi-weekly</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
-                                <select id="meal-preparation-time" name="meal-preparation-time" class="form-control">
-                                    <option value="">Select a time constraint</option>
-                                    <option value="quick">Quick</option>
-                                    <option value="moderate">Moderate</option>
-                                    <option value="extensive">Extensive</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Food Allergies</label>
-                                <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Taste Prefered</label>
-                                <select id="taste" name="taste" class="form-control">
-                                    <option value="">Select your taste</option>
-                                    <option value="sweet">Sweet</option>
-                                    <option value="sour">Sour</option>
-                                    <option value="spicy">Spicy</option>
-                                    <option value="salty">Salty</option>
-                                    <option value="bitter">Bitter</option>
-                                </select>
-                            </div>
-                        </div>
-                        </fieldset>
-                        
-
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Food Preferences and Restrictions</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
-                                <input type="text" id="specific-foods-1" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
-                                <input type="text" id="specific-foods-2" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
-                                <input type="text" id="specific-foods-3" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
-                                <input type="text" id="specific-foods-4" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
-                                <input type="text" id="specific-foods-5" name="specific-foods" placeholder="Enter specific foods to include or exclude">
-                            </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
-                                <input type="text" id="diet-preferences-1" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
-                                <input type="text" id="diet-preferences-2" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
-                                <input type="text" id="diet-preferences-3" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
-                                <input type="text" id="diet-preferences-4" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
-                                <input type="text" id="diet-preferences-5" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
-                            </div>
-                        </div>
-                        </fieldset>
-                        
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Culinary Preferences & Season</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
-                                <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Current Season</label>
-                                <select id="season" name="season" class="form-control">
-                                    <option value="">Select your current season</option>
-                                    <option value="spring">Spring</option>
-                                    <option value="summer">Summer</option>
-                                    <option value="autumn">Autumn</option>
-                                    <option value="winter">Winter</option>
-                                </select>
-                            </div>
-                        </div>
-                        </fieldset>
-
-                        <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
-                        <legend style="width: 20%;font-size: 15px;">Health Considerations</legend>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Current Medications or Supplements</label>
-                                <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                    <label class="form-control-label px-3">Medical Conditions</label>
-                                    <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
-                            </div>
-                        </div>
-                        </fieldset>
-                        
-                        <div class="row justify-content-end">
-                            <div class="form-group col-sm-6"> 
-                                <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL</button> 
-                            </div>
+                <div id="meal-form">
+                    <div class="card">
+                        <!-- <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5> -->
+                        <form class="form-card" onsubmit="event.preventDefault()">
                             
-                        </div>
-                    </form>
-                    
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Personal Information</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
+                                    <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label>
+                                    <select id="gender" name="gender" class="form-control" required>
+                                        <option value="">Select your gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Height (cm)<span class="text-danger"> *</span></label>
+                                    <input type="number" id="height" name="height" placeholder="Enter your height in cm" min="100" max="250" required>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Weight (kg)<span class="text-danger"> *</span></label>
+                                    <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
+                                </div>
+                            </div>
+                            </fieldset>
 
+
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Lifestyle and Activity</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
+                                    <select id="activity-level" name="activity-level" class="form-control" required>
+                                        <option value="">Select your activity level</option>
+                                        <option value="sedentary">Sedentary (little or no exercise)</option>
+                                        <option value="lightly-active">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                                        <option value="moderately-active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+                                        <option value="very-active">Very Active (hard exercise/sports 6-7 days a week)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Goals</label>
+                                    <select id="goals" name="goals" class="form-control">
+                                        <option value="">Select a goal</option>
+                                        <option value="weight_loss">Weight Loss</option>
+                                        <option value="weight_gain">Weight Gain</option>
+                                        <option value="maintenance">Maintenance</option>
+                                        <option value="muscle_building">Muscle Building</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Nutritional Preferences</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Macronutrient Ratios</label>
+                                    <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Target Caloric Intake (calories per meal)</label>
+                                    <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Meal Planning</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Budget Constraints</label>
+                                    <select id="budget-constraints" name="budget-constraints" class="form-control">
+                                        <option value="">Select a budget constraint</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Preferred Shopping Frequency</label>
+                                    <select id="shopping-frequency" name="shopping-frequency" class="form-control">
+                                        <option value="">Select a shopping frequency</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="bi-weekly">Bi-weekly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
+                                    <select id="meal-preparation-time" name="meal-preparation-time" class="form-control">
+                                        <option value="">Select a time constraint</option>
+                                        <option value="quick">Quick</option>
+                                        <option value="moderate">Moderate</option>
+                                        <option value="extensive">Extensive</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Food Allergies</label>
+                                    <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Taste Prefered</label>
+                                    <select id="taste" name="taste" class="form-control">
+                                        <option value="">Select your taste</option>
+                                        <option value="sweet">Sweet</option>
+                                        <option value="sour">Sour</option>
+                                        <option value="spicy">Spicy</option>
+                                        <option value="salty">Salty</option>
+                                        <option value="bitter">Bitter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Food Preferences and Restrictions</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                    <input type="text" id="specific-foods-1" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                    <input type="text" id="specific-foods-2" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                    <input type="text" id="specific-foods-3" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                    <input type="text" id="specific-foods-4" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                    <input type="text" id="specific-foods-5" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                    <input type="text" id="diet-preferences-1" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                    <input type="text" id="diet-preferences-2" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                    <input type="text" id="diet-preferences-3" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                    <input type="text" id="diet-preferences-4" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                    <input type="text" id="diet-preferences-5" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Culinary Preferences & Season</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
+                                    <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Current Season</label>
+                                    <select id="season" name="season" class="form-control">
+                                        <option value="">Select your current season</option>
+                                        <option value="spring">Spring</option>
+                                        <option value="summer">Summer</option>
+                                        <option value="autumn">Autumn</option>
+                                        <option value="winter">Winter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </fieldset>
+
+                            <fieldset style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+                            <legend style="width: 20%;font-size: 15px;font-weight: 700;color: #8074df;">Health Considerations</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Current Medications or Supplements</label>
+                                    <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Medical Conditions</label>
+                                        <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <div class="row justify-content-end">
+                                <div class="form-group col-sm-6"> 
+                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL</button> 
+                                </div>
+                                
+                            </div>
+                        </form>
+                        
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -473,92 +517,19 @@ input, select{
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="mealPlanModal" tabindex="-1" role="dialog" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
-        <div class="modal-dialog custom-modal-size" role="document" style="max-width: 70%;width: auto;">
+    <div class="modal fade" id="mealPreferenceModal" tabindex="-1" role="dialog" aria-labelledby="mealPreferenceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="mealPlanModalLabel">Meal Plan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="mealPlanContent">
-                <div id="meal-container" class="container mt-5">
-                    <div class="recipe-card">
-                        <div class="recipe-title">
-                            <h2 id="recipe-name">Recipe Name</h2>
-                            <p id="recipe-info">Serving Info</p>
-                        </div>
-                        <img src="" class="mealimage">
-                        <div class="row">
-                            <div class="col-md-6 ingredient-list">
-                                <h4>Ingredient List</h4>
-                                <ul id="ingredient-list">
-                                    <!-- Ingredients will be inserted here -->
-                                </ul>
-                            </div>
-                            <div class="col-md-6 preparation">
-                                <h4>Preparation</h4>
-                                <ol id="preparation-steps">
-                                    <!-- Preparation steps will be inserted here -->
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="nutrition">
-                            <h4>Nutrition Information (Amount Per Serve)</h4>
-                            <table class="table table-bordered" id="nutrition-info">
-                                <!-- Nutrition information will be inserted here -->
-                            </table>
-                        </div>
-                        <div class="app">
-                            <h1>Was this Meal was helpful?</h1>
-                            <p>Let us know how we did</p>
-                          
-                            <div class="container">
-                              <div class="item">
-                                <label for="0">
-                                <input class="radio" type="radio" name="feedback" id="0" value="0">
-                                <span>🤬</span>
-                              </label>
-                              </div>
-                          
-                              <div class="item">
-                                <label for="1">
-                                <input class="radio" type="radio" name="feedback" id="1" value="1">
-                                <span>🙁</span>
-                              </label>
-                              </div>
-                          
-                              <div class="item">
-                                <label for="2">
-                                <input class="radio" type="radio" name="feedback" id="2" value="2">
-                                <span>😶</span>
-                              </label>
-                              </div>
-                          
-                              <div class="item">
-                                <label for="3">
-                                <input class="radio" type="radio" name="feedback" id="3" value="3">
-                                <span>😁</span>
-                              </label>
-                              </div>
-                          
-                              <div class="item">
-                                <label for="4">
-                                <input class="radio" type="radio" name="feedback" id="4" value="4">
-                                <span>😍</span>
-                              </label>
-                              </div>
-                          
-                            </div>
-                          </div>
-                    </div>
-                    <div id="loader" style="display:none;">Loading...</div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mealPreferenceModalLabel">Choose Your Meal Preference</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-body">
+                    <button type="button" class="btn btn-primary btn-block" id="predefined-meal">I want predefined meal preference</button>
+                    <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
+                </div>
             </div>
         </div>
     </div>
@@ -574,159 +545,30 @@ input, select{
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // function prepareMeal() {
-    //     // Retrieve form values
-    //     var age = document.getElementById("age").value;
-    //     var gender = document.getElementById("gender").value;
-    //     var height = document.getElementById("height").value;
-    //     var weight = document.getElementById("weight").value;
-    //     var activityLevel = document.getElementById("activity-level").value;
-    //     var dietPreferences = document.getElementById("diet-preferences").value;
-    //     var foodAllergies = document.getElementById("food-allergies").value;
-    //     var specificFoods = document.getElementById("specific-foods").value;
-    //     var goals = document.getElementById("goals").value;
-    //     var caloricIntake = document.getElementById("caloric-intake").value;
-    //     var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
-    //     var mealPreparationTime = document.getElementById("meal-preparation-time").value;
-    //     var budgetConstraints = document.getElementById("budget-constraints").value;
-    //     var shoppingFrequency = document.getElementById("shopping-frequency").value;
-    //     var cuisinePreferences = document.getElementById("cuisine-preferences").value;
-    //     var medicalConditions = document.getElementById("medical-conditions").value;
-    //     var medicationsSupplements = document.getElementById("medications-supplements").value;
-    //     var mealType = document.getElementById("meal-type").value;
-    //     var season = document.getElementById("season").value;
-    //     var taste = document.getElementById("taste").value;
+    document.getElementById('f50s_button').addEventListener('click', function() {
+        document.getElementById('targetCard').scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById('day').addEventListener('change', function() {
+        if (this.value) {
+            $('#mealPreferenceModal').modal('show');
+        }
+    });
 
-    //     // Generate meal plan text
-    //     var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle and prefer a ${dietPreferences} diet, avoiding ${foodAllergies}. They have specific preferences for ${specificFoods} and aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season} and prefered taste is ${taste}. Plan for meals including ${mealType}.`;
+    // Predefined meal preference button click
+    document.getElementById('predefined-meal').addEventListener('click', function() {
+        $('#mealPreferenceModal').modal('hide');
+        autofillForm();
+        document.getElementById('meal-form').style.display = 'block';
+        document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+    });
 
-    //     // Encode mealPlanText for URL
-    //     var encodedMealPlanText = encodeURIComponent(mealPlanText);
-
-    //     // Construct the API URL with query parameter
-    //     var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?meal_type=${mealType}&user_preferences=${encodedMealPlanText}`;
-    //     // Show the loader
-    //     document.getElementById("loader").style.display = "block";
-
-    //     // Send POST request to API endpoint using fetch
-    //     fetch(apiUrl, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         // Hide the loader
-    //         document.getElementById("loader").style.display = "none";
-
-    //         // Handle API response here
-    //         console.log('API Response:', data);
-
-    //         // Ensure the API response contains necessary data
-    //         var recipeName = data.recipe_name || 'N/A';
-    //         var cookingTime = data.cooking_time || 'N/A';
-    //         var serving = data.serving || 'N/A';
-    //         var shoppingList = data.shopping_list || [];
-    //         var preparationSteps = data.preparation_step || [];
-    //         var nutrition = data.nutrition || [];
-    //         var imageUrl = data.image_url || 'N/A';
-
-    //         // Construct the HTML for displaying the response data
-    //         var formattedData = `
-    //             <div class="recipe-card">
-    //                 <div class="recipe-title">
-    //                     <h2 id="recipe-name">${recipeName}</h2>
-    //                     <p id="recipe-info">Cooking Time: ${cookingTime}, Serving: ${serving}</p>
-    //                 </div>
-    //                 <img src="${imageUrl}" class="mealimage full-width-image">
-    //                 <div class="row">
-    //                     <div class="col-md-6 ingredient-list">
-    //                         <h4 style="color:#6e4bd0;">Ingredients:</h4>
-    //                         <ul>
-    //                             ${shoppingList.map(item => `<li>${item}</li>`).join('')}
-    //                         </ul>
-    //                     </div>
-    //                     <div class="col-md-6 preparation">
-    //                         <h4 style="color:#6e4bd0;">Preparation Steps:</h4>
-    //                         <ol>
-    //                             ${preparationSteps.map(step => `<li>${step}</li>`).join('')}
-    //                         </ol>
-    //                     </div>
-    //                 </div>
-    //                 <div class="nutrition">
-    //                     <h4 style="color:#6e4bd0;">Nutrition Information:</h4>
-    //                     <ul>
-    //                         ${nutrition.map(item => `<li>${item}</li>`).join('')}
-    //                     </ul>
-    //                 </div>
-    //             </div>
-    //             <body style="margin: 0; text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif;">
-    //             <div class="app" style="width: 90%; max-width: 500px; margin: 0 auto;">
-    //                 <center><h3 style="margin: 0; padding: 0; line-height: 1.5;">Was this meal helpful?</h3></center>
-
-    //                 <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
-    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-    //                     <label for="0">
-    //                     <input class="radio" type="radio" name="feedback" id="0" value="0" style="display: none;">
-    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🤬</span>
-    //                     </label>
-    //                 </div>
-
-    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-    //                     <label for="1">
-    //                     <input class="radio" type="radio" name="feedback" id="1" value="1" style="display: none;">
-    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">🙁</span>
-    //                     </label>
-    //                 </div>
-
-    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-    //                     <label for="2">
-    //                     <input class="radio" type="radio" name="feedback" id="2" value="2" style="display: none;">
-    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😶</span>
-    //                     </label>
-    //                 </div>
-
-    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-    //                     <label for="3">
-    //                     <input class="radio" type="radio" name="feedback" id="3" value="3" style="display: none;">
-    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😁</span>
-    //                     </label>
-    //                 </div>
-
-    //                 <div class="item" style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; user-select: none;">
-    //                     <label for="4">
-    //                     <input class="radio" type="radio" name="feedback" id="4" value="4" style="display: none;">
-    //                     <span style="font-size: 3rem; filter: grayscale(100); cursor: pointer; transition: 0.3s;">😍</span>
-    //                     </label>
-    //                 </div>
-
-    //                 </div>
-    //             </div>
-    //         `;
-
-    //         // Update the meal container with formattedData
-    //         var mealContainer = document.getElementById("meal-container");
-    //         mealContainer.innerHTML = formattedData;
-
-    //         // Show the modal
-    //         $('#mealPlanModal').modal('show');
-    //     })
-    //     .catch(error => {
-    //         // Hide the loader
-    //         document.getElementById("loader").style.display = "none";
-
-    //         console.error('Error:', error);
-
-    //         // Handle error gracefully
-    //         var modalContent = document.getElementById("mealPlanContent");
-    //         modalContent.textContent = "An error occurred while generating the meal plan. Please try again.";
-
-    //         // Show the modal
-    //         $('#mealPlanModal').modal('show');
-    //     });
-    // }
-    
+    // Custom meal preference button click
+    document.getElementById('custom-meal').addEventListener('click', function() {
+        $('#mealPreferenceModal').modal('hide');
+        document.getElementById('meal-form').style.display = 'block';
+        document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+    });
+   
     function prepareMeal() {
         // Retrieve form values
         var age = document.getElementById("age").value;
@@ -843,18 +685,28 @@ input, select{
         document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
         document.getElementById('season').value = sampleData.season;
         document.getElementById('taste').value = sampleData.taste;
-        document.getElementById('diet-preferences-1').value = sampleData.dietPreferences;
+        
         document.getElementById('food-allergies').value = sampleData.foodAllergies;
-        document.getElementById('specific-foods-1').value = sampleData.specificFoods;
+        
         document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
         document.getElementById('medical-conditions').value = sampleData.medicalConditions;
         document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
         document.getElementById('day').value = sampleData.day;
+        document.getElementById('specific-foods-1').value = sampleData.specificFoods1;
+        document.getElementById('specific-foods-2').value = sampleData.specificFoods2;
+        document.getElementById('specific-foods-3').value = sampleData.specificFoods3;
+        document.getElementById('specific-foods-4').value = sampleData.specificFoods4;
+        document.getElementById('specific-foods-5').value = sampleData.specificFoods5;
+        document.getElementById('diet-preferences-1').value = sampleData.dietPreferences1;
+        document.getElementById('diet-preferences-2').value = sampleData.dietPreferences2;
+        document.getElementById('diet-preferences-3').value = sampleData.dietPreferences3;
+        document.getElementById('diet-preferences-4').value = sampleData.dietPreferences4;
+        document.getElementById('diet-preferences-5').value = sampleData.dietPreferences5;
     }
     
     function getSampleDataForMealType(day) {
         switch (day) {
-            case 'breakfast':
+            case 'monday':
                 return {
                     age: 50,
                     gender: 'female',
@@ -868,16 +720,26 @@ input, select{
                     shoppingFrequency: 'weekly',
                     season: 'spring',
                     taste: 'spicy',
-                    dietPreferences: 'Vegetarian',
+                    // dietPreferences: 'Vegetarian',
                     foodAllergies: 'Nuts',
-                    specificFoods: 'Oats',
+                    // specificFoods: 'Oats',
                     cuisinePreferences: 'Australian',
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'breakfast'
+                    day: 'monday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
-            case 'snack-1':
+            case 'tuesday':
                 return {
                     age: 50,
                     gender: 'female',
@@ -898,10 +760,20 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'snack-1'
+                    day: 'tuesday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
                 break;
-            case 'lunch':
+            case 'wednesday':
                 return {
                     age: 50,
                     gender: 'female',
@@ -922,11 +794,21 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'lunch'
+                    day: 'wednesday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
                 // Add sample data for Lunch
                 break;
-            case 'snack-2':
+            case 'thursday':
                 return {
                     age: 50,
                     gender: 'female',
@@ -947,11 +829,21 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'snack-2'
+                    day: 'thursday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
                 // Add sample data for Snack - 2
                 break;
-            case 'dinner':
+            case 'friday':
                 return {
                     age: 50,
                     gender: 'female',
@@ -972,10 +864,91 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    MealType: 'dinner'
+                    day: 'friday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
                 // Add sample data for Dinner
                 break;
+            case 'saturday':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Non Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Chicken',
+                    cuisinePreferences: 'Australian',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein',
+                    day: 'saturday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
+                };
+                // Add sample data for Dinner
+                break;
+            case 'sunday':
+                return {
+                    age: 50,
+                    gender: 'female',
+                    height: 160,
+                    weight: 60,
+                    activityLevel: 'moderately-active',
+                    goals: 'weight_loss',
+                    caloricIntake: 400,
+                    mealPreparationTime: 'quick',
+                    budgetConstraints: 'medium',
+                    shoppingFrequency: 'weekly',
+                    season: 'spring',
+                    taste: 'spicy',
+                    dietPreferences: 'Non Vegetarian',
+                    foodAllergies: 'Nuts',
+                    specificFoods: 'Chicken',
+                    cuisinePreferences: 'Australian',
+                    medicalConditions: 'Low Blood Pressure',
+                    medicationsSupplements: 'Multivitamin',
+                    macronutrientRatios: '40% Protein',
+                    day: 'sunday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
+                };
+                // Add sample data for Dinner
+                break;
+            
             default:
                 return {
                     age: 50,
@@ -997,7 +970,17 @@ input, select{
                     medicalConditions: 'Low Blood Pressure',
                     medicationsSupplements: 'Multivitamin',
                     macronutrientRatios: '40% Protein',
-                    day: 'Monday'
+                    day: 'monday',
+                    specificFoods1: 'Oats',
+                    specificFoods2: 'Banana',
+                    specificFoods3: 'Chicken',
+                    specificFoods4: 'Fruits',
+                    specificFoods5: 'Meat',
+                    dietPreferences1 : 'Vegetarian',
+                    dietPreferences2 : 'Vegetarian',
+                    dietPreferences3 : 'Non Vegetarian',
+                    dietPreferences4 : 'Vegetarian',
+                    dietPreferences5 : 'Non Vegetarian',
                 };
         }
     }
