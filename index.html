@@ -271,7 +271,16 @@ input, select{
                     <h5 class="text-center mb-4">Start Your Meal Journey</h5>
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 d-flex align-items-center">
-                            <span class="icon">&#128197;</span> <!-- Calendar icon -->
+                            <button type="button" class="btn btn-primary btn-block" id="predefined-meal">I want predefined meal preference</button>
+                    
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
+                        </div>
+                    </div>
+                    <!-- <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 d-flex align-items-center">
+                            <span class="icon">&#128197;</span> 
                             <label for="day" class="mb-0">Choose a day to start:</label>
                         </div>
                         <div class="form-group col-sm-6">
@@ -286,7 +295,7 @@ input, select{
                                 <option value="sunday">Sunday</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div id="meal-form">
@@ -549,15 +558,15 @@ input, select{
     document.getElementById('f50s_button').addEventListener('click', function() {
         document.getElementById('targetCard').scrollIntoView({ behavior: 'smooth' });
     });
-    document.getElementById('day').addEventListener('change', function() {
-        if (this.value) {
-            $('#mealPreferenceModal').modal('show');
-        }
-    });
+    // document.getElementById('day').addEventListener('change', function() {
+    //     if (this.value) {
+    //         $('#mealPreferenceModal').modal('show');
+    //     }
+    // });
 
     // Predefined meal preference button click
     document.getElementById('predefined-meal').addEventListener('click', function() {
-        $('#mealPreferenceModal').modal('hide');
+        // $('#mealPreferenceModal').modal('hide');
         autofillForm();
         document.getElementById('meal-form').style.display = 'block';
         document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
@@ -565,7 +574,7 @@ input, select{
 
     // Custom meal preference button click
     document.getElementById('custom-meal').addEventListener('click', function() {
-        $('#mealPreferenceModal').modal('hide');
+        // $('#mealPreferenceModal').modal('hide');
         document.getElementById('meal-form').style.display = 'block';
         document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
     });
@@ -685,7 +694,7 @@ input, select{
         var cuisinePreferences = document.getElementById("cuisine-preferences").value;
         var medicalConditions = document.getElementById("medical-conditions").value;
         var medicationsSupplements = document.getElementById("medications-supplements").value;
-        var day = document.getElementById("day").value;
+        // var day = document.getElementById("day").value;
         var season = document.getElementById("season").value;
         var taste = document.getElementById("taste").value;
 
@@ -702,13 +711,13 @@ input, select{
         var dietPreferences5 = document.getElementById("diet-preferences-5").value;
 
         // Generate meal plan text
-        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner. Prepare only for ${day}.`;
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner. Prepare only for Monday.`;
         console.log(mealPlanText);
         // Encode mealPlanText for URL
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
         // Construct the API URL with query parameters
-        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?weekday=${day}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal/?weekday=monday&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
         console.log(apiUrl)
         // Show the loader
         document.getElementById("loader").style.display = "block";
@@ -766,14 +775,9 @@ input, select{
             alert('An error occurred while generating the meal plan. Please try again.');
         });
     }
-
-// document.getElementById('generate-meal-button').addEventListener('click', prepareMeal);
-
-
     function autofillForm() {
-        var day = document.getElementById('day').value;
-        var sampleData = getSampleDataForMealType(day);
-        
+        var sampleData = getSampleData();
+
         document.getElementById('age').value = sampleData.age;
         document.getElementById('gender').value = sampleData.gender;
         document.getElementById('height').value = sampleData.height;
@@ -787,305 +791,378 @@ input, select{
         document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
         document.getElementById('season').value = sampleData.season;
         document.getElementById('taste').value = sampleData.taste;
-        
+
         document.getElementById('food-allergies').value = sampleData.foodAllergies;
-        
+
         document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
         document.getElementById('medical-conditions').value = sampleData.medicalConditions;
         document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
-        document.getElementById('day').value = sampleData.day;
+
         document.getElementById('specific-foods-1').value = sampleData.specificFoods1;
         document.getElementById('specific-foods-2').value = sampleData.specificFoods2;
         document.getElementById('specific-foods-3').value = sampleData.specificFoods3;
         document.getElementById('specific-foods-4').value = sampleData.specificFoods4;
         document.getElementById('specific-foods-5').value = sampleData.specificFoods5;
+
         document.getElementById('diet-preferences-1').value = sampleData.dietPreferences1;
         document.getElementById('diet-preferences-2').value = sampleData.dietPreferences2;
         document.getElementById('diet-preferences-3').value = sampleData.dietPreferences3;
         document.getElementById('diet-preferences-4').value = sampleData.dietPreferences4;
         document.getElementById('diet-preferences-5').value = sampleData.dietPreferences5;
     }
-    
-    function getSampleDataForMealType(day) {
-        switch (day) {
-            case 'monday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    // dietPreferences: 'Vegetarian',
-                    foodAllergies: 'Nuts',
-                    // specificFoods: 'Oats',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'monday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-            case 'tuesday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 200,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'sweet',
-                    dietPreferences: 'Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Banana',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'tuesday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                break;
-            case 'wednesday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 600,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Non Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Chicken',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'wednesday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                // Add sample data for Lunch
-                break;
-            case 'thursday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Vegetables',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'thursday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                // Add sample data for Snack - 2
-                break;
-            case 'friday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Non Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Chicken',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'friday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                // Add sample data for Dinner
-                break;
-            case 'saturday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Non Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Chicken',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'saturday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                // Add sample data for Dinner
-                break;
-            case 'sunday':
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Non Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Chicken',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'sunday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-                // Add sample data for Dinner
-                break;
-            
-            default:
-                return {
-                    age: 50,
-                    gender: 'female',
-                    height: 160,
-                    weight: 60,
-                    activityLevel: 'moderately-active',
-                    goals: 'weight_loss',
-                    caloricIntake: 400,
-                    mealPreparationTime: 'quick',
-                    budgetConstraints: 'medium',
-                    shoppingFrequency: 'weekly',
-                    season: 'spring',
-                    taste: 'spicy',
-                    dietPreferences: 'Vegetarian',
-                    foodAllergies: 'Nuts',
-                    specificFoods: 'Oats',
-                    cuisinePreferences: 'Australian',
-                    medicalConditions: 'Low Blood Pressure',
-                    medicationsSupplements: 'Multivitamin',
-                    macronutrientRatios: '40% Protein',
-                    day: 'monday',
-                    specificFoods1: 'Oats',
-                    specificFoods2: 'Banana',
-                    specificFoods3: 'Chicken',
-                    specificFoods4: 'Fruits',
-                    specificFoods5: 'Meat',
-                    dietPreferences1 : 'Vegetarian',
-                    dietPreferences2 : 'Vegetarian',
-                    dietPreferences3 : 'Non Vegetarian',
-                    dietPreferences4 : 'Vegetarian',
-                    dietPreferences5 : 'Non Vegetarian',
-                };
-        }
+
+    function getSampleData() {
+        return {
+            age: 50,
+            gender: 'female',
+            height: 160,
+            weight: 60,
+            activityLevel: 'moderately-active',
+            goals: 'weight_loss',
+            caloricIntake: 400,
+            mealPreparationTime: 'quick',
+            budgetConstraints: 'medium',
+            shoppingFrequency: 'weekly',
+            season: 'spring',
+            taste: 'spicy',
+            foodAllergies: 'Nuts',
+            cuisinePreferences: 'Australian',
+            medicalConditions: 'Low Blood Pressure',
+            medicationsSupplements: 'Multivitamin',
+            macronutrientRatios: '40% Protein',
+            specificFoods1: 'Oats',
+            specificFoods2: 'Banana',
+            specificFoods3: 'Chicken',
+            specificFoods4: 'Fruits',
+            specificFoods5: 'Meat',
+            dietPreferences1: 'Vegetarian',
+            dietPreferences2: 'Vegetarian',
+            dietPreferences3: 'Non Vegetarian',
+            dietPreferences4: 'Vegetarian',
+            dietPreferences5: 'Non Vegetarian',
+        };
     }
+
+
+// document.getElementById('generate-meal-button').addEventListener('click', prepareMeal);
+
+
+    // function autofillForm() {
+    //     var day = document.getElementById('day').value;
+    //     var sampleData = getSampleDataForMealType(day);
+        
+    //     document.getElementById('age').value = sampleData.age;
+    //     document.getElementById('gender').value = sampleData.gender;
+    //     document.getElementById('height').value = sampleData.height;
+    //     document.getElementById('weight').value = sampleData.weight;
+    //     document.getElementById('activity-level').value = sampleData.activityLevel;
+    //     document.getElementById('goals').value = sampleData.goals;
+    //     document.getElementById('caloric-intake').value = sampleData.caloricIntake;
+    //     document.getElementById('macronutrient-ratios').value = sampleData.macronutrientRatios;
+    //     document.getElementById('meal-preparation-time').value = sampleData.mealPreparationTime;
+    //     document.getElementById('budget-constraints').value = sampleData.budgetConstraints;
+    //     document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
+    //     document.getElementById('season').value = sampleData.season;
+    //     document.getElementById('taste').value = sampleData.taste;
+        
+    //     document.getElementById('food-allergies').value = sampleData.foodAllergies;
+        
+    //     document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
+    //     document.getElementById('medical-conditions').value = sampleData.medicalConditions;
+    //     document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
+    //     document.getElementById('day').value = sampleData.day;
+    //     document.getElementById('specific-foods-1').value = sampleData.specificFoods1;
+    //     document.getElementById('specific-foods-2').value = sampleData.specificFoods2;
+    //     document.getElementById('specific-foods-3').value = sampleData.specificFoods3;
+    //     document.getElementById('specific-foods-4').value = sampleData.specificFoods4;
+    //     document.getElementById('specific-foods-5').value = sampleData.specificFoods5;
+    //     document.getElementById('diet-preferences-1').value = sampleData.dietPreferences1;
+    //     document.getElementById('diet-preferences-2').value = sampleData.dietPreferences2;
+    //     document.getElementById('diet-preferences-3').value = sampleData.dietPreferences3;
+    //     document.getElementById('diet-preferences-4').value = sampleData.dietPreferences4;
+    //     document.getElementById('diet-preferences-5').value = sampleData.dietPreferences5;
+    // }
+    
+    // function getSampleDataForMealType(day) {
+    //     switch (day) {
+    //         case 'monday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 // dietPreferences: 'Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 // specificFoods: 'Oats',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'monday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //         case 'tuesday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 200,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'sweet',
+    //                 dietPreferences: 'Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Banana',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'tuesday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             break;
+    //         case 'wednesday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 600,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Non Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Chicken',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'wednesday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             // Add sample data for Lunch
+    //             break;
+    //         case 'thursday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Vegetables',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'thursday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             // Add sample data for Snack - 2
+    //             break;
+    //         case 'friday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Non Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Chicken',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'friday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             // Add sample data for Dinner
+    //             break;
+    //         case 'saturday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Non Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Chicken',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'saturday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             // Add sample data for Dinner
+    //             break;
+    //         case 'sunday':
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Non Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Chicken',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'sunday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //             // Add sample data for Dinner
+    //             break;
+            
+    //         default:
+    //             return {
+    //                 age: 50,
+    //                 gender: 'female',
+    //                 height: 160,
+    //                 weight: 60,
+    //                 activityLevel: 'moderately-active',
+    //                 goals: 'weight_loss',
+    //                 caloricIntake: 400,
+    //                 mealPreparationTime: 'quick',
+    //                 budgetConstraints: 'medium',
+    //                 shoppingFrequency: 'weekly',
+    //                 season: 'spring',
+    //                 taste: 'spicy',
+    //                 dietPreferences: 'Vegetarian',
+    //                 foodAllergies: 'Nuts',
+    //                 specificFoods: 'Oats',
+    //                 cuisinePreferences: 'Australian',
+    //                 medicalConditions: 'Low Blood Pressure',
+    //                 medicationsSupplements: 'Multivitamin',
+    //                 macronutrientRatios: '40% Protein',
+    //                 day: 'monday',
+    //                 specificFoods1: 'Oats',
+    //                 specificFoods2: 'Banana',
+    //                 specificFoods3: 'Chicken',
+    //                 specificFoods4: 'Fruits',
+    //                 specificFoods5: 'Meat',
+    //                 dietPreferences1 : 'Vegetarian',
+    //                 dietPreferences2 : 'Vegetarian',
+    //                 dietPreferences3 : 'Non Vegetarian',
+    //                 dietPreferences4 : 'Vegetarian',
+    //                 dietPreferences5 : 'Non Vegetarian',
+    //             };
+    //     }
+    // }
 
 </script>
 
