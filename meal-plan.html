@@ -140,6 +140,8 @@
         var urlParams = new URLSearchParams(window.location.search);
         var mealPlanData = JSON.parse(decodeURIComponent(urlParams.get('mealPlanData')));
 
+        console.log('Loaded Meal Plan Data:', mealPlanData); // Debugging statement
+
         var mealTypes = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
         var mealContainer = document.getElementById("meal-container");
 
@@ -192,11 +194,12 @@
         var data = {
             'fields': {
                 'user_name': 'meal_app',
-                'meal_type': 'N/A',  // You can set this dynamically if needed
-                'recipe': recipeName,
-                'ingredients': shoppingList.join(', '),
-                'cooking_instruction': preparationSteps.join(', '),
-                'status': 'completed',
+                'meal_type': mealType,
+                'recipe_name': recipeName,
+                'cooking_time': cookingTime,
+                'serving': serving,
+                'shopping_list': shoppingList.join(', '),
+                'preparation_step': preparationSteps.join(', '),
                 'nutrition': nutrition.join(', '),
                 'image': imageUrl,
                 'cooking_time': cookingTime,
