@@ -398,7 +398,10 @@
     });
 
 </script> -->
-<script>
+
+
+<!-- Working one -->
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             document.getElementById('loading').style.display = 'none';
@@ -486,7 +489,198 @@
                 });
         }, 5000);
     });
+</script> -->
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('meal-container').style.display = 'block';
+            
+            var urlParams = new URLSearchParams(window.location.search);
+            var userName = urlParams.get('email');
+
+            if (!userName) {
+                alert('User name is missing from the URL.');
+                return;
+            }
+
+            fetch(`https://fabulous50s.colakin.com/meal_api/get_user_meal_for_week_by_email/?email=${userName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.weekly_meals || Object.keys(data.weekly_meals).length === 0) {
+                        alert('No meal data found for the user.');
+                        return;
+                    }
+
+                    var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                    var mealTypes = {
+                        Breakfast: "Breakfast",
+                        Snack1: "Snack 1",
+                        Lunch: "Lunch",
+                        Snack2: "Snack 2",
+                        Dinner: "Dinner"
+                    };
+
+                    var mealContainer = document.getElementById("meal-container");
+
+                    daysOfWeek.forEach(day => {
+                        if (data.weekly_meals[day]) {
+                            var dayMeals = data.weekly_meals[day].meals;
+                            var dayHeader = `<h2 class="text-center">${day}</h2><hr>`;
+                            mealContainer.innerHTML += dayHeader;
+
+                            dayMeals.forEach(meal => {
+                                // Fix JSON parsing error in cooking_instruction
+                                var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
+
+                                var formattedData = `
+                                    <div class="meal-type">
+                                        <center><h2>${mealTypes[meal.meal_type.replace(/-/, '')]}</h2></center>
+                                    </div>
+                                    <div class="recipe-title">
+                                        <h2>${meal.recipe}</h2>
+                                        <p>${meal.serving} Servings, ${meal.cooking_time}</p>
+                                    </div>
+                                    <img src="${meal.image}" class="mealimage full-width-image" alt="Meal Image">
+                                    <div class="row">
+                                        <div class="col-md-6 ingredient-list">
+                                            <h4>Ingredient List</h4>
+                                            <ul>
+                                                ${meal.ingredients.split(',').map(item => `<li>${item}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 preparation">
+                                            <h4>Preparation</h4>
+                                            <ol>
+                                                ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="nutrition">
+                                        <h4>Nutrition Information (Amount Per Serve)</h4>
+                                        <table class="table table-bordered">
+                                            <tr><td>Calories: ${meal.calories}</td></tr>
+                                            <tr><td>Protein: ${meal.protein}</td></tr>
+                                            <tr><td>Carbs: ${meal.carbs}</td></tr>
+                                            <tr><td>Fat: ${meal.fat}</td></tr>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <div class="app">
+                                        <center><h4>Was this meal useful?</h4></center>
+                                        <div class="container">
+                                            <div class="item">
+                                                <label for="${meal.meal_type}-0">
+                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-0" value="🤬">
+                                                    <span>🤬</span>
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <label for="${meal.meal_type}-1">
+                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-1" value="🙁">
+                                                    <span>🙁</span>
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <label for="${meal.meal_type}-2">
+                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-2" value="😶">
+                                                    <span>😶</span>
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <label for="${meal.meal_type}-3">
+                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-3" value="😁">
+                                                    <span>😁</span>
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <label for="${meal.meal_type}-4">
+                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-4" value="😍">
+                                                    <span>😍</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                `;
+                                mealContainer.innerHTML += formattedData;
+                            });
+                        }
+                    });
+
+                    // Event listener for radio buttons
+                    document.querySelectorAll('.radio').forEach(function(radio) {
+                        radio.addEventListener('change', function() {
+                            var mealType = this.name.split('-')[1];
+                            var review = this.value;
+                            var selectedMeal = data.weekly_meals.find(day => day.meals.find(meal => meal.meal_type === mealType));
+                            if (selectedMeal) {
+                                saveMealDataToAirtable(
+                                    userName,
+                                    mealTypes[mealType],
+                                    selectedMeal.recipe,
+                                    selectedMeal.cooking_time,
+                                    selectedMeal.serving,
+                                    selectedMeal.ingredients.split(', '),
+                                    JSON.parse(selectedMeal.cooking_instruction.replace(/'/g, '"')),
+                                    [selectedMeal.calories, selectedMeal.protein, selectedMeal.carbs, selectedMeal.fat],
+                                    selectedMeal.image,
+                                    review
+                                );
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error fetching the meal plan data. Please try again.');
+                });
+        }, 5000);
+    });
+
+    function saveMealDataToAirtable(userName, mealType, recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
+        var data = {
+            'fields': {
+                'user_name': userName,
+                'meal_type': mealType,
+                'recipe': recipeName,
+                'cooking_time': cookingTime,
+                'serving': serving,
+                'ingredients': shoppingList.join(', '),
+                'cooking_instruction': preparationSteps.join(', '),
+                'nutrition': nutrition.join(', '),
+                'image': imageUrl,
+                'reviews': review,
+                'status': 'completed'
+            }
+        };
+
+        fetch('https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer patXM2BHfAqiHM2kx.b67f0ea418ea122677bd765ccb629e291f0976bf2375c0d45a252f18c7ff2d86',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(`Error: ${data.error.message}`);
+            } else {
+                alert('Your review has been saved. Thank you!');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error saving your review. Please try again.');
+        });
+    }
 </script>
+
 
 </body>
 </html>
