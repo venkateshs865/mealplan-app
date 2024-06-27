@@ -318,9 +318,9 @@
                 var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
                 var mealTypes = {
                     Breakfast: "Breakfast",
-                    Snack_1: "Snack-1",
+                    Snack1: "Snack 1",
                     Lunch: "Lunch",
-                    Snack_2: "Snack-2",
+                    Snack2: "Snack 2",
                     Dinner: "Dinner"
                 };
 
@@ -333,9 +333,12 @@
                         mealContainer.innerHTML += dayHeader;
 
                         dayMeals.forEach(meal => {
+                            // Fix JSON parsing error in cooking_instruction
+                            var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
+
                             var formattedData = `
                                 <div class="meal-type">
-                                    <center><h2>${mealTypes[meal.meal_type.toLowerCase().replace('-', '')]}</h2></center>
+                                    <center><h2>${mealTypes[meal.meal_type.replace(/-/, '')]}</h2></center>
                                 </div>
                                 <div class="recipe-title">
                                     <h2>${meal.recipe}</h2>
@@ -352,7 +355,7 @@
                                     <div class="col-md-6 preparation">
                                         <h4>Preparation</h4>
                                         <ol>
-                                            ${JSON.parse(meal.cooking_instruction).map(step => `<li>${step}</li>`).join('')}
+                                            ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
                                         </ol>
                                     </div>
                                 </div>
@@ -377,6 +380,7 @@
                 alert('There was an error fetching the meal plan data. Please try again.');
             });
     });
+
 </script>
 </body>
 </html>
