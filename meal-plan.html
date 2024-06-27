@@ -537,100 +537,92 @@
                                 var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
 
                                 var formattedData = `
-                                    <div class="meal-type">
-                                        <center><h2>${mealTypes[meal.meal_type.replace(/-/, '')]}</h2></center>
-                                    </div>
-                                    <div class="recipe-title">
-                                        <h2>${meal.recipe}</h2>
-                                        <p>${meal.serving} Servings, ${meal.cooking_time}</p>
-                                    </div>
-                                    <img src="${meal.image}" class="mealimage full-width-image" alt="Meal Image">
-                                    <div class="row">
-                                        <div class="col-md-6 ingredient-list">
-                                            <h4>Ingredient List</h4>
-                                            <ul>
-                                                ${meal.ingredients.split(',').map(item => `<li>${item}</li>`).join('')}
-                                            </ul>
+                                    <div class="meal">
+                                        <div class="meal-type">
+                                            <center><h2>${mealTypes[meal.meal_type.replace(/-/, '')]}</h2></center>
                                         </div>
-                                        <div class="col-md-6 preparation">
-                                            <h4>Preparation</h4>
-                                            <ol>
-                                                ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
-                                            </ol>
+                                        <div class="recipe-title">
+                                            <h2>${meal.recipe}</h2>
+                                            <p>${meal.serving} Servings, ${meal.cooking_time}</p>
                                         </div>
-                                    </div>
-                                    <div class="nutrition">
-                                        <h4>Nutrition Information (Amount Per Serve)</h4>
-                                        <table class="table table-bordered">
-                                            <tr><td>Calories: ${meal.calories}</td></tr>
-                                            <tr><td>Protein: ${meal.protein}</td></tr>
-                                            <tr><td>Carbs: ${meal.carbs}</td></tr>
-                                            <tr><td>Fat: ${meal.fat}</td></tr>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="app">
-                                        <center><h4>Was this meal useful?</h4></center>
-                                        <div class="container">
-                                            <div class="item">
-                                                <label for="${meal.meal_type}-0">
-                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-0" value="🤬">
-                                                    <span>🤬</span>
-                                                </label>
+                                        <img src="${meal.image}" class="mealimage full-width-image" alt="Meal Image">
+                                        <div class="row">
+                                            <div class="col-md-6 ingredient-list">
+                                                <h4>Ingredient List</h4>
+                                                <ul>
+                                                    ${meal.ingredients.split(',').map(item => `<li>${item}</li>`).join('')}
+                                                </ul>
                                             </div>
-                                            <div class="item">
-                                                <label for="${meal.meal_type}-1">
-                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-1" value="🙁">
-                                                    <span>🙁</span>
-                                                </label>
-                                            </div>
-                                            <div class="item">
-                                                <label for="${meal.meal_type}-2">
-                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-2" value="😶">
-                                                    <span>😶</span>
-                                                </label>
-                                            </div>
-                                            <div class="item">
-                                                <label for="${meal.meal_type}-3">
-                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-3" value="😁">
-                                                    <span>😁</span>
-                                                </label>
-                                            </div>
-                                            <div class="item">
-                                                <label for="${meal.meal_type}-4">
-                                                    <input class="radio" type="radio" name="feedback-${meal.meal_type}" id="${meal.meal_type}-4" value="😍">
-                                                    <span>😍</span>
-                                                </label>
+                                            <div class="col-md-6 preparation">
+                                                <h4>Preparation</h4>
+                                                <ol>
+                                                    ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
+                                                </ol>
                                             </div>
                                         </div>
+                                        <div class="nutrition">
+                                            <h4>Nutrition Information (Amount Per Serve)</h4>
+                                            <table class="table table-bordered">
+                                                <tr><td>Calories: ${meal.calories}</td></tr>
+                                                <tr><td>Protein: ${meal.protein}</td></tr>
+                                                <tr><td>Carbs: ${meal.carbs}</td></tr>
+                                                <tr><td>Fat: ${meal.fat}</td></tr>
+                                            </table>
+                                        </div>
+                                        <div class="feedback">
+                                            <h4>Feedback</h4>
+                                            <div class="app">
+                                                <center><h4>Was this meal useful?</h4></center>
+                                                <div class="container">
+                                                    <div class="item">
+                                                        <label for="${meal.id}-0">
+                                                            <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-0" value="🤬">
+                                                            <span>🤬</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="item">
+                                                        <label for="${meal.id}-1">
+                                                            <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-1" value="🙁">
+                                                            <span>🙁</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="item">
+                                                        <label for="${meal.id}-2">
+                                                            <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-2" value="😶">
+                                                            <span>😶</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="item">
+                                                        <label for="${meal.id}-3">
+                                                            <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-3" value="😁">
+                                                            <span>😁</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="item">
+                                                        <label for="${meal.id}-4">
+                                                            <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-4" value="😍">
+                                                            <span>😍</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
                                     </div>
-                                    <hr>
                                 `;
                                 mealContainer.innerHTML += formattedData;
                             });
                         }
                     });
 
-                    // Event listener for radio buttons
-                    document.querySelectorAll('.radio').forEach(function(radio) {
+                    // Add event listeners to the feedback radios
+                    document.querySelectorAll('input[type="radio"]').forEach(radio => {
                         radio.addEventListener('change', function() {
-                            var mealType = this.name.split('-')[1];
-                            var review = this.value;
-                            var selectedMeal = data.weekly_meals.find(day => day.meals.find(meal => meal.meal_type === mealType));
-                            if (selectedMeal) {
-                                saveMealDataToAirtable(
-                                    userName,
-                                    mealTypes[mealType],
-                                    selectedMeal.recipe,
-                                    selectedMeal.cooking_time,
-                                    selectedMeal.serving,
-                                    selectedMeal.ingredients.split(', '),
-                                    JSON.parse(selectedMeal.cooking_instruction.replace(/'/g, '"')),
-                                    [selectedMeal.calories, selectedMeal.protein, selectedMeal.carbs, selectedMeal.fat],
-                                    selectedMeal.image,
-                                    review
-                                );
-                            }
+                            var feedbackValue = this.value;
+                            var mealId = this.id.split('-')[0]; // Extract meal ID from radio button ID
+
+                            // Update Airtable with the feedback
+                            updateAirtable(mealId, feedbackValue);
                         });
                     });
                 })
@@ -641,45 +633,41 @@
         }, 5000);
     });
 
-    function saveMealDataToAirtable(userName, mealType, recipeName, cookingTime, serving, shoppingList, preparationSteps, nutrition, imageUrl, review) {
+    function updateAirtable(mealId, feedbackValue) {
+        // Replace with your Airtable endpoint and API key
+        var url = 'https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx';
+        var apiKey = 'Bearer patXM2BHfAqiHM2kx.b67f0ea418ea122677bd765ccb629e291f0976bf2375c0d45a252f18c7ff2d86';
+
+        // Data to be sent to Airtable
         var data = {
-            'fields': {
-                'user_name': userName,
-                'meal_type': mealType,
-                'recipe': recipeName,
-                'cooking_time': cookingTime,
-                'serving': serving,
-                'ingredients': shoppingList.join(', '),
-                'cooking_instruction': preparationSteps.join(', '),
-                'nutrition': nutrition.join(', '),
-                'image': imageUrl,
-                'reviews': review,
-                'status': 'completed'
+            "fields": {
+                "Meal ID": mealId,
+                "Feedback": feedbackValue
             }
         };
 
-        fetch('https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx', {
+        fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer patXM2BHfAqiHM2kx.b67f0ea418ea122677bd765ccb629e291f0976bf2375c0d45a252f18c7ff2d86',
+                'Authorization': apiKey,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(`Error: ${data.error.message}`);
-            } else {
-                alert('Your review has been saved. Thank you!');
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error updating Airtable');
             }
+            alert('Feedback submitted successfully!');
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error saving your review. Please try again.');
+            console.error('Error updating Airtable:', error);
+            alert('There was an error submitting feedback. Please try again.');
         });
     }
 </script>
+
+
 
 
 </body>
