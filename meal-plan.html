@@ -137,7 +137,7 @@
     <center><a href="index.html" class="btn btn-primary back-link">Go Back to Main Page</a></center>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
@@ -291,6 +291,92 @@
             alert('There was an error saving your review. Please try again.');
         });
     }
+</script>
+</body>
+</html> -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var userName = urlParams.get('username');
+
+        if (!userName) {
+            alert('User name is missing from the URL.');
+            return;
+        }
+
+        fetch(`https://fabulous50s.colakin.com/meal_api/get_user_meal_for_week/?user_name=${userName}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.weekly_meals || Object.keys(data.weekly_meals).length === 0) {
+                    alert('No meal data found for the user.');
+                    return;
+                }
+
+                var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                var mealTypes = {
+                    Breakfast: "Breakfast",
+                    Snack_1: "Snack-1",
+                    Lunch: "Lunch",
+                    Snack_2: "Snack-2",
+                    Dinner: "Dinner"
+                };
+
+                var mealContainer = document.getElementById("meal-container");
+
+                daysOfWeek.forEach(day => {
+                    if (data.weekly_meals[day]) {
+                        var dayMeals = data.weekly_meals[day].meals;
+                        var dayHeader = `<h2 class="text-center">${day}</h2><hr>`;
+                        mealContainer.innerHTML += dayHeader;
+
+                        dayMeals.forEach(meal => {
+                            var formattedData = `
+                                <div class="meal-type">
+                                    <center><h2>${mealTypes[meal.meal_type.toLowerCase().replace('-', '')]}</h2></center>
+                                </div>
+                                <div class="recipe-title">
+                                    <h2>${meal.recipe}</h2>
+                                    <p>${meal.serving} Servings, ${meal.cooking_time}</p>
+                                </div>
+                                <img src="${meal.image}" class="mealimage full-width-image" alt="Meal Image">
+                                <div class="row">
+                                    <div class="col-md-6 ingredient-list">
+                                        <h4>Ingredient List</h4>
+                                        <ul>
+                                            ${meal.ingredients.split(',').map(item => `<li>${item}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 preparation">
+                                        <h4>Preparation</h4>
+                                        <ol>
+                                            ${JSON.parse(meal.cooking_instruction).map(step => `<li>${step}</li>`).join('')}
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="nutrition">
+                                    <h4>Nutrition Information (Amount Per Serve)</h4>
+                                    <table class="table table-bordered">
+                                        <tr><td>Calories: ${meal.calories}</td></tr>
+                                        <tr><td>Protein: ${meal.protein}</td></tr>
+                                        <tr><td>Carbs: ${meal.carbs}</td></tr>
+                                        <tr><td>Fat: ${meal.fat}</td></tr>
+                                    </table>
+                                </div>
+                                <hr>
+                            `;
+                            mealContainer.innerHTML += formattedData;
+                        });
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error fetching the meal plan data. Please try again.');
+            });
+    });
 </script>
 </body>
 </html>

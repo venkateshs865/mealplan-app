@@ -756,7 +756,14 @@ input, select{
             dietPreferences5: 'Non Vegetarian',
         };
     }
-
+    
+    function copyToClipboard() {
+        var copyText = document.getElementById("mealPlanUrl");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand("copy");
+        alert("URL copied to clipboard: " + copyText.value);
+    }
 </script>
 
 </html>
