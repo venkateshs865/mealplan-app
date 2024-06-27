@@ -12,7 +12,7 @@ body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidde
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
-#f50s_button, #custom-meal,#predefined-meal{
+#f50s_button, #custom-meal,#predefined-meal, #generated-meal{
     /* font-family: "Gilroy", Sans-serif; */
     font-size: 16px;
     font-weight: 600;
@@ -274,7 +274,7 @@ input, select{
                             <label for="day" class="mb-0">Enter your valid email to start : <span class="text-danger"> *</span></label>
                         </div>
                         <div class="form-group col-sm-6">
-                            <input type="text" id="user_name" name="user_name" placeholder="Eg. John Deo" style="width: 100%;">
+                            <input type="text" id="user_name" name="user_name" placeholder="Eg. johndeo@email.com" style="width: 100%;">
                         </div>
                     </div>
                     <div class="row justify-content-between text-left">
@@ -285,9 +285,11 @@ input, select{
                         <div class="form-group col-sm-6">
                             <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
                         </div>
+                        <div class="form-group col-sm-6">
+                            <button type="button" class="btn btn-secondary btn-block" id="generated-meal">Show my generated meal plan</button>
+                        </div>
                     </div>
-                    
-                </div>
+                </div>  
                 
                 <div id="meal-form">
                     <div class="card">
@@ -540,39 +542,33 @@ input, select{
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="mealPreferenceModal" tabindex="-1" role="dialog" aria-labelledby="mealPreferenceModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <div class="modal fade" id="mealPlanModal" tabindex="-1" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 50%;">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mealPreferenceModalLabel">Choose Your Meal Preference</h5>
+                <div class="modal-header" style="background: #8074df;color: white;">
+                    <h5 class="modal-title" id="mealPlanModalLabel">Preparing Your Meal Plan</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <button type="button" class="btn btn-primary btn-block" id="predefined-meal">I want predefined meal preference</button>
-                    <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
+                    <center>
+                        <img src="meal.gif" style="width: 48%;">
+                    </center>
+                    <p style="color:#8074df;font-weight: 600;">Your meal plan has been generating. You can access it using the URL below after 5-10 mins:</p>
+                    <div class="d-flex">
+                        <input type="text" class="form-control me-2" id="mealPlanUrl" readonly style="flex: 1;">
+                        <button class="btn" onclick="copyToClipboard()" style="flex: 0 0 auto;">
+                            <img src="copy.png" style="width: 20px;">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="mealPlanModal" tabindex="-1" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mealPlanModalLabel">Meal Plan URL</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Your meal plan has been generating. You can access it using the URL below after 5-10 mins:</p>
-                    <input type="text" class="form-control" id="mealPlanUrl" readonly>
-                    <button class="btn btn-primary mt-3" onclick="copyToClipboard()">Copy URL</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     
 
@@ -593,7 +589,15 @@ input, select{
     //         $('#mealPreferenceModal').modal('show');
     //     }
     // });
-
+    // var userName = document.getElementById("user_name").value;
+    document.getElementById('generated-meal').addEventListener('click', function() {
+        var userName = document.getElementById("user_name").value;
+        // Construct the URL with the email query parameter
+        var url = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+        // https://generate-mealplan.vercel.app/meal-plan.html?email=
+        // Redirect to the constructed URL
+        window.location.href = url;
+    });
     // Predefined meal preference button click
     document.getElementById('predefined-meal').addEventListener('click', function() {
         // $('#mealPreferenceModal').modal('hide');
