@@ -648,7 +648,7 @@ input, select{
         var encodedMealPlanText = encodeURIComponent(mealPlanText);
 
         // Construct the API URL with query parameters
-        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal_plan/?username=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal_plan/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
         console.log(apiUrl)
         // Show the loader
         document.getElementById("loader").style.display = "block";
@@ -672,7 +672,7 @@ input, select{
         })
         .then(data => {
             // Construct the URL to be displayed
-            var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?username=${encodeURIComponent(userName)}`;
+            var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
             
             // Show the modal with the URL
             document.getElementById('mealPlanUrl').value = mealPlanUrl;
