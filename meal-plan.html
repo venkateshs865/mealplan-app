@@ -300,14 +300,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var urlParams = new URLSearchParams(window.location.search);
-        var userName = urlParams.get('username');
+        var userName = urlParams.get('email');
 
         if (!userName) {
             alert('User name is missing from the URL.');
             return;
         }
 
-        fetch(`https://fabulous50s.colakin.com/meal_api/get_user_meal_for_week/?user_name=${userName}`)
+        fetch(`https://fabulous50s.colakin.com/meal_api/get_user_meal_for_week_by_email/?email=${userName}`)
             .then(response => response.json())
             .then(data => {
                 if (!data.weekly_meals || Object.keys(data.weekly_meals).length === 0) {
