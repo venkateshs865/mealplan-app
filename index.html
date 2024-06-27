@@ -521,9 +521,11 @@ input, select{
                             
                             <div class="row justify-content-end">
                                 <div class="form-group col-sm-6"> 
-                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL</button> 
+                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL<br><small>(If you have no meal plan)</small></button> 
                                 </div>
-                                
+                                <div class="form-group col-sm-6"> 
+                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMealAgain()">PREPARE ME A NEW MEAL<br><small>(If you already have meal plan)</small></button> 
+                                </div>
                             </div>
                         </form>
                         
@@ -688,6 +690,89 @@ input, select{
             alert('An error occurred while generating the meal plan. Please try again.');
         });
     }
+
+    function prepareMealAgain() {
+        // Retrieve form values
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+        var activityLevel = document.getElementById("activity-level").value;
+        var foodAllergies = document.getElementById("food-allergies").value;
+        var goals = document.getElementById("goals").value;
+        var caloricIntake = document.getElementById("caloric-intake").value;
+        var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+        var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+        var budgetConstraints = document.getElementById("budget-constraints").value;
+        var shoppingFrequency = document.getElementById("shopping-frequency").value;
+        var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+        var medicalConditions = document.getElementById("medical-conditions").value;
+        var medicationsSupplements = document.getElementById("medications-supplements").value;
+        var day = 'Monday';
+        var season = document.getElementById("season").value;
+        var taste = document.getElementById("taste").value;
+        var userName = document.getElementById("user_name").value;
+
+        var specificFoods1 = document.getElementById("specific-foods-1").value;
+        var specificFoods2 = document.getElementById("specific-foods-2").value;
+        var specificFoods3 = document.getElementById("specific-foods-3").value;
+        var specificFoods4 = document.getElementById("specific-foods-4").value;
+        var specificFoods5 = document.getElementById("specific-foods-5").value;
+
+        var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+        var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+        var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+        var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+        var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+        
+        // Generate meal plan text
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have allergies of ${foodAllergies}. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner.`;
+        console.log(mealPlanText);
+        // Encode mealPlanText for URL
+        var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+        // Construct the API URL with query parameters
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/delete_user_meals/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
+        console.log(apiUrl)
+        // Show the loader
+        document.getElementById("loader").style.display = "block";
+
+        // Send POST request to API endpoint using fetch
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Construct the URL to be displayed
+            var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+            
+            // Show the modal with the URL
+            document.getElementById('mealPlanUrl').value = mealPlanUrl;
+            $('#mealPlanModal').modal('show');
+        })
+        .catch(error => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            console.error('Error:', error);
+
+            // Handle error gracefully
+            alert('An error occurred while generating the meal plan. Please try again.');
+        });
+    }
+
 
     function autofillForm() {
         var sampleData = getSampleData();
