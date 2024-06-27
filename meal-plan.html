@@ -632,7 +632,6 @@
                 });
         }, 5000);
     });
-
     function updateAirtable(mealId, feedbackValue) {
         // Replace with your Airtable endpoint and API key
         var url = 'https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx';
@@ -640,14 +639,18 @@
 
         // Data to be sent to Airtable
         var data = {
-            "fields": {
-                "id": mealId,
-                "review": feedbackValue
-            }
+            "records": [
+                {
+                    "id": mealId,
+                    "fields": {
+                        "Review": feedbackValue
+                    }
+                }
+            ]
         };
 
         fetch(url, {
-            method: 'POST',
+            method: 'PATCH', // Use PATCH method to update existing record
             headers: {
                 'Authorization': apiKey,
                 'Content-Type': 'application/json'
@@ -665,6 +668,40 @@
             alert('There was an error submitting feedback. Please try again.');
         });
     }
+
+
+    // function updateAirtable(mealId, feedbackValue) {
+    //     // Replace with your Airtable endpoint and API key
+    //     var url = 'https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx';
+    //     var apiKey = 'Bearer patXM2BHfAqiHM2kx.b67f0ea418ea122677bd765ccb629e291f0976bf2375c0d45a252f18c7ff2d86';
+
+    //     // Data to be sent to Airtable
+    //     var data = {
+    //         "fields": {
+    //             "id": mealId,
+    //             "review": feedbackValue
+    //         }
+    //     };
+
+    //     fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Authorization': apiKey,
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Error updating Airtable');
+    //         }
+    //         alert('Feedback submitted successfully!');
+    //     })
+    //     .catch(error => {
+    //         console.error('Error updating Airtable:', error);
+    //         alert('There was an error submitting feedback. Please try again.');
+    //     });
+    // }
 </script>
 
 
