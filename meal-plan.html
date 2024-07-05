@@ -535,6 +535,7 @@
                             dayMeals.forEach(meal => {
                                 // Fix JSON parsing error in cooking_instruction
                                 var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
+                                var Ingredients = JSON.parse(meal.ingredients.replace(/'/g, '"'));
 
                                 var formattedData = `
                                     <div class="meal">
@@ -550,7 +551,7 @@
                                             <div class="col-md-6 ingredient-list">
                                                 <h4>Ingredient List</h4>
                                                 <ul>
-                                                    ${meal.ingredients.map(item => `<li>${item}</li>`).join('')}
+                                                    ${Ingredients.map(item => `<li>${item}</li>`).join('')}
                                                 </ul>
                                             </div>
                                             <div class="col-md-6 preparation">
