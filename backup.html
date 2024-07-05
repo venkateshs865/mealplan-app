@@ -1777,3 +1777,2500 @@ var encodedMealPlanData = encodeURIComponent(JSON.stringify(mealPlanData));
         </fieldset>
     </div>
 </fieldset>
+<!-- -----------------------------July 05 Working (Testing) ------------------------------------ -->
+
+<!-- New -->
+<html>
+<title>Fabulous50s - Meal Generating App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" type="image/x-icon">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidden;height: 100%;}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);background-color: #8f85e5 !important;}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
+.loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+#f50s_button, #custom-meal,#predefined-meal, #generated-meal{
+    /* font-family: "Gilroy", Sans-serif; */
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    line-height: 1em;
+    letter-spacing: 0px;
+    /* background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+     */
+    background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+    color: white;
+    border-style: solid;
+    border-width: .9px;
+    border-color: white;
+    border-radius: 30px !important;
+    box-shadow: 0px 0px 6px 1px #7a57db;
+}
+label{
+    color: #8074df;
+    font-weight: 600;
+}
+input, select{
+    border-radius: 30px !important;
+    font-size: 16px !important;
+    /* opacity: 80%; */
+}
+#heading-card{
+    color: #8074df;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2em;
+}
+.image-container {
+    text-align: center;
+    margin-top: 60px;
+}
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+}
+.navbar-light{
+    background-color: #8984e4 !important;
+    height: 90px;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Center text alignment */
+}
+.main-content {
+    min-height: 90vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+}
+#meal-form {
+            display: none;
+        }
+@media (max-width: 600px) {
+    .main-content {
+    flex-direction: column; /* Stack elements vertically */
+    padding-top: 20px; /* Optional: add some padding for better appearance */
+    padding-bottom: 20px; /* Optional: add some padding for better appearance */
+    }
+    .center-content {
+    margin-top: 20px; /* Optional: add some margin for better appearance */
+    }
+    #heading-card{
+        color: #8074df;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1.2em;
+    }
+    .subheading{
+        font-size: 18px !important;
+    }
+    p{
+        font-size: 15px;
+    }
+    legend{
+        width: 50% !important;
+        font-size: 10px !important;
+    }
+    select, input, label{
+        font-size: 14px !important;
+    }
+    .custom-modal-size {
+        max-width: 100% !important;
+        width: auto !important;
+    }
+}
+
+.subheading{
+    color: #434054;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2em;
+}
+/* legend{
+    width: 20%;
+    font-size: 15px;
+} */
+.recipe-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.recipe-title {
+    background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+.ingredient-list, .preparation {
+    margin: 20px 0;
+}
+.notes, .nutrition {
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+.nutrition table {
+    width: 100%;
+}
+/* .custom-modal-size {
+    max-width: 70% !important;
+    width: auto !important;
+} */
+.full-width-image {
+    width: 100%;
+    height: auto;
+}
+.item {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+.radio {
+  display: none;
+}
+.radio ~ span {
+  font-size: 3rem;
+  filter: grayscale(100);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.radio:checked ~ span {
+  filter: grayscale(0);
+  font-size: 4rem;
+}
+
+ /* Custom styles for the target card */
+ #targetCard {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#targetCard h5 {
+    color: #6e4bd0;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#targetCard select {
+    border-radius: 5px;
+}
+
+#targetCard .form-group {
+    margin-bottom: 15px;
+}
+
+#targetCard .icon {
+    color: #6e4bd0;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+</style>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img width="60" height="60" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" class="attachment-full size-full wp-image-36441" alt></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-1 main-content">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-sm-12 col-12">
+                <img src="img-1.jpg" class="img-fluid" alt="Placeholder Image">
+            </div>
+            <div class="col-md-6 col-sm-12 col-12 center-content">
+                <h1 id="heading-card">Welcome to Fabulous50s Meal Generation</h1>
+                <p class="subheading">Healthy Meal Plan for Women Over 50s</p>
+                <p>
+                    Our meal plan is specifically designed to meet the nutritional needs of women over 50. It includes a balanced mix of lean proteins, whole grains, healthy fats, and plenty of fruits and vegetables.
+                </p>
+                <div class="form-group col-sm-6">
+                    <button type="button" class="btn btn-primary btn-block" id="f50s_button">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center">
+            <img src="image1.png" class="img-fluid d-block mx-auto" alt="Responsive Image">
+          </div>
+        </div>
+    </div>
+    
+    
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <div class="card" id="targetCard">
+                    <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                        <legend style="width: 40%;font-size: 16px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;padding: 6px 20px;">Start Your Meal Journey</legend>
+                    <!-- <h5 class="text-center mb-4">Start Your Meal Journey</h5> -->
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 d-flex align-items-center">
+                                <label for="day" class="mb-0">Enter your valid email to start : <span class="text-danger"> *</span></label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <input type="text" id="user_name" name="user_name" placeholder="Eg. johndeo@email.com" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 d-flex align-items-center">
+                                <button type="button" class="btn btn-primary btn-block" id="predefined-meal">I want predefined meal preference</button>
+                        
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <button type="button" class="btn btn-secondary btn-block" id="generated-meal">Show my generated meal plan</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                
+                <div id="meal-form">
+                    <div class="card" style="border-radius: 10px !important;">
+                        <!-- <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5> -->
+                        <form class="form-card" onsubmit="event.preventDefault()">
+                            
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                            <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Personal Information</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
+                                    <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label>
+                                    <select id="gender" name="gender" class="form-control" required>
+                                        <option value="">Select your gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Height (cm)<span class="text-danger"> *</span></label>
+                                    <input type="number" id="height" name="height" placeholder="Enter your height in cm" min="100" max="250" required>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Weight (kg)<span class="text-danger"> *</span></label>
+                                    <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
+                                </div>
+                            </div>
+                            </fieldset>
+
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                            <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lifestyle and Activity</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
+                                    <select id="activity-level" name="activity-level" class="form-control" required>
+                                        <option value="">Select your activity level</option>
+                                        <option value="sedentary">Sedentary (little or no exercise)</option>
+                                        <option value="lightly-active">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                                        <option value="moderately-active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+                                        <option value="very-active">Very Active (hard exercise/sports 6-7 days a week)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Goals</label>
+                                    <select id="goals" name="goals" class="form-control">
+                                        <option value="">Select a goal</option>
+                                        <option value="weight_loss">Weight Loss</option>
+                                        <option value="weight_gain">Weight Gain</option>
+                                        <option value="maintenance">Maintenance</option>
+                                        <option value="muscle_building">Muscle Building</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                            <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Nutritional Preferences</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Macronutrient Ratios</label>
+                                    <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Target Caloric Intake (calories per meal)</label>
+                                    <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                                </div>
+                            </div>
+                            </fieldset>
+                            
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                            <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Meal Planning</legend>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Budget Constraints</label>
+                                    <select id="budget-constraints" name="budget-constraints" class="form-control">
+                                        <option value="">Select a budget constraint</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Preferred Shopping Frequency</label>
+                                    <select id="shopping-frequency" name="shopping-frequency" class="form-control">
+                                        <option value="">Select a shopping frequency</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="bi-weekly">Bi-weekly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
+                                    <select id="meal-preparation-time" name="meal-preparation-time" class="form-control">
+                                        <option value="">Select a time constraint</option>
+                                        <option value="quick">Quick</option>
+                                        <option value="moderate">Moderate</option>
+                                        <option value="extensive">Extensive</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Food Allergies</label>
+                                    <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Taste Prefered</label>
+                                    <select id="taste" name="taste" class="form-control">
+                                        <option value="">Select your taste</option>
+                                        <option value="sweet">Sweet</option>
+                                        <option value="sour">Sour</option>
+                                        <option value="spicy">Spicy</option>
+                                        <option value="salty">Salty</option>
+                                        <option value="bitter">Bitter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </fieldset>
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Culinary Preferences & Season</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
+                                        <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Current Season</label>
+                                        <select id="season" name="season" class="form-control">
+                                            <option value="">Select your current season</option>
+                                            <option value="spring">Spring</option>
+                                            <option value="summer">Summer</option>
+                                            <option value="autumn">Autumn</option>
+                                            <option value="winter">Winter</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </fieldset>
+    
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Health Considerations</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Current Medications or Supplements</label>
+                                        <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Medical Conditions</label>
+                                            <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
+                                    </div>
+                                </div>
+                                </fieldset>
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Monday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Tuesday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-tuesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-tuesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-tuesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-tuesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-tuesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-tuesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-tuesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-tuesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-tuesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-tuesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Wednesday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-wednesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-wednesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-wednesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-wednesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-wednesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-wednesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-wednesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-wednesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-wednesday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-wednesday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Thursday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-thursday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-thursday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-thursday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-thursday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-thursday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-thursday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-thursday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-thursday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-thursday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-thursday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Friday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-friday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-friday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-friday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-friday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-friday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-friday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-friday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-friday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-friday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-friday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Saturday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-saturday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-saturday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-saturday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-saturday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-saturday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-saturday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-saturday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-saturday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-saturday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-saturday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+
+                            <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences - Sunday</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1-sunday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1-sunday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2-sunday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2-sunday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3-sunday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3-sunday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4-sunday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4-sunday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5-sunday" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5-sunday" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+                            
+                            <div class="row justify-content-end">
+                                <div class="form-group col-sm-6"> 
+                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL<br><small>(If you have no meal plan)</small></button> 
+                                </div>
+                                <div class="form-group col-sm-6"> 
+                                    <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMealAgain()">PREPARE ME A NEW MEAL<br><small>(If you already have meal plan)</small></button> 
+                                </div>
+                            </div>
+                        </form>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader" class="loader" style="display:none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mealPlanModal" tabindex="-1" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 50%;">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #8074df;color: white;">
+                    <h5 class="modal-title" id="mealPlanModalLabel">Preparing Your Meal Plan</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <img src="meal.gif" style="width: 48%;">
+                    </center>
+                    <p style="color:#8074df;font-weight: 600;">Your meal plan has been generating. You can access it using the URL below after 5-10 mins:</p>
+                    <div class="d-flex">
+                        <input type="text" class="form-control me-2" id="mealPlanUrl" readonly style="flex: 1;">
+                        <button class="btn" onclick="copyToClipboard()" style="flex: 0 0 auto;">
+                            <img src="copy.png" style="width: 20px;">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+    
+  
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+<!-- Bootstrap Bundle JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.getElementById('f50s_button').addEventListener('click', function() {
+        document.getElementById('targetCard').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var userNameInput = document.getElementById('user_name');
+        var submitUserNameBtn = document.getElementById('submit-user-name');
+        var predefinedMealBtn = document.getElementById('predefined-meal');
+        var customMealBtn = document.getElementById('custom-meal');
+        var generatedMealBtn = document.getElementById('generated-meal');
+
+        // Check if userNameInput is empty
+        function isUserNameEmpty() {
+            return userNameInput.value.trim() === '';
+        }
+
+        // Show alert and focus input field
+        function showUserNameAlert() {
+            alert('Please enter your Email.');
+            userNameInput.focus();
+        }
+
+        // Event listener for generated meal plan button
+        generatedMealBtn.addEventListener('click', function() {
+            var userName = userNameInput.value.trim();
+
+            if (userName === '') {
+                showUserNameAlert();
+            } else {
+                var url = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+                window.location.href = url;
+            }
+        });
+
+        // Event listener for predefined meal preference button
+        predefinedMealBtn.addEventListener('click', function() {
+            var userName = userNameInput.value.trim();
+
+            if (userName === '') {
+                showUserNameAlert();
+            } else {
+                // Assuming autofillForm() and show/hide logic for meal form
+                autofillForm(); // Example function to autofill form
+                document.getElementById('meal-form').style.display = 'block';
+                document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Event listener for custom meal preference button
+        customMealBtn.addEventListener('click', function() {
+            var userName = userNameInput.value.trim();
+
+            if (userName === '') {
+                showUserNameAlert();
+            } else {
+                // Show/hide logic for meal form
+                document.getElementById('meal-form').style.display = 'block';
+                document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+   
+    function prepareMeal() {
+        // Retrieve form values
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+        var activityLevel = document.getElementById("activity-level").value;
+        var foodAllergies = document.getElementById("food-allergies").value;
+        var goals = document.getElementById("goals").value;
+        var caloricIntake = document.getElementById("caloric-intake").value;
+        var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+        var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+        var budgetConstraints = document.getElementById("budget-constraints").value;
+        var shoppingFrequency = document.getElementById("shopping-frequency").value;
+        var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+        var medicalConditions = document.getElementById("medical-conditions").value;
+        var medicationsSupplements = document.getElementById("medications-supplements").value;
+        var day = 'Monday';
+        var season = document.getElementById("season").value;
+        var taste = document.getElementById("taste").value;
+        var userName = document.getElementById("user_name").value;
+
+        var specificFoods1 = document.getElementById("specific-foods-1").value;
+        var specificFoods2 = document.getElementById("specific-foods-2").value;
+        var specificFoods3 = document.getElementById("specific-foods-3").value;
+        var specificFoods4 = document.getElementById("specific-foods-4").value;
+        var specificFoods5 = document.getElementById("specific-foods-5").value;
+
+        var specificFoods1Tuesday = document.getElementById("specific-foods-1-tuesday").value;
+        var specificFoods2Tuesday = document.getElementById("specific-foods-2-tuesday").value;
+        var specificFoods3Tuesday = document.getElementById("specific-foods-3-tuesday").value;
+        var specificFoods4Tuesday = document.getElementById("specific-foods-4-tuesday").value;
+        var specificFoods5Tuesday = document.getElementById("specific-foods-5-tuesday").value;
+
+        var specificFoods1Wednesday = document.getElementById("specific-foods-1-wednesday").value;
+        var specificFoods2Wednesday = document.getElementById("specific-foods-2-wednesday").value;
+        var specificFoods3Wednesday = document.getElementById("specific-foods-3-wednesday").value;
+        var specificFoods4Wednesday = document.getElementById("specific-foods-4-wednesday").value;
+        var specificFoods5Wednesday = document.getElementById("specific-foods-5-wednesday").value;
+
+        var specificFoods1Thursday = document.getElementById("specific-foods-1-thursday").value;
+        var specificFoods2Thursday = document.getElementById("specific-foods-2-thursday").value;
+        var specificFoods3Thursday = document.getElementById("specific-foods-3-thursday").value;
+        var specificFoods4Thursday = document.getElementById("specific-foods-4-thursday").value;
+        var specificFoods5Thursday = document.getElementById("specific-foods-5-thursday").value;
+
+        var specificFoods1Friday = document.getElementById("specific-foods-1-friday").value;
+        var specificFoods2Friday = document.getElementById("specific-foods-2-friday").value;
+        var specificFoods3Friday = document.getElementById("specific-foods-3-friday").value;
+        var specificFoods4Friday = document.getElementById("specific-foods-4-friday").value;
+        var specificFoods5Friday = document.getElementById("specific-foods-5-friday").value;
+
+        var specificFoods1Saturday = document.getElementById("specific-foods-1-saturday").value;
+        var specificFoods2Saturday = document.getElementById("specific-foods-2-saturday").value;
+        var specificFoods3Saturday = document.getElementById("specific-foods-3-saturday").value;
+        var specificFoods4Saturday = document.getElementById("specific-foods-4-saturday").value;
+        var specificFoods5Saturday = document.getElementById("specific-foods-5-saturday").value;
+
+        var specificFoods1Sunday = document.getElementById("specific-foods-1-sunday").value;
+        var specificFoods2Sunday = document.getElementById("specific-foods-2-sunday").value;
+        var specificFoods3Sunday = document.getElementById("specific-foods-3-sunday").value;
+        var specificFoods4Sunday = document.getElementById("specific-foods-4-sunday").value;
+        var specificFoods5Sunday = document.getElementById("specific-foods-5-sunday").value;
+
+        var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+        var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+        var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+        var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+        var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+
+        var dietPreferences1Tuesday = document.getElementById("diet-preferences-1-tuesday").value;
+        var dietPreferences2Tuesday = document.getElementById("diet-preferences-2-tuesday").value;
+        var dietPreferences3Tuesday = document.getElementById("diet-preferences-3-tuesday").value;
+        var dietPreferences4Tuesday = document.getElementById("diet-preferences-4-tuesday").value;
+        var dietPreferences5Tuesday = document.getElementById("diet-preferences-5-tuesday").value;
+
+        var dietPreferences1Wednesday = document.getElementById("diet-preferences-1-wednesday").value;
+        var dietPreferences2Wednesday = document.getElementById("diet-preferences-2-wednesday").value;
+        var dietPreferences3Wednesday = document.getElementById("diet-preferences-3-wednesday").value;
+        var dietPreferences4Wednesday = document.getElementById("diet-preferences-4-wednesday").value;
+        var dietPreferences5Wednesday = document.getElementById("diet-preferences-5-wednesday").value;
+
+        var dietPreferences1Thursday = document.getElementById("diet-preferences-1-thursday").value;
+        var dietPreferences2Thursday = document.getElementById("diet-preferences-2-thursday").value;
+        var dietPreferences3Thursday = document.getElementById("diet-preferences-3-thursday").value;
+        var dietPreferences4Thursday = document.getElementById("diet-preferences-4-thursday").value;
+        var dietPreferences5Thursday = document.getElementById("diet-preferences-5-thursday").value;
+
+        var dietPreferences1Friday = document.getElementById("diet-preferences-1-friday").value;
+        var dietPreferences2Friday = document.getElementById("diet-preferences-2-friday").value;
+        var dietPreferences3Friday = document.getElementById("diet-preferences-3-friday").value;
+        var dietPreferences4Friday = document.getElementById("diet-preferences-4-friday").value;
+        var dietPreferences5Friday = document.getElementById("diet-preferences-5-friday").value;
+
+        var dietPreferences1Saturday = document.getElementById("diet-preferences-1-saturday").value;
+        var dietPreferences2Saturday = document.getElementById("diet-preferences-2-saturday").value;
+        var dietPreferences3Saturday = document.getElementById("diet-preferences-3-saturday").value;
+        var dietPreferences4Saturday = document.getElementById("diet-preferences-4-saturday").value;
+        var dietPreferences5Saturday = document.getElementById("diet-preferences-5-saturday").value;
+
+        var dietPreferences1Sunday = document.getElementById("diet-preferences-1-sunday").value;
+        var dietPreferences2Sunday = document.getElementById("diet-preferences-2-sunday").value;
+        var dietPreferences3Sunday = document.getElementById("diet-preferences-3-sunday").value;
+        var dietPreferences4Sunday = document.getElementById("diet-preferences-4-sunday").value;
+        var dietPreferences5Sunday = document.getElementById("diet-preferences-5-sunday").value;
+        
+        // Generate meal plan text
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have allergies of ${foodAllergies}. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner.`;
+        console.log(mealPlanText);
+        // Encode mealPlanText for URL
+        var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+        // Construct the API URL with query parameters
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal_plan/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}&specificFoods1Tuesday=${specificFoods1Tuesday}&specificFoods2Tuesday=${specificFoods2Tuesday}&specificFoods3Tuesday=${specificFoods3Tuesday}&specificFoods4Tuesday=${specificFoods4Tuesday}&specificFoods5Tuesday=${specificFoods5Tuesday}&specificFoods1Wednesday=${specificFoods1Wednesday}&specificFoods2Wednesday=${specificFoods2Wednesday}&specificFoods3Wednesday=${specificFoods3Wednesday}&specificFoods4Wednesday=${specificFoods4Wednesday}&specificFoods5Wednesday=${specificFoods5Wednesday}&specificFoods1Thursday=${specificFoods1Thursday}&specificFoods2Thursday=${specificFoods2Thursday}&specificFoods3Thursday=${specificFoods3Thursday}&specificFoods4Thursday=${specificFoods4Thursday}&specificFoods5Thursday=${specificFoods5Thursday}&specificFoods1Friday=${specificFoods1Friday}&specificFoods2Friday=${specificFoods2Friday}&specificFoods3Friday=${specificFoods3Friday}&specificFoods4Friday=${specificFoods4Friday}&specificFoods5Friday=${specificFoods5Friday}&specificFoods1Saturday=${specificFoods1Saturday}&specificFoods2Saturday=${specificFoods2Saturday}&specificFoods3Saturday=${specificFoods3Saturday}&specificFoods4Saturday=${specificFoods4Saturday}&specificFoods5Saturday=${specificFoods5Saturday}&specificFoods1Sunday=${specificFoods1Sunday}&specificFoods2Sunday=${specificFoods2Sunday}&specificFoods3Sunday=${specificFoods3Sunday}&specificFoods4Sunday=${specificFoods4Sunday}&specificFoods5Sunday=${specificFoods5Sunday}&dietPreferences1Tuesday=${dietPreferences1Tuesday}&dietPreferences2Tuesday=${dietPreferences2Tuesday}&dietPreferences3Tuesday=${dietPreferences3Tuesday}&dietPreferences4Tuesday=${dietPreferences4Tuesday}&dietPreferences5Tuesday=${dietPreferences5Tuesday}&dietPreferences1Wednesday=${dietPreferences1Wednesday}&dietPreferences2Wednesday=${dietPreferences2Wednesday}&dietPreferences3Wednesday=${dietPreferences3Wednesday}&dietPreferences4Wednesday=${dietPreferences4Wednesday}&dietPreferences5Wednesday=${dietPreferences5Wednesday}&dietPreferences1Thursday=${dietPreferences1Thursday}&dietPreferences2Thursday=${dietPreferences2Thursday}&dietPreferences3Thursday=${dietPreferences3Thursday}&dietPreferences4Thursday=${dietPreferences4Thursday}&dietPreferences5Thursday=${dietPreferences5Thursday}&dietPreferences1Friday=${dietPreferences1Friday}&dietPreferences2Friday=${dietPreferences2Friday}&dietPreferences3Friday=${dietPreferences3Friday}&dietPreferences4Friday=${dietPreferences4Friday}&dietPreferences5Friday=${dietPreferences5Friday}&dietPreferences1Saturday=${dietPreferences1Saturday}&dietPreferences2Saturday=${dietPreferences2Saturday}&dietPreferences3Saturday=${dietPreferences3Saturday}&dietPreferences4Saturday=${dietPreferences4Saturday}&dietPreferences5Saturday=${dietPreferences5Saturday}&dietPreferences1Sunday=${dietPreferences1Sunday}&dietPreferences2Sunday=${dietPreferences2Sunday}&dietPreferences3Sunday=${dietPreferences3Sunday}&dietPreferences4Sunday=${dietPreferences4Sunday}&dietPreferences5Sunday=${dietPreferences5Sunday}`;
+        console.log(apiUrl)
+        // Show the loader
+        document.getElementById("loader").style.display = "block";
+
+        // Send POST request to API endpoint using fetch
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Construct the URL to be displayed
+            var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+            
+            // Show the modal with the URL
+            document.getElementById('mealPlanUrl').value = mealPlanUrl;
+            $('#mealPlanModal').modal('show');
+        })
+        .catch(error => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            console.error('Error:', error);
+
+            // Handle error gracefully
+            alert('An error occurred while generating the meal plan. Please try again.');
+        });
+    }
+
+    function prepareMealAgain() {
+        // Retrieve form values
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+        var activityLevel = document.getElementById("activity-level").value;
+        var foodAllergies = document.getElementById("food-allergies").value;
+        var goals = document.getElementById("goals").value;
+        var caloricIntake = document.getElementById("caloric-intake").value;
+        var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+        var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+        var budgetConstraints = document.getElementById("budget-constraints").value;
+        var shoppingFrequency = document.getElementById("shopping-frequency").value;
+        var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+        var medicalConditions = document.getElementById("medical-conditions").value;
+        var medicationsSupplements = document.getElementById("medications-supplements").value;
+        var day = 'Monday';
+        var season = document.getElementById("season").value;
+        var taste = document.getElementById("taste").value;
+        var userName = document.getElementById("user_name").value;
+
+        var specificFoods1 = document.getElementById("specific-foods-1").value;
+        var specificFoods2 = document.getElementById("specific-foods-2").value;
+        var specificFoods3 = document.getElementById("specific-foods-3").value;
+        var specificFoods4 = document.getElementById("specific-foods-4").value;
+        var specificFoods5 = document.getElementById("specific-foods-5").value;
+
+        var specificFoods1Tuesday = document.getElementById("specific-foods-1-tuesday").value;
+        var specificFoods2Tuesday = document.getElementById("specific-foods-2-tuesday").value;
+        var specificFoods3Tuesday = document.getElementById("specific-foods-3-tuesday").value;
+        var specificFoods4Tuesday = document.getElementById("specific-foods-4-tuesday").value;
+        var specificFoods5Tuesday = document.getElementById("specific-foods-5-tuesday").value;
+
+        var specificFoods1Wednesday = document.getElementById("specific-foods-1-wednesday").value;
+        var specificFoods2Wednesday = document.getElementById("specific-foods-2-wednesday").value;
+        var specificFoods3Wednesday = document.getElementById("specific-foods-3-wednesday").value;
+        var specificFoods4Wednesday = document.getElementById("specific-foods-4-wednesday").value;
+        var specificFoods5Wednesday = document.getElementById("specific-foods-5-wednesday").value;
+
+        var specificFoods1Thursday = document.getElementById("specific-foods-1-thursday").value;
+        var specificFoods2Thursday = document.getElementById("specific-foods-2-thursday").value;
+        var specificFoods3Thursday = document.getElementById("specific-foods-3-thursday").value;
+        var specificFoods4Thursday = document.getElementById("specific-foods-4-thursday").value;
+        var specificFoods5Thursday = document.getElementById("specific-foods-5-thursday").value;
+
+        var specificFoods1Friday = document.getElementById("specific-foods-1-friday").value;
+        var specificFoods2Friday = document.getElementById("specific-foods-2-friday").value;
+        var specificFoods3Friday = document.getElementById("specific-foods-3-friday").value;
+        var specificFoods4Friday = document.getElementById("specific-foods-4-friday").value;
+        var specificFoods5Friday = document.getElementById("specific-foods-5-friday").value;
+
+        var specificFoods1Saturday = document.getElementById("specific-foods-1-saturday").value;
+        var specificFoods2Saturday = document.getElementById("specific-foods-2-saturday").value;
+        var specificFoods3Saturday = document.getElementById("specific-foods-3-saturday").value;
+        var specificFoods4Saturday = document.getElementById("specific-foods-4-saturday").value;
+        var specificFoods5Saturday = document.getElementById("specific-foods-5-saturday").value;
+
+        var specificFoods1Sunday = document.getElementById("specific-foods-1-sunday").value;
+        var specificFoods2Sunday = document.getElementById("specific-foods-2-sunday").value;
+        var specificFoods3Sunday = document.getElementById("specific-foods-3-sunday").value;
+        var specificFoods4Sunday = document.getElementById("specific-foods-4-sunday").value;
+        var specificFoods5Sunday = document.getElementById("specific-foods-5-sunday").value;
+
+        var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+        var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+        var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+        var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+        var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+
+        var dietPreferences1Tuesday = document.getElementById("diet-preferences-1-tuesday").value;
+        var dietPreferences2Tuesday = document.getElementById("diet-preferences-2-tuesday").value;
+        var dietPreferences3Tuesday = document.getElementById("diet-preferences-3-tuesday").value;
+        var dietPreferences4Tuesday = document.getElementById("diet-preferences-4-tuesday").value;
+        var dietPreferences5Tuesday = document.getElementById("diet-preferences-5-tuesday").value;
+
+        var dietPreferences1Wednesday = document.getElementById("diet-preferences-1-wednesday").value;
+        var dietPreferences2Wednesday = document.getElementById("diet-preferences-2-wednesday").value;
+        var dietPreferences3Wednesday = document.getElementById("diet-preferences-3-wednesday").value;
+        var dietPreferences4Wednesday = document.getElementById("diet-preferences-4-wednesday").value;
+        var dietPreferences5Wednesday = document.getElementById("diet-preferences-5-wednesday").value;
+
+        var dietPreferences1Thursday = document.getElementById("diet-preferences-1-thursday").value;
+        var dietPreferences2Thursday = document.getElementById("diet-preferences-2-thursday").value;
+        var dietPreferences3Thursday = document.getElementById("diet-preferences-3-thursday").value;
+        var dietPreferences4Thursday = document.getElementById("diet-preferences-4-thursday").value;
+        var dietPreferences5Thursday = document.getElementById("diet-preferences-5-thursday").value;
+
+        var dietPreferences1Friday = document.getElementById("diet-preferences-1-friday").value;
+        var dietPreferences2Friday = document.getElementById("diet-preferences-2-friday").value;
+        var dietPreferences3Friday = document.getElementById("diet-preferences-3-friday").value;
+        var dietPreferences4Friday = document.getElementById("diet-preferences-4-friday").value;
+        var dietPreferences5Friday = document.getElementById("diet-preferences-5-friday").value;
+
+        var dietPreferences1Saturday = document.getElementById("diet-preferences-1-saturday").value;
+        var dietPreferences2Saturday = document.getElementById("diet-preferences-2-saturday").value;
+        var dietPreferences3Saturday = document.getElementById("diet-preferences-3-saturday").value;
+        var dietPreferences4Saturday = document.getElementById("diet-preferences-4-saturday").value;
+        var dietPreferences5Saturday = document.getElementById("diet-preferences-5-saturday").value;
+
+        var dietPreferences1Sunday = document.getElementById("diet-preferences-1-sunday").value;
+        var dietPreferences2Sunday = document.getElementById("diet-preferences-2-sunday").value;
+        var dietPreferences3Sunday = document.getElementById("diet-preferences-3-sunday").value;
+        var dietPreferences4Sunday = document.getElementById("diet-preferences-4-sunday").value;
+        var dietPreferences5Sunday = document.getElementById("diet-preferences-5-sunday").value;
+        
+        // Generate meal plan text
+        var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have allergies of ${foodAllergies}. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner.`;
+        console.log(mealPlanText);
+        // Encode mealPlanText for URL
+        var encodedMealPlanText = encodeURIComponent(mealPlanText);
+
+        // Construct the API URL with query parameters
+        var apiUrl = `https://fabulous50s.colakin.com/meal_api/delete_user_meals/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}&specificFoods1Tuesday=${specificFoods1Tuesday}&specificFoods2Tuesday=${specificFoods2Tuesday}&specificFoods3Tuesday=${specificFoods3Tuesday}&specificFoods4Tuesday=${specificFoods4Tuesday}&specificFoods5Tuesday=${specificFoods5Tuesday}&specificFoods1Wednesday=${specificFoods1Wednesday}&specificFoods2Wednesday=${specificFoods2Wednesday}&specificFoods3Wednesday=${specificFoods3Wednesday}&specificFoods4Wednesday=${specificFoods4Wednesday}&specificFoods5Wednesday=${specificFoods5Wednesday}&specificFoods1Thursday=${specificFoods1Thursday}&specificFoods2Thursday=${specificFoods2Thursday}&specificFoods3Thursday=${specificFoods3Thursday}&specificFoods4Thursday=${specificFoods4Thursday}&specificFoods5Thursday=${specificFoods5Thursday}&specificFoods1Friday=${specificFoods1Friday}&specificFoods2Friday=${specificFoods2Friday}&specificFoods3Friday=${specificFoods3Friday}&specificFoods4Friday=${specificFoods4Friday}&specificFoods5Friday=${specificFoods5Friday}&specificFoods1Saturday=${specificFoods1Saturday}&specificFoods2Saturday=${specificFoods2Saturday}&specificFoods3Saturday=${specificFoods3Saturday}&specificFoods4Saturday=${specificFoods4Saturday}&specificFoods5Saturday=${specificFoods5Saturday}&specificFoods1Sunday=${specificFoods1Sunday}&specificFoods2Sunday=${specificFoods2Sunday}&specificFoods3Sunday=${specificFoods3Sunday}&specificFoods4Sunday=${specificFoods4Sunday}&specificFoods5Sunday=${specificFoods5Sunday}&dietPreferences1Tuesday=${dietPreferences1Tuesday}&dietPreferences2Tuesday=${dietPreferences2Tuesday}&dietPreferences3Tuesday=${dietPreferences3Tuesday}&dietPreferences4Tuesday=${dietPreferences4Tuesday}&dietPreferences5Tuesday=${dietPreferences5Tuesday}&dietPreferences1Wednesday=${dietPreferences1Wednesday}&dietPreferences2Wednesday=${dietPreferences2Wednesday}&dietPreferences3Wednesday=${dietPreferences3Wednesday}&dietPreferences4Wednesday=${dietPreferences4Wednesday}&dietPreferences5Wednesday=${dietPreferences5Wednesday}&dietPreferences1Thursday=${dietPreferences1Thursday}&dietPreferences2Thursday=${dietPreferences2Thursday}&dietPreferences3Thursday=${dietPreferences3Thursday}&dietPreferences4Thursday=${dietPreferences4Thursday}&dietPreferences5Thursday=${dietPreferences5Thursday}&dietPreferences1Friday=${dietPreferences1Friday}&dietPreferences2Friday=${dietPreferences2Friday}&dietPreferences3Friday=${dietPreferences3Friday}&dietPreferences4Friday=${dietPreferences4Friday}&dietPreferences5Friday=${dietPreferences5Friday}&dietPreferences1Saturday=${dietPreferences1Saturday}&dietPreferences2Saturday=${dietPreferences2Saturday}&dietPreferences3Saturday=${dietPreferences3Saturday}&dietPreferences4Saturday=${dietPreferences4Saturday}&dietPreferences5Saturday=${dietPreferences5Saturday}&dietPreferences1Sunday=${dietPreferences1Sunday}&dietPreferences2Sunday=${dietPreferences2Sunday}&dietPreferences3Sunday=${dietPreferences3Sunday}&dietPreferences4Sunday=${dietPreferences4Sunday}&dietPreferences5Sunday=${dietPreferences5Sunday}`;
+
+        console.log(apiUrl)
+        // Show the loader
+        document.getElementById("loader").style.display = "block";
+
+        // Send POST request to API endpoint using fetch
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Construct the URL to be displayed
+            var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+            
+            // Show the modal with the URL
+            document.getElementById('mealPlanUrl').value = mealPlanUrl;
+            $('#mealPlanModal').modal('show');
+        })
+        .catch(error => {
+            // Hide the loader
+            document.getElementById("loader").style.display = "none";
+
+            console.error('Error:', error);
+
+            // Handle error gracefully
+            alert('An error occurred while generating the meal plan. Please try again.');
+        });
+    }
+
+
+    function autofillForm() {
+        var sampleData = getSampleData();
+
+        document.getElementById('age').value = sampleData.age;
+        document.getElementById('gender').value = sampleData.gender;
+        document.getElementById('height').value = sampleData.height;
+        document.getElementById('weight').value = sampleData.weight;
+        document.getElementById('activity-level').value = sampleData.activityLevel;
+        document.getElementById('goals').value = sampleData.goals;
+        document.getElementById('caloric-intake').value = sampleData.caloricIntake;
+        document.getElementById('macronutrient-ratios').value = sampleData.macronutrientRatios;
+        document.getElementById('meal-preparation-time').value = sampleData.mealPreparationTime;
+        document.getElementById('budget-constraints').value = sampleData.budgetConstraints;
+        document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
+        document.getElementById('season').value = sampleData.season;
+        document.getElementById('taste').value = sampleData.taste;
+
+        document.getElementById('food-allergies').value = sampleData.foodAllergies;
+
+        document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
+        document.getElementById('medical-conditions').value = sampleData.medicalConditions;
+        document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
+
+        document.getElementById('specific-foods-1').value = sampleData.specificFoods1;
+        document.getElementById('specific-foods-2').value = sampleData.specificFoods2;
+        document.getElementById('specific-foods-3').value = sampleData.specificFoods3;
+        document.getElementById('specific-foods-4').value = sampleData.specificFoods4;
+        document.getElementById('specific-foods-5').value = sampleData.specificFoods5;
+
+        document.getElementById('diet-preferences-1').value = sampleData.dietPreferences1;
+        document.getElementById('diet-preferences-2').value = sampleData.dietPreferences2;
+        document.getElementById('diet-preferences-3').value = sampleData.dietPreferences3;
+        document.getElementById('diet-preferences-4').value = sampleData.dietPreferences4;
+        document.getElementById('diet-preferences-5').value = sampleData.dietPreferences5;
+
+        document.getElementById("specific-foods-1-tuesday").value = sampleData.specificFoods1Tuesday;
+        document.getElementById("specific-foods-2-tuesday").value = sampleData.specificFoods2Tuesday;
+        document.getElementById("specific-foods-3-tuesday").value = sampleData.specificFoods3Tuesday;
+        document.getElementById("specific-foods-4-tuesday").value = sampleData.specificFoods4Tuesday;
+        document.getElementById("specific-foods-5-tuesday").value = sampleData.specificFoods5Tuesday;
+        document.getElementById("specific-foods-1-wednesday").value = sampleData.specificFoods1Wednesday;
+        document.getElementById("specific-foods-2-wednesday").value = sampleData.specificFoods2Wednesday;
+        document.getElementById("specific-foods-3-wednesday").value = sampleData.specificFoods3Wednesday;
+        document.getElementById("specific-foods-4-wednesday").value = sampleData.specificFoods4Wednesday;
+        document.getElementById("specific-foods-5-wednesday").value = sampleData.specificFoods5Wednesday;
+        document.getElementById("specific-foods-1-thursday").value = sampleData.specificFoods1Thursday;
+        document.getElementById("specific-foods-2-thursday").value = sampleData.specificFoods2Thursday;
+        document.getElementById("specific-foods-3-thursday").value = sampleData.specificFoods3Thursday;
+        document.getElementById("specific-foods-4-thursday").value = sampleData.specificFoods4Thursday;
+        document.getElementById("specific-foods-5-thursday").value = sampleData.specificFoods5Thursday;
+        document.getElementById("specific-foods-1-friday").value = sampleData.specificFoods1Friday;
+        document.getElementById("specific-foods-2-friday").value = sampleData.specificFoods2Friday;
+        document.getElementById("specific-foods-3-friday").value = sampleData.specificFoods3Friday;
+        document.getElementById("specific-foods-4-friday").value = sampleData.specificFoods4Friday;
+        document.getElementById("specific-foods-5-friday").value = sampleData.specificFoods5Friday;
+        document.getElementById("specific-foods-1-saturday").value = sampleData.specificFoods1Saturday;
+        document.getElementById("specific-foods-2-saturday").value = sampleData.specificFoods2Saturday;
+        document.getElementById("specific-foods-3-saturday").value = sampleData.specificFoods3Saturday;
+        document.getElementById("specific-foods-4-saturday").value = sampleData.specificFoods4Saturday;
+        document.getElementById("specific-foods-5-saturday").value = sampleData.specificFoods5Saturday;
+        document.getElementById("specific-foods-1-sunday").value = sampleData.specificFoods1Sunday;
+        document.getElementById("specific-foods-2-sunday").value = sampleData.specificFoods2Sunday;
+        document.getElementById("specific-foods-3-sunday").value = sampleData.specificFoods3Sunday;
+        document.getElementById("specific-foods-4-sunday").value = sampleData.specificFoods4Sunday;
+        document.getElementById("specific-foods-5-sunday").value = sampleData.specificFoods5Sunday;
+
+        document.getElementById("diet-preferences-1-tuesday").value = sampleData.dietPreferences1Tuesday;
+        document.getElementById("diet-preferences-2-tuesday").value = sampleData.dietPreferences2Tuesday;
+        document.getElementById("diet-preferences-3-tuesday").value = sampleData.dietPreferences3Tuesday;
+        document.getElementById("diet-preferences-4-tuesday").value = sampleData.dietPreferences4Tuesday;
+        document.getElementById("diet-preferences-5-tuesday").value = sampleData.dietPreferences5Tuesday;
+        document.getElementById("diet-preferences-1-wednesday").value = sampleData.dietPreferences1Wednesday;
+        document.getElementById("diet-preferences-2-wednesday").value = sampleData.dietPreferences2Wednesday;
+        document.getElementById("diet-preferences-3-wednesday").value = sampleData.dietPreferences3Wednesday;
+        document.getElementById("diet-preferences-4-wednesday").value = sampleData.dietPreferences4Wednesday;
+        document.getElementById("diet-preferences-5-wednesday").value = sampleData.dietPreferences5Wednesday;
+        document.getElementById("diet-preferences-1-thursday").value = sampleData.dietPreferences1Thursday;
+        document.getElementById("diet-preferences-2-thursday").value = sampleData.dietPreferences2Thursday;
+        document.getElementById("diet-preferences-3-thursday").value = sampleData.dietPreferences3Thursday;
+        document.getElementById("diet-preferences-4-thursday").value = sampleData.dietPreferences4Thursday;
+        document.getElementById("diet-preferences-5-thursday").value = sampleData.dietPreferences5Thursday;
+        document.getElementById("diet-preferences-1-friday").value = sampleData.dietPreferences1Friday;
+        document.getElementById("diet-preferences-2-friday").value = sampleData.dietPreferences2Friday;
+        document.getElementById("diet-preferences-3-friday").value = sampleData.dietPreferences3Friday;
+        document.getElementById("diet-preferences-4-friday").value = sampleData.dietPreferences4Friday;
+        document.getElementById("diet-preferences-5-friday").value = sampleData.dietPreferences5Friday;
+        document.getElementById("diet-preferences-1-saturday").value = sampleData.dietPreferences1Saturday;
+        document.getElementById("diet-preferences-2-saturday").value = sampleData.dietPreferences2Saturday;
+        document.getElementById("diet-preferences-3-saturday").value = sampleData.dietPreferences3Saturday;
+        document.getElementById("diet-preferences-4-saturday").value = sampleData.dietPreferences4Saturday;
+        document.getElementById("diet-preferences-5-saturday").value = sampleData.dietPreferences5Saturday;
+        document.getElementById("diet-preferences-1-sunday").value = sampleData.dietPreferences1Sunday;
+        document.getElementById("diet-preferences-2-sunday").value = sampleData.dietPreferences2Sunday;
+        document.getElementById("diet-preferences-3-sunday").value = sampleData.dietPreferences3Sunday;
+        document.getElementById("diet-preferences-4-sunday").value = sampleData.dietPreferences4Sunday;
+        document.getElementById("diet-preferences-5-sunday").value = sampleData.dietPreferences5Sunday;
+    }
+
+    function getSampleData() {
+        return {
+            age: 50,
+            gender: 'female',
+            height: 160,
+            weight: 60,
+            activityLevel: 'moderately-active',
+            goals: 'weight_loss',
+            caloricIntake: 400,
+            mealPreparationTime: 'quick',
+            budgetConstraints: 'medium',
+            shoppingFrequency: 'weekly',
+            season: 'spring',
+            taste: 'spicy',
+            foodAllergies: 'Nuts',
+            cuisinePreferences: 'Australian',
+            medicalConditions: 'Low Blood Pressure',
+            medicationsSupplements: 'Multivitamin',
+            macronutrientRatios: '40% Protein',
+            specificFoods1: 'Fruits or Milk products or Oats',
+            specificFoods2: 'Fruits Salad or Veggies Salad',
+            specificFoods3: 'Lamb with Rice or Fish with Rice',
+            specificFoods4: 'Diary product',
+            specificFoods5: 'Chicken',
+            dietPreferences1: 'Vegetarian',
+            dietPreferences2: 'Vegetarian',
+            dietPreferences3: 'Non Vegetarian',
+            dietPreferences4: 'Vegetarian',
+            dietPreferences5: 'Non Vegetarian',
+            specificFoods1Tuesday : 'Chicken Breast',
+            specificFoods2Tuesday : 'Broccoli',
+            specificFoods3Tuesday : 'Brown Rice',
+            specificFoods4Tuesday : 'Almonds',
+            specificFoods5Tuesday : 'Greek Yogurt',
+            specificFoods1Wednesday : 'Salmon',
+            specificFoods2Wednesday : 'Quinoa',
+            specificFoods3Wednesday : 'Spinach',
+            specificFoods4Wednesday : 'Avocado',
+            specificFoods5Wednesday : 'Berries',
+            specificFoods1Thursday : 'Turkey',
+            specificFoods2Thursday : 'Sweet Potato',
+            specificFoods3Thursday : 'Green Beans',
+            specificFoods4Thursday : 'Chia Seeds',
+            specificFoods5Thursday : 'Cottage Cheese',
+            specificFoods1Friday : 'Beef',
+            specificFoods2Friday : 'Asparagus',
+            specificFoods3Friday : 'Lentils',
+            specificFoods4Friday : 'Pumpkin Seeds',
+            specificFoods5Friday : 'Apple',
+            specificFoods1Saturday : 'Tofu',
+            specificFoods2Saturday : 'Kale',
+            specificFoods3Saturday : 'Barley',
+            specificFoods4Saturday : 'Sunflower Seeds',
+            specificFoods5Saturday : 'Banana',
+            specificFoods1Sunday : 'Pork',
+            specificFoods2Sunday : 'Cauliflower',
+            specificFoods3Sunday : 'Bulgur',
+            specificFoods4Sunday : 'Walnuts',
+            specificFoods5Sunday : 'Orange',
+            dietPreferences1Tuesday : 'Low Carb',
+            dietPreferences2Tuesday : 'High Protein',
+            dietPreferences3Tuesday : 'Gluten Free',
+            dietPreferences4Tuesday : 'Dairy Free',
+            dietPreferences5Tuesday : 'Paleo',
+            dietPreferences1Wednesday : 'Vegetarian',
+            dietPreferences2Wednesday : 'Low Fat',
+            dietPreferences3Wednesday : 'Keto',
+            dietPreferences4Wednesday : 'Vegan',
+            dietPreferences5Wednesday : 'Mediterranean',
+            dietPreferences1Thursday : 'Pescatarian',
+            dietPreferences2Thursday : 'Low Sodium',
+            dietPreferences3Thursday : 'Whole30',
+            dietPreferences4Thursday : 'Anti-Inflammatory',
+            dietPreferences5Thursday : 'High Fiber',
+            dietPreferences1Friday : 'DASH',
+            dietPreferences2Friday : 'MIND',
+            dietPreferences3Friday : 'Flexitarian',
+            dietPreferences4Friday : 'Intermittent Fasting',
+            dietPreferences5Friday : 'Plant-Based',
+            dietPreferences1Saturday : 'Clean Eating',
+            dietPreferences2Saturday : 'Zone Diet',
+            dietPreferences3Saturday : 'Ornish Diet',
+            dietPreferences4Saturday : 'Volumetrics',
+            dietPreferences5Saturday : 'Raw Food',
+            dietPreferences1Sunday : 'Fertility Diet',
+            dietPreferences2Sunday : 'Nordic Diet',
+            dietPreferences3Sunday : 'Alkaline Diet',
+            dietPreferences4Sunday : 'Sugar Free',
+            dietPreferences5Sunday : 'Weight Watchers',
+        };
+    }
+    
+    function copyToClipboard() {
+        var copyText = document.getElementById("mealPlanUrl");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand("copy");
+        alert("URL copied to clipboard: " + copyText.value);
+    }
+</script>
+
+</html>
+
+<!-- Working -->
+<html>
+    <title>Fabulous50s - Meal Generating App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" type="image/x-icon">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    body{font-family: "Poppins", sans-serif !important;color: #000;overflow-x: hidden;height: 100%;}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);background-color: #8f85e5 !important;}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
+    .loader {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+    #f50s_button, #custom-meal,#predefined-meal, #generated-meal{
+        /* font-family: "Gilroy", Sans-serif; */
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: none;
+        line-height: 1em;
+        letter-spacing: 0px;
+        /* background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+         */
+        background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+        color: white;
+        border-style: solid;
+        border-width: .9px;
+        border-color: white;
+        border-radius: 30px !important;
+        box-shadow: 0px 0px 6px 1px #7a57db;
+    }
+    label{
+        color: #8074df;
+        font-weight: 600;
+    }
+    input, select{
+        border-radius: 30px !important;
+        font-size: 16px !important;
+        /* opacity: 80%; */
+    }
+    #heading-card{
+        color: #8074df;
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 1.2em;
+    }
+    .image-container {
+        text-align: center;
+        margin-top: 60px;
+    }
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+    }
+    .navbar-light{
+        background-color: #8984e4 !important;
+        height: 90px;
+    }
+    
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center; /* Center text alignment */
+    }
+    .main-content {
+        min-height: 90vh; /* Full viewport height */
+        display: flex;
+        align-items: center;
+    }
+    #meal-form {
+                display: none;
+            }
+    @media (max-width: 600px) {
+        .main-content {
+        flex-direction: column; /* Stack elements vertically */
+        padding-top: 20px; /* Optional: add some padding for better appearance */
+        padding-bottom: 20px; /* Optional: add some padding for better appearance */
+        }
+        .center-content {
+        margin-top: 20px; /* Optional: add some margin for better appearance */
+        }
+        #heading-card{
+            color: #8074df;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.2em;
+        }
+        .subheading{
+            font-size: 18px !important;
+        }
+        p{
+            font-size: 15px;
+        }
+        legend{
+            width: 50% !important;
+            font-size: 10px !important;
+        }
+        select, input, label{
+            font-size: 14px !important;
+        }
+        .custom-modal-size {
+            max-width: 100% !important;
+            width: auto !important;
+        }
+    }
+    
+    .subheading{
+        color: #434054;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 1.2em;
+    }
+    /* legend{
+        width: 20%;
+        font-size: 15px;
+    } */
+    .recipe-card {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .recipe-title {
+        background: linear-gradient(180deg, #99b2f4, #8b91e9, #6e4bd0);
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+    }
+    .ingredient-list, .preparation {
+        margin: 20px 0;
+    }
+    .notes, .nutrition {
+        font-size: 0.9em;
+        margin-top: 20px;
+    }
+    .nutrition table {
+        width: 100%;
+    }
+    /* .custom-modal-size {
+        max-width: 70% !important;
+        width: auto !important;
+    } */
+    .full-width-image {
+        width: 100%;
+        height: auto;
+    }
+    .item {
+      width: 90px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+    .radio {
+      display: none;
+    }
+    .radio ~ span {
+      font-size: 3rem;
+      filter: grayscale(100);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .radio:checked ~ span {
+      filter: grayscale(0);
+      font-size: 4rem;
+    }
+    
+     /* Custom styles for the target card */
+     #targetCard {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    
+    #targetCard h5 {
+        color: #6e4bd0;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    
+    #targetCard select {
+        border-radius: 5px;
+    }
+    
+    #targetCard .form-group {
+        margin-bottom: 15px;
+    }
+    
+    #targetCard .icon {
+        color: #6e4bd0;
+        font-size: 24px;
+        margin-right: 10px;
+    }
+    
+    </style>
+    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img width="60" height="60" src="https://fabulous50s.com/wp-content/uploads/2023/08/logo-2.svg" class="attachment-full size-full wp-image-36441" alt></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container my-1 main-content">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <img src="img-1.jpg" class="img-fluid" alt="Placeholder Image">
+                </div>
+                <div class="col-md-6 col-sm-12 col-12 center-content">
+                    <h1 id="heading-card">Welcome to Fabulous50s Meal Generation</h1>
+                    <p class="subheading">Healthy Meal Plan for Women Over 50s</p>
+                    <p>
+                        Our meal plan is specifically designed to meet the nutritional needs of women over 50. It includes a balanced mix of lean proteins, whole grains, healthy fats, and plenty of fruits and vegetables.
+                    </p>
+                    <div class="form-group col-sm-6">
+                        <button type="button" class="btn btn-primary btn-block" id="f50s_button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <img src="image1.png" class="img-fluid d-block mx-auto" alt="Responsive Image">
+              </div>
+            </div>
+        </div>
+        
+        
+    
+        <div class="container-fluid px-1 py-5 mx-auto">
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                    <div class="card" id="targetCard">
+                        <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                            <legend style="width: 40%;font-size: 16px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;padding: 6px 20px;">Start Your Meal Journey</legend>
+                        <!-- <h5 class="text-center mb-4">Start Your Meal Journey</h5> -->
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 d-flex align-items-center">
+                                    <label for="day" class="mb-0">Enter your valid email to start : <span class="text-danger"> *</span></label>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input type="text" id="user_name" name="user_name" placeholder="Eg. johndeo@email.com" style="width: 100%;">
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 d-flex align-items-center">
+                                    <button type="button" class="btn btn-primary btn-block" id="predefined-meal">I want predefined meal preference</button>
+                            
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <button type="button" class="btn btn-secondary btn-block" id="custom-meal">I want to build my own meal preference</button>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <button type="button" class="btn btn-secondary btn-block" id="generated-meal">Show my generated meal plan</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                    
+                    <div id="meal-form">
+                        <div class="card" style="border-radius: 10px !important;">
+                            <!-- <h5 class="text-center mb-4" style="color:#6e4bd0;font-weight: 600;">Enter your meal preference</h5> -->
+                            <form class="form-card" onsubmit="event.preventDefault()">
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Personal Information</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label>
+                                        <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required>
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label>
+                                        <select id="gender" name="gender" class="form-control" required>
+                                            <option value="">Select your gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Height (cm)<span class="text-danger"> *</span></label>
+                                        <input type="number" id="height" name="height" placeholder="Enter your height in cm" min="100" max="250" required>
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Weight (kg)<span class="text-danger"> *</span></label>
+                                        <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" min="20" max="500" required>
+                                    </div>
+                                </div>
+                                </fieldset>
+    
+    
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lifestyle and Activity</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Activity Level<span class="text-danger"> *</span></label>
+                                        <select id="activity-level" name="activity-level" class="form-control" required>
+                                            <option value="">Select your activity level</option>
+                                            <option value="sedentary">Sedentary (little or no exercise)</option>
+                                            <option value="lightly-active">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                                            <option value="moderately-active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+                                            <option value="very-active">Very Active (hard exercise/sports 6-7 days a week)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Goals</label>
+                                        <select id="goals" name="goals" class="form-control">
+                                            <option value="">Select a goal</option>
+                                            <option value="weight_loss">Weight Loss</option>
+                                            <option value="weight_gain">Weight Gain</option>
+                                            <option value="maintenance">Maintenance</option>
+                                            <option value="muscle_building">Muscle Building</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Nutritional Preferences</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Macronutrient Ratios</label>
+                                        <input type="text" id="macronutrient-ratios" name="macronutrient-ratios" placeholder="Carbs, Proteins, Fats (if specific targets are desired)">
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Target Caloric Intake (calories per meal)</label>
+                                        <input type="number" id="caloric-intake" name="caloric-intake" placeholder="if known">
+                                    </div>
+                                </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Meal Planning</legend>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Budget Constraints</label>
+                                        <select id="budget-constraints" name="budget-constraints" class="form-control">
+                                            <option value="">Select a budget constraint</option>
+                                            <option value="low">Low</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Preferred Shopping Frequency</label>
+                                        <select id="shopping-frequency" name="shopping-frequency" class="form-control">
+                                            <option value="">Select a shopping frequency</option>
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="bi-weekly">Bi-weekly</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Time Constraints for Meal Preparation</label>
+                                        <select id="meal-preparation-time" name="meal-preparation-time" class="form-control">
+                                            <option value="">Select a time constraint</option>
+                                            <option value="quick">Quick</option>
+                                            <option value="moderate">Moderate</option>
+                                            <option value="extensive">Extensive</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Food Allergies</label>
+                                        <input type="text" id="food-allergies" name="food-allergies" placeholder="Nuts, Dairy, Gluten, Shellfish, etc.">
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex">
+                                        <label class="form-control-label px-3">Taste Prefered</label>
+                                        <select id="taste" name="taste" class="form-control">
+                                            <option value="">Select your taste</option>
+                                            <option value="sweet">Sweet</option>
+                                            <option value="sour">Sour</option>
+                                            <option value="spicy">Spicy</option>
+                                            <option value="salty">Salty</option>
+                                            <option value="bitter">Bitter</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </fieldset>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Culinary Preferences & Season</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Cultural or Regional Cuisine Preferences</label>
+                                            <input type="text" id="cuisine-preferences" name="cuisine-preferences" placeholder="Enter your cultural or regional cuisine preferences">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Current Season</label>
+                                            <select id="season" name="season" class="form-control">
+                                                <option value="">Select your current season</option>
+                                                <option value="spring">Spring</option>
+                                                <option value="summer">Summer</option>
+                                                <option value="autumn">Autumn</option>
+                                                <option value="winter">Winter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </fieldset>
+        
+                                    <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Health Considerations</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Current Medications or Supplements</label>
+                                            <input type="text" id="medications-supplements" name="medications-supplements" placeholder="Enter your current medications or supplements">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                                <label class="form-control-label px-3">Medical Conditions</label>
+                                                <input type="text" id="medical-conditions" name="medical-conditions" placeholder="Diabetes, Hypertension, etc.">
+                                        </div>
+                                    </div>
+                                    </fieldset>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Food Preferences</legend>
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Breakfast</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Breakfast</label>
+                                            <input type="text" id="specific-foods-1" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Breakfast</label>
+                                            <input type="text" id="diet-preferences-1" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-1</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-1</label>
+                                            <input type="text" id="specific-foods-2" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-1</label>
+                                            <input type="text" id="diet-preferences-2" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+    
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Lunch</legend>
+                                    <div class="row justify-content-between text-left">
+                                       <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Lunch</label>
+                                            <input type="text" id="specific-foods-3" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Lunch</label>
+                                            <input type="text" id="diet-preferences-3" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+    
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Snack-2</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Snack-2</label>
+                                            <input type="text" id="specific-foods-4" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Snack-2</label>
+                                            <input type="text" id="diet-preferences-4" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+    
+                                <fieldset style="background:#ebf3fd;border: 2px solid #8f85e5; padding: 15px; margin-bottom: 15px;border-radius: 10px;">
+                                    <legend style="width: 30%;font-size: 15px;font-weight: 600;color: #ffffff;background: #8f85e5;border-radius: 20px;">Dinner</legend>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Specific Foods to Include for Dinner</label>
+                                            <input type="text" id="specific-foods-5" name="specific-foods" placeholder="Enter specific foods to include or exclude">
+                                        </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex">
+                                            <label class="form-control-label px-3">Dietary Preferences for Dinner</label>
+                                            <input type="text" id="diet-preferences-5" name="diet-preferences" placeholder="Vegetarian, Vegan, Paleo, Keto, etc.">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                </fieldset>
+                                
+                                <div class="row justify-content-end">
+                                    <div class="form-group col-sm-6"> 
+                                        <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMeal()">PREPARE A MEAL<br><small>(If you have no meal plan)</small></button> 
+                                    </div>
+                                    <div class="form-group col-sm-6"> 
+                                        <button type="button" class="btn-block btn-primary" id="f50s_button" onclick="prepareMealAgain()">PREPARE ME A NEW MEAL<br><small>(If you already have meal plan)</small></button> 
+                                    </div>
+                                </div>
+                            </form>
+                            
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loader" class="loader" style="display:none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="mealPlanModal" tabindex="-1" aria-labelledby="mealPlanModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 50%;">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #8074df;color: white;">
+                        <h5 class="modal-title" id="mealPlanModalLabel">Preparing Your Meal Plan</h5>
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                            <img src="meal.gif" style="width: 48%;">
+                        </center>
+                        <p style="color:#8074df;font-weight: 600;">Your meal plan has been generating. You can access it using the URL below after 5-10 mins:</p>
+                        <div class="d-flex">
+                            <input type="text" class="form-control me-2" id="mealPlanUrl" readonly style="flex: 1;">
+                            <button class="btn" onclick="copyToClipboard()" style="flex: 0 0 auto;">
+                                <img src="copy.png" style="width: 20px;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    
+        
+      
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.getElementById('f50s_button').addEventListener('click', function() {
+            document.getElementById('targetCard').scrollIntoView({ behavior: 'smooth' });
+        });
+        // document.getElementById('day').addEventListener('change', function() {
+        //     if (this.value) {
+        //         $('#mealPreferenceModal').modal('show');
+        //     }
+        // });
+        // var userName = document.getElementById("user_name").value;
+        // document.getElementById('generated-meal').addEventListener('click', function() {
+        //     var userName = document.getElementById("user_name").value;
+        //     // Construct the URL with the email query parameter
+        //     var url = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+        //     // https://generate-mealplan.vercel.app/meal-plan.html?email=
+        //     // Redirect to the constructed URL
+        //     window.location.href = url;
+        // });
+        // // Predefined meal preference button click
+        // document.getElementById('predefined-meal').addEventListener('click', function() {
+        //     // $('#mealPreferenceModal').modal('hide');
+        //     autofillForm();
+        //     document.getElementById('meal-form').style.display = 'block';
+        //     document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+        // });
+    
+        // // Custom meal preference button click
+        // document.getElementById('custom-meal').addEventListener('click', function() {
+        //     // $('#mealPreferenceModal').modal('hide');
+        //     document.getElementById('meal-form').style.display = 'block';
+        //     document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+        // });
+        document.addEventListener("DOMContentLoaded", function() {
+            var userNameInput = document.getElementById('user_name');
+            var submitUserNameBtn = document.getElementById('submit-user-name');
+            var predefinedMealBtn = document.getElementById('predefined-meal');
+            var customMealBtn = document.getElementById('custom-meal');
+            var generatedMealBtn = document.getElementById('generated-meal');
+    
+            // Check if userNameInput is empty
+            function isUserNameEmpty() {
+                return userNameInput.value.trim() === '';
+            }
+    
+            // Show alert and focus input field
+            function showUserNameAlert() {
+                alert('Please enter your Email.');
+                userNameInput.focus();
+            }
+    
+            // Event listener for submit button (if needed)
+            // submitUserNameBtn.addEventListener('click', function() {
+            //     if (isUserNameEmpty()) {
+            //         showUserNameAlert();
+            //     }
+            // });
+    
+            // Event listener for generated meal plan button
+            generatedMealBtn.addEventListener('click', function() {
+                var userName = userNameInput.value.trim();
+    
+                if (userName === '') {
+                    showUserNameAlert();
+                } else {
+                    var url = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+                    window.location.href = url;
+                }
+            });
+    
+            // Event listener for predefined meal preference button
+            predefinedMealBtn.addEventListener('click', function() {
+                var userName = userNameInput.value.trim();
+    
+                if (userName === '') {
+                    showUserNameAlert();
+                } else {
+                    // Assuming autofillForm() and show/hide logic for meal form
+                    autofillForm(); // Example function to autofill form
+                    document.getElementById('meal-form').style.display = 'block';
+                    document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+    
+            // Event listener for custom meal preference button
+            customMealBtn.addEventListener('click', function() {
+                var userName = userNameInput.value.trim();
+    
+                if (userName === '') {
+                    showUserNameAlert();
+                } else {
+                    // Show/hide logic for meal form
+                    document.getElementById('meal-form').style.display = 'block';
+                    document.getElementById('meal-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    
+       
+        function prepareMeal() {
+            // Retrieve form values
+            var age = document.getElementById("age").value;
+            var gender = document.getElementById("gender").value;
+            var height = document.getElementById("height").value;
+            var weight = document.getElementById("weight").value;
+            var activityLevel = document.getElementById("activity-level").value;
+            var foodAllergies = document.getElementById("food-allergies").value;
+            var goals = document.getElementById("goals").value;
+            var caloricIntake = document.getElementById("caloric-intake").value;
+            var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+            var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+            var budgetConstraints = document.getElementById("budget-constraints").value;
+            var shoppingFrequency = document.getElementById("shopping-frequency").value;
+            var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+            var medicalConditions = document.getElementById("medical-conditions").value;
+            var medicationsSupplements = document.getElementById("medications-supplements").value;
+            var day = 'Monday';
+            var season = document.getElementById("season").value;
+            var taste = document.getElementById("taste").value;
+            var userName = document.getElementById("user_name").value;
+    
+            var specificFoods1 = document.getElementById("specific-foods-1").value;
+            var specificFoods2 = document.getElementById("specific-foods-2").value;
+            var specificFoods3 = document.getElementById("specific-foods-3").value;
+            var specificFoods4 = document.getElementById("specific-foods-4").value;
+            var specificFoods5 = document.getElementById("specific-foods-5").value;
+    
+            var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+            var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+            var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+            var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+            var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+            
+            // Generate meal plan text
+            var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have allergies of ${foodAllergies}. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner.`;
+            console.log(mealPlanText);
+            // Encode mealPlanText for URL
+            var encodedMealPlanText = encodeURIComponent(mealPlanText);
+    
+            // Construct the API URL with query parameters
+            var apiUrl = `https://fabulous50s.colakin.com/meal_api/generate_meal_plan/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
+            console.log(apiUrl)
+            // Show the loader
+            document.getElementById("loader").style.display = "block";
+    
+            // Send POST request to API endpoint using fetch
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                // Hide the loader
+                document.getElementById("loader").style.display = "none";
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Construct the URL to be displayed
+                var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+                
+                // Show the modal with the URL
+                document.getElementById('mealPlanUrl').value = mealPlanUrl;
+                $('#mealPlanModal').modal('show');
+            })
+            .catch(error => {
+                // Hide the loader
+                document.getElementById("loader").style.display = "none";
+    
+                console.error('Error:', error);
+    
+                // Handle error gracefully
+                alert('An error occurred while generating the meal plan. Please try again.');
+            });
+        }
+    
+        function prepareMealAgain() {
+            // Retrieve form values
+            var age = document.getElementById("age").value;
+            var gender = document.getElementById("gender").value;
+            var height = document.getElementById("height").value;
+            var weight = document.getElementById("weight").value;
+            var activityLevel = document.getElementById("activity-level").value;
+            var foodAllergies = document.getElementById("food-allergies").value;
+            var goals = document.getElementById("goals").value;
+            var caloricIntake = document.getElementById("caloric-intake").value;
+            var macronutrientRatios = document.getElementById("macronutrient-ratios").value;
+            var mealPreparationTime = document.getElementById("meal-preparation-time").value;
+            var budgetConstraints = document.getElementById("budget-constraints").value;
+            var shoppingFrequency = document.getElementById("shopping-frequency").value;
+            var cuisinePreferences = document.getElementById("cuisine-preferences").value;
+            var medicalConditions = document.getElementById("medical-conditions").value;
+            var medicationsSupplements = document.getElementById("medications-supplements").value;
+            var day = 'Monday';
+            var season = document.getElementById("season").value;
+            var taste = document.getElementById("taste").value;
+            var userName = document.getElementById("user_name").value;
+    
+            var specificFoods1 = document.getElementById("specific-foods-1").value;
+            var specificFoods2 = document.getElementById("specific-foods-2").value;
+            var specificFoods3 = document.getElementById("specific-foods-3").value;
+            var specificFoods4 = document.getElementById("specific-foods-4").value;
+            var specificFoods5 = document.getElementById("specific-foods-5").value;
+    
+            var dietPreferences1 = document.getElementById("diet-preferences-1").value;
+            var dietPreferences2 = document.getElementById("diet-preferences-2").value;
+            var dietPreferences3 = document.getElementById("diet-preferences-3").value;
+            var dietPreferences4 = document.getElementById("diet-preferences-4").value;
+            var dietPreferences5 = document.getElementById("diet-preferences-5").value;
+            
+            // Generate meal plan text
+            var mealPlanText = `Generate a meal plan for a ${age}-year-old ${gender} who is ${height} cm tall and weighs ${weight} kg. They lead a ${activityLevel} lifestyle. They have aim to achieve ${goals} with a target caloric intake of ${caloricIntake} calories per day, focusing on a ${macronutrientRatios} macronutrient distribution. They have allergies of ${foodAllergies}. They have ${mealPreparationTime} for meal prep, with ${budgetConstraints} budget and ${shoppingFrequency} shopping habits. Their cuisine preference leans towards ${cuisinePreferences}, considering their ${medicalConditions} and taking ${medicationsSupplements}. User's current season was ${season}.  Plan for meals including breakfast, snack_1, lunch, snack_2, dinner.`;
+            console.log(mealPlanText);
+            // Encode mealPlanText for URL
+            var encodedMealPlanText = encodeURIComponent(mealPlanText);
+    
+            // Construct the API URL with query parameters
+            var apiUrl = `https://fabulous50s.colakin.com/meal_api/delete_user_meals/?email=${userName}&user_preferences=${encodedMealPlanText}&specificFoods1=${specificFoods1}&specificFoods2=${specificFoods2}&specificFoods3=${specificFoods3}&specificFoods4=${specificFoods4}&specificFoods5=${specificFoods5}&dietPreferences1=${dietPreferences1}&dietPreferences2=${dietPreferences2}&dietPreferences3=${dietPreferences3}&dietPreferences4=${dietPreferences4}&dietPreferences5=${dietPreferences5}`;
+            console.log(apiUrl)
+            // Show the loader
+            document.getElementById("loader").style.display = "block";
+    
+            // Send POST request to API endpoint using fetch
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                // Hide the loader
+                document.getElementById("loader").style.display = "none";
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Construct the URL to be displayed
+                var mealPlanUrl = `https://generate-mealplan.vercel.app/meal-plan.html?email=${encodeURIComponent(userName)}`;
+                
+                // Show the modal with the URL
+                document.getElementById('mealPlanUrl').value = mealPlanUrl;
+                $('#mealPlanModal').modal('show');
+            })
+            .catch(error => {
+                // Hide the loader
+                document.getElementById("loader").style.display = "none";
+    
+                console.error('Error:', error);
+    
+                // Handle error gracefully
+                alert('An error occurred while generating the meal plan. Please try again.');
+            });
+        }
+    
+    
+        function autofillForm() {
+            var sampleData = getSampleData();
+    
+            document.getElementById('age').value = sampleData.age;
+            document.getElementById('gender').value = sampleData.gender;
+            document.getElementById('height').value = sampleData.height;
+            document.getElementById('weight').value = sampleData.weight;
+            document.getElementById('activity-level').value = sampleData.activityLevel;
+            document.getElementById('goals').value = sampleData.goals;
+            document.getElementById('caloric-intake').value = sampleData.caloricIntake;
+            document.getElementById('macronutrient-ratios').value = sampleData.macronutrientRatios;
+            document.getElementById('meal-preparation-time').value = sampleData.mealPreparationTime;
+            document.getElementById('budget-constraints').value = sampleData.budgetConstraints;
+            document.getElementById('shopping-frequency').value = sampleData.shoppingFrequency;
+            document.getElementById('season').value = sampleData.season;
+            document.getElementById('taste').value = sampleData.taste;
+    
+            document.getElementById('food-allergies').value = sampleData.foodAllergies;
+    
+            document.getElementById('cuisine-preferences').value = sampleData.cuisinePreferences;
+            document.getElementById('medical-conditions').value = sampleData.medicalConditions;
+            document.getElementById('medications-supplements').value = sampleData.medicationsSupplements;
+    
+            document.getElementById('specific-foods-1').value = sampleData.specificFoods1;
+            document.getElementById('specific-foods-2').value = sampleData.specificFoods2;
+            document.getElementById('specific-foods-3').value = sampleData.specificFoods3;
+            document.getElementById('specific-foods-4').value = sampleData.specificFoods4;
+            document.getElementById('specific-foods-5').value = sampleData.specificFoods5;
+    
+            document.getElementById('diet-preferences-1').value = sampleData.dietPreferences1;
+            document.getElementById('diet-preferences-2').value = sampleData.dietPreferences2;
+            document.getElementById('diet-preferences-3').value = sampleData.dietPreferences3;
+            document.getElementById('diet-preferences-4').value = sampleData.dietPreferences4;
+            document.getElementById('diet-preferences-5').value = sampleData.dietPreferences5;
+        }
+    
+        function getSampleData() {
+            return {
+                age: 50,
+                gender: 'female',
+                height: 160,
+                weight: 60,
+                activityLevel: 'moderately-active',
+                goals: 'weight_loss',
+                caloricIntake: 400,
+                mealPreparationTime: 'quick',
+                budgetConstraints: 'medium',
+                shoppingFrequency: 'weekly',
+                season: 'spring',
+                taste: 'spicy',
+                foodAllergies: 'Nuts',
+                cuisinePreferences: 'Australian',
+                medicalConditions: 'Low Blood Pressure',
+                medicationsSupplements: 'Multivitamin',
+                macronutrientRatios: '40% Protein',
+                specificFoods1: 'Fruits or Milk products or Oats',
+                specificFoods2: 'Fruits Salad or Veggies Salad',
+                specificFoods3: 'Lamb with Rice or Fish with Rice',
+                specificFoods4: 'Diary product',
+                specificFoods5: 'Chicken',
+                dietPreferences1: 'Vegetarian',
+                dietPreferences2: 'Vegetarian',
+                dietPreferences3: 'Non Vegetarian',
+                dietPreferences4: 'Vegetarian',
+                dietPreferences5: 'Non Vegetarian',
+            };
+        }
+        
+        function copyToClipboard() {
+            var copyText = document.getElementById("mealPlanUrl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("URL copied to clipboard: " + copyText.value);
+        }
+    </script>
+    
+    </html>
+    
