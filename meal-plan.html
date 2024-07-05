@@ -147,10 +147,6 @@
     <img src="meal.gif" style="width: 18%;">
 </div>
 <div class="container mt-5">
-    <div id="weekly-ingredients" class="weekly-ingredients">
-        <h2>Weekly Ingredients</h2>
-        <ul id="ingredients-list"></ul>
-    </div>
     <div id="meal-container" class="recipe-card">
         <!-- Dynamic meal plan content will be inserted here -->
     </div>
@@ -160,6 +156,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
@@ -192,8 +189,6 @@
                     };
 
                     var mealContainer = document.getElementById("meal-container");
-                    var ingredientsList = document.getElementById("ingredients-list");
-                    var allIngredients = new Set();
 
                     daysOfWeek.forEach(day => {
                         if (data.weekly_meals[day]) {
@@ -205,8 +200,6 @@
                                 // Fix JSON parsing error in cooking_instruction
                                 var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
                                 var Ingredients = JSON.parse(meal.ingredients.replace(/'/g, '"'));
-
-                                Ingredients.forEach(item => allIngredients.add(item));
 
                                 var formattedData = `
                                     <div class="meal">
@@ -286,7 +279,7 @@
                             });
                         }
                     });
-                    ingredientsList.innerHTML = Array.from(allIngredients).map(ingredient => `<li>${ingredient}</li>`).join('');
+
                     // Add event listeners to the feedback radios
                     document.querySelectorAll('input[type="radio"]').forEach(radio => {
                         radio.addEventListener('change', function() {
@@ -304,7 +297,6 @@
                 });
         }, 5000);
     });
-    
     function updateAirtable(mealId, feedbackValue) {
         // Replace with your Airtable endpoint and API key
         var url = 'https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx';
