@@ -550,9 +550,10 @@
                                             <div class="col-md-6 ingredient-list">
                                                 <h4>Ingredient List</h4>
                                                 <ul>
-                                                    ${meal.ingredients.map(item => `<li>${item}</li>`).join('')}
+                                                    ${meal && Array.isArray(meal.ingredients) ? meal.ingredients.map(item => `<li>${item}</li>`).join('') : '<li>No ingredients available</li>'}
                                                 </ul>
                                             </div>
+
                                             <div class="col-md-6 preparation">
                                                 <h4>Preparation</h4>
                                                 <ol>
