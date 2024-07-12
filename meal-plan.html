@@ -201,6 +201,80 @@
                                 var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
                                 var Ingredients = JSON.parse(meal.ingredients.replace(/'/g, '"'));
 
+                                // var formattedData = `
+                                //     <div class="meal">
+                                //         <div class="meal-type">
+                                //             <center><h2>${mealTypes[meal.meal_type.replace(/-/, '')]}</h2></center>
+                                //         </div>
+                                //         <div class="recipe-title">
+                                //             <h2>${meal.recipe}</h2>
+                                //             <p>${meal.serving} Servings, ${meal.cooking_time}</p>
+                                //         </div>
+                                //         <img src="${meal.compressed_image}" class="mealimage full-width-image" alt="Meal Image">
+                                //         <div class="row">
+                                //             <div class="col-md-6 ingredient-list">
+                                //                 <h4>Ingredient List</h4>
+                                //                 <ul>
+                                //                     ${Ingredients.map(item => `<li>${item}</li>`).join('')}
+                                //                 </ul>
+                                //             </div>
+                                //             <div class="col-md-6 preparation">
+                                //                 <h4>Preparation</h4>
+                                //                 <ol>
+                                //                     ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
+                                //                 </ol>
+                                //             </div>
+                                //         </div>
+                                //         <div class="nutrition">
+                                //             <h4>Nutrition Information (Amount Per Serve)</h4>
+                                //             <table class="table table-bordered">
+                                //                 <tr><td>Calories: ${meal.calories}</td></tr>
+                                //                 <tr><td>Protein: ${meal.protein}</td></tr>
+                                //                 <tr><td>Carbs: ${meal.carbs}</td></tr>
+                                //                 <tr><td>Fat: ${meal.fat}</td></tr>
+                                //             </table>
+                                //         </div>
+                                //         <div class="feedback">
+                                //             <h4>Feedback</h4>
+                                //             <div class="app">
+                                //                 <center><h4>Was this meal useful?</h4></center>
+                                //                 <div class="container">
+                                //                     <div class="item">
+                                //                         <label for="${meal.id}-0">
+                                //                             <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-0" value="🤬">
+                                //                             <span>🤬</span>
+                                //                         </label>
+                                //                     </div>
+                                //                     <div class="item">
+                                //                         <label for="${meal.id}-1">
+                                //                             <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-1" value="🙁">
+                                //                             <span>🙁</span>
+                                //                         </label>
+                                //                     </div>
+                                //                     <div class="item">
+                                //                         <label for="${meal.id}-2">
+                                //                             <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-2" value="😶">
+                                //                             <span>😶</span>
+                                //                         </label>
+                                //                     </div>
+                                //                     <div class="item">
+                                //                         <label for="${meal.id}-3">
+                                //                             <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-3" value="😁">
+                                //                             <span>😁</span>
+                                //                         </label>
+                                //                     </div>
+                                //                     <div class="item">
+                                //                         <label for="${meal.id}-4">
+                                //                             <input class="radio" type="radio" name="feedback-${meal.id}" id="${meal.id}-4" value="😍">
+                                //                             <span>😍</span>
+                                //                         </label>
+                                //                     </div>
+                                //                 </div>
+                                //             </div>
+                                //         </div>
+                                //         <hr>
+                                //     </div>
+                                // `;
                                 var formattedData = `
                                     <div class="meal">
                                         <div class="meal-type">
@@ -210,7 +284,20 @@
                                             <h2>${meal.recipe}</h2>
                                             <p>${meal.serving} Servings, ${meal.cooking_time}</p>
                                         </div>
-                                        <img src="${meal.compressed_image}" class="mealimage full-width-image" alt="Meal Image">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="${meal.compressed_image}" class="mealimage full-width-image" alt="Meal Image">
+                                            </div>
+                                            <div class="col-md-6 nutrition">
+                                                <h4>Nutrition Information (Amount Per Serve)</h4>
+                                                <table class="table table-bordered">
+                                                    <tr><td>Calories: ${meal.calories}</td></tr>
+                                                    <tr><td>Protein: ${meal.protein}</td></tr>
+                                                    <tr><td>Carbs: ${meal.carbs}</td></tr>
+                                                    <tr><td>Fat: ${meal.fat}</td></tr>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6 ingredient-list">
                                                 <h4>Ingredient List</h4>
@@ -224,15 +311,6 @@
                                                     ${cookingInstructions.map(step => `<li>${step}</li>`).join('')}
                                                 </ol>
                                             </div>
-                                        </div>
-                                        <div class="nutrition">
-                                            <h4>Nutrition Information (Amount Per Serve)</h4>
-                                            <table class="table table-bordered">
-                                                <tr><td>Calories: ${meal.calories}</td></tr>
-                                                <tr><td>Protein: ${meal.protein}</td></tr>
-                                                <tr><td>Carbs: ${meal.carbs}</td></tr>
-                                                <tr><td>Fat: ${meal.fat}</td></tr>
-                                            </table>
                                         </div>
                                         <div class="feedback">
                                             <h4>Feedback</h4>
@@ -275,6 +353,8 @@
                                         <hr>
                                     </div>
                                 `;
+
+                                
                                 mealContainer.innerHTML += formattedData;
                             });
                         }
