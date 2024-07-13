@@ -211,7 +211,7 @@
                         if (data.weekly_meals[day]) {
                             var dayMeals = data.weekly_meals[day].meals;
                             
-                            var weekHeader = `<h2 class="text-center recipe-title">${data.start_date} - ${data.end_date_str}</h2><hr>`;
+                            var weekHeader = `<h2 class="text-center recipe-title">Meal Plan for ${data.start_date} - ${data.end_date_str}</h2><hr>`;
                             mealContainer.innerHTML += weekHeader;
 
                             var dayHeader = `<h2 class="text-center">${day}</h2><hr>`;
