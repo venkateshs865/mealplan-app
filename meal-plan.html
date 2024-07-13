@@ -339,9 +339,8 @@
                                         </div>
                                         <br>
                                         <div class="feedback">
-                                            <h4>Feedback</h4>
+                                            <h4>Was this meal useful?</h4>
                                             <div class="app">
-                                                <center><h4>Was this meal useful?</h4></center>
                                                 <div class="container">
                                                     <div class="item">
                                                         <label for="${meal.id}-0">
@@ -385,6 +384,20 @@
                             });
                         }
                     });
+
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var sourceOfTruth = "${meal.source_of_truth}"; // Assign the source_of_truth variable from your server-side logic
+
+                        if (sourceOfTruth) {
+                            var container = document.getElementById("sourceOfTruthContainer");
+                            var link = document.getElementById("sourceOfTruthLink");
+
+                            link.href = sourceOfTruth;
+                            link.textContent = sourceOfTruth;
+                            container.style.display = "block";
+                        }
+                    });
+
 
                     // Add event listeners to the feedback radios
                     document.querySelectorAll('input[type="radio"]').forEach(radio => {
