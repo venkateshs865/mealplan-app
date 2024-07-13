@@ -217,19 +217,8 @@
                                 // Fix JSON parsing error in cooking_instruction
                                 var cookingInstructions = JSON.parse(meal.cooking_instruction.replace(/'/g, '"'));
                                 var Ingredients = JSON.parse(meal.ingredients.replace(/'/g, '"'));
-                                document.addEventListener("DOMContentLoaded", function() {
-                                    var sourceOfTruth = "${meal.source_of_truth}"; // Assign the source_of_truth variable from your server-side logic
-
-                                    if (sourceOfTruth) {
-                                        var container = document.getElementById("sourceOfTruthContainer");
-                                        var link = document.getElementById("sourceOfTruthLink");
-
-                                        link.href = sourceOfTruth;
-                                        link.textContent = sourceOfTruth;
-                                        container.style.display = "block";
-                                    }
-                                });
-
+                                var url = new URL(meal.source_of_truth);
+                                var domain = url.origin;
                                 var formattedData = `
                                     <div class="meal">
                                         <div class="meal-type">
@@ -273,7 +262,7 @@
                                         
                                         <div class="sot">
                                             <h4>Source of Truth</h4>
-                                            <a href = "${meal.source_of_truth}">${meal.source_of_truth}</a>
+                                            <a href="${domain}">${domain}</a>
                                         </div>
                                         <br>
                                         <div class="feedback">
@@ -342,6 +331,7 @@
                 });
         }, 5000);
     });
+    
     function updateAirtable(mealId, feedbackValue) {
         // Replace with your Airtable endpoint and API key
         var url = 'https://api.airtable.com/v0/appAGxrSU8fcqg5kJ/tblyILjVSp2dVovCx';
