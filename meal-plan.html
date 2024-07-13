@@ -210,6 +210,10 @@
                     daysOfWeek.forEach(day => {
                         if (data.weekly_meals[day]) {
                             var dayMeals = data.weekly_meals[day].meals;
+                            
+                            var weekHeader = `<h2 class="text-center recipe-title">${meal.start_date_str} - ${meal.end_date_str}</h2><hr>`;
+                            mealContainer.innerHTML += weekHeader;
+
                             var dayHeader = `<h2 class="text-center">${day}</h2><hr>`;
                             mealContainer.innerHTML += dayHeader;
 
@@ -219,6 +223,7 @@
                                 var Ingredients = JSON.parse(meal.ingredients.replace(/'/g, '"'));
                                 var url = new URL(meal.source_of_truth);
                                 var domain = url.origin;
+
                                 var formattedData = `
                                     <div class="meal">
                                         <div class="meal-type">
